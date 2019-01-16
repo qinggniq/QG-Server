@@ -1,0 +1,7 @@
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles/QG-Server.dir
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/util/CMakeFiles/rebuild_cache.dir
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/util/CMakeFiles/edit_cache.dir
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/log/CMakeFiles/rebuild_cache.dir
+/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/log/CMakeFiles/edit_cache.dir

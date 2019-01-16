@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/QG-Server.dir/core/HttpData.o CMakeFiles/QG-Server.dir/core/HttpParser.o  -o QG-Server -llibserver_base 
