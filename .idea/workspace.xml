@@ -32,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="322">
-              <caret line="52" column="36" lean-forward="true" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+              <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -192,16 +192,15 @@
       <option name="presentableId" value="Default" />
       <updated>1547544559546</updated>
       <workItem from="1547544563543" duration="6221000" />
-      <workItem from="1547619973884" duration="6516000" />
+      <workItem from="1547619973884" duration="6584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12737000" />
+    <option name="totallyTimeSpent" value="12805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="29" width="1368" height="740" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25112107" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -315,7 +314,7 @@
     <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
-          <caret line="52" column="36" lean-forward="true" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
         </state>
       </provider>
     </entry>
