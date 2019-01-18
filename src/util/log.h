@@ -19,15 +19,15 @@
 
 #ifdef BOOST_NO_CXX11_HDR_CHRONO
 
-namespace {
+namespace qg {
 	inline
 	qg_string
 	NowTime () {
 		auto now = std::chrono::system_clock::now ();
-		std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-		return qg_string(std::ctime());
+		std::time_t end_time = std::chrono::system_clock::to_time_t (end);
+		return qg_string (std::ctime ());
 	}
-}
+} // namespace qg
 #endif
 
 
@@ -67,23 +67,23 @@ private:
 
 
 Log::ostream_t&
-Log::get(LogLevel level)
+Log::get (LogLevel level)
 {
-	this->ostream << "- " << NowTime();
+	this->ostream << "- " << NowTime ();
 	this->ostream << " " << (level) << ": ";
-	this->ostream << qg::qg_string(level > LOGDEBUG ? 0 : level - LOGDEBUG, '\t');
+	this->ostream << qg::qg_string (level > LOGDEBUG ? 0 : level - LOGDEBUG, '\t');
 	this->level_ = level;
 	return this->ostream;
 }
 
 
-Log::~Log()
+Log::~Log ()
 {
-	if (this->level_ >= Log::level())
+	if (this->level_ >= Log::level ())
 	{
 		this->ostream << std::endl;
-		fprintf(stderr, "%s", this->ostream.str().c_str());
-		fflush(stderr);
+		fprintf (stderr, "%s", this->ostream.str ().c_str ());
+		fflush (stderr);
 	}
 }
 #endif //PROJECT_LOG_H

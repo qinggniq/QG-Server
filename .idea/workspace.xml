@@ -12,14 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69316b34-f974-4d53-98ac-5a6d8fa29a1a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/util/log.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/Project.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/Project.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpData.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpData.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpData.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpParser.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpParser.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpParser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/log.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/log.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/src/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,11 +73,12 @@
       <file leaf-file-name="log.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/util/log.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="-1048">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
               <folding>
                 <element signature="e#80#98#0" expanded="true" />
-                <element signature="e#490#670#0" expanded="true" />
+                <element signature="e#150#161#0" expanded="true" />
+                <element signature="e#490#708#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,6 +109,7 @@
       <find>#define (.*) (.*)</find>
       <find>qg_uint</find>
       <find>size_t</find>
+      <find>(\w)\(</find>
     </findStrings>
     <replaceStrings>
       <replace>Http</replace>
@@ -122,6 +117,8 @@
       <replace>using (1) = (2);</replace>
       <replace>using $1 = $2;</replace>
       <replace>qg_size_t</replace>
+      <replace>\w \(</replace>
+      <replace>$1 \(</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/core</dir>
@@ -149,8 +146,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="219" />
-    <option name="y" value="98" />
+    <option name="x" value="504" />
+    <option name="y" value="100" />
     <option name="width" value="1057" />
     <option name="height" value="733" />
   </component>
@@ -230,12 +227,12 @@
       <workItem from="1547544563543" duration="6221000" />
       <workItem from="1547619973884" duration="6584000" />
       <workItem from="1547715592731" duration="4736000" />
-      <workItem from="1547796584081" duration="6006000" />
+      <workItem from="1547796584081" duration="6394000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23547000" />
+    <option name="totallyTimeSpent" value="23935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="219" y="98" width="1057" height="733" extended-state="0" />
@@ -467,11 +464,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/log.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="16" />
+        <state relative-caret-position="-1048">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#80#98#0" expanded="true" />
-            <element signature="e#490#670#0" expanded="true" />
+            <element signature="e#150#161#0" expanded="true" />
+            <element signature="e#490#708#0" expanded="true" />
           </folding>
         </state>
       </provider>

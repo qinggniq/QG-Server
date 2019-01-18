@@ -62,43 +62,44 @@ namespace qg{
 			typedef qg_string header_kt;
 
 			public:
-			HttpData (const method_t &method,
-								const version_t &version,
-								const url_t &url,
-								const query_t &query,
-								const header_t &header,
-								const body_t &body):
+			HttpData (
+					const method_t &method,
+					const version_t &version,
+					const url_t &url,
+					const query_t &query,
+					const header_t &header,
+					const body_t &body):
 					method_ (method),
 					version_ (version),
 					url_ (url),
 					query_ (query),
 					header_ (header),
 					body_ (body) {}
-			;
 			HttpData ();
 			~HttpData ();
 
-			version_t version () const;
+			version_t& version () const;
 			void set_version (const version_t &version) ;
-			method_t method () const ;
+			method_t& method () const ;
 			void set_methd (const method_t &method) ;
-			url_t url () const ;
+			url_t& url () const ;
 			void set_url (const url_t &url) ;
 			void set_query (const query_t &query) ;
-			query_vt query_item (const query_vt &) const;
+			query_vt& query_item (const query_vt &) const;
 			void set_query_item (const query_kt &key, const query_vt &value);
 			void set_header (const header_t &header) const;
 			void set_header_item (const header_kt &key, const header_vt &value);
-			header_vt header_item (const header_kt &) const;
+			header_vt& header_item (const header_kt &) const;
 			void set_body (const body_t &body);
-			body_t body () const;
-    private:
+			body_t& body () const;
+
+			private:
 			method_t method_;
-      version_t version_;
-      url_t url_;
-      query_t query_;
-      header_t header_;
-      body_t body_;
+			version_t version_;
+			url_t url_;
+			query_t query_;
+			header_t header_;
+			body_t body_;
     };
 } //namespace qg
 

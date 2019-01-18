@@ -51,7 +51,7 @@ namespace qg{
 
 	}
 
-	HttpData::method_t
+	HttpData::method_t&
 	HttpData::method () const {
 		return this->method_;
 	}
@@ -61,7 +61,7 @@ namespace qg{
 		this->method_ = method;
 	}
 
-	HttpData::version_t
+	HttpData::version_t&
 	HttpData::version () const {
 		return this->version_;
 	}
@@ -71,7 +71,7 @@ namespace qg{
 		this->version_ = version;
 	}
 
-	HttpData::url_t
+	HttpData::url_t&
 	HttpData::url () const {
 		return this->url_;
 	}
@@ -87,7 +87,7 @@ namespace qg{
 		this->query_ = query;
 	}
 
-	HttpData::query_vt
+	HttpData::query_vt&
 	HttpData::query_item (const qg::HttpData::query_vt &key) const {
 		//TODO (qinggniq) fix the bug when key not in query
 		return this->query_[key];
@@ -100,7 +100,7 @@ namespace qg{
 		this->query_.emplace (key, value);
 	}
 
-	HttpData::header_vt
+	HttpData::header_vt&
 	HttpData::header_item (const qg::HttpData::header_kt &key) const {
 		//TODO (qinggniq) fix the bug when key is not in header
 		return this->header_[key];
@@ -120,7 +120,7 @@ namespace qg{
 	}
 
 
-	HttpData::body_t
+	HttpData::body_t&
 	HttpData::body () const {
 		return this->body_;
 	}
