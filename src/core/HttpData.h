@@ -50,35 +50,48 @@ namespace qg{
     };
 
     class HttpData{
+		public:
+			typedef qg_string method_t;
+			typedef qg_string version_t;
+			typedef qg_string url_t;
+			typedef qg_string body_t;
+			typedef std::unordered_map<qg_string, qg_string> header_t;
+			typedef std::unordered_map<qg_string, qg_string> query_t;
+			typedef qg_string query_vt;
+			typedef qg_string query_kt;
+			typedef qg_string header_vt;
+			typedef qg_string header_kt;
     public:
-        typedef qg_string method_t;
-        typedef qg_string version_t;
-        typedef qg_string url_t;
-        typedef qg_string body_t;
-        typedef std::unordered_map<qg_string, qg_string> header_t;
-        typedef qg_string header_vt;
-        typedef qg_string header_kt;
-    public:
-        HttpData (method_t method,
-									version_t version,
-                  url_t url,
-									header_t header,
-									body_t body);
-        HttpData ();
-        ~HttpData ();
+			HttpData (const method_t method,
+								const version_t version,
+								const url_t url,
+								const query_t query,
+								const header_t header,
+								const body_t body):
+					method_ (method),
+					version_ (version),
+					url_ (url),
+					query_ (query),
+					header_ (header),
+					body_ (body) {}
+			;
+			HttpData ();
+			~HttpData ();
 
-        version_t version () const;
-        method_t method () const ;
-        url_t url () const ;
-        header_t header () const;
-        header_vt header_item (header_kt) const;
-        body_t body() const;
+			version_t version () const;
+			method_t method () const ;
+			url_t url () const ;
+			query_vt query_item (const query_vt &) const;
+			header_t header () const;
+			header_vt header_item (const header_kt &) const;
+			body_t body() const;
     private:
-        method_t method_;
-        version_t version_;
-        url_t url_;
-        header_t header_;
-        body_t body_;
+			method_t method_;
+      version_t version_;
+      url_t url_;
+      query_t query_;
+      header_t header_;
+      body_t body_;
     };
 } //namespace qg
 

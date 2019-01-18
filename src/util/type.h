@@ -8,17 +8,18 @@
 #include <string>
 
 namespace qg{
-#define qg_short short
-#define qg_int int
-#define qg_long long
-#define qg_longlong long long
-#define qg_string std::string
-    enum Bool{
-        TRUE=1,
-        FALSE=0,
-    };
-#define qg_bool Bool
-#define TRUE 1
-#define FALSE 0
+using qg_short = short;
+using qg_uint = unsigned int;
+using qg_sizt_t = size_t ;
+using qg_ssize_t = ssize_t ;
+using qg_int = int;
+using qg_long = long;
+using qg_longlong = long long;
+using qg_istream = std::istream;
+using qg_string = std::string;
+using qg_bool = bool;
+
+const qg_int ERROR = -1;
+const qg_int OK = 0;
 } //namespace qg
 #endif //QG_SERVER_TYPE_H

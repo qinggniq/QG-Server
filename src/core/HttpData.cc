@@ -37,52 +37,53 @@ namespace qg{
 		return mime_type_[suffix];
 	}
 
-HttpData::HttpData () {
-		this->method_ = "";
-		this->version_ = "";
-		this->url_ = "";
-		this->header_ = HttpData::header_t ();
-		this->body_ = HttpData::body_t ();
+	HttpData::HttpData () {
+			this->method_ = "";
+			this->version_ = "";
+			this->url_ = "";
+			this->header_ = HttpData::header_t ();
+			this->body_ = HttpData::body_t ();
 	}
 
-HttpData::HttpData (qg::HttpData::method_t method,
-										qg::HttpData::version_t version,
-										qg::HttpData::url_t url,
-										qg::HttpData::header_t header,
-										qg::HttpData::body_t body)
-										method_(method),
-										version_(version){}
 
-HttpData::~HttpData () {}
 
-HttpData::method_t
-HttpData::method () const {
-	return this->method_;
-}
+	HttpData::~HttpData () {
 
-HttpData::version_t
-HttpData::version () const {
-	return this->version_;
-}
+	}
 
-HttpData::url_t
-HttpData::url () const {
-	return this->url_;
-}
+	HttpData::method_t
+	HttpData::method () const {
+		return this->method_;
+	}
 
-HttpData::header_vt
-HttpData::header_item (qg::HttpData::header_kt key) const {
-	return this->header_[key];
-}
+	HttpData::version_t
+	HttpData::version () const {
+		return this->version_;
+	}
 
-HttpData::header_t
-HttpData::header () const {
-	return this->header_;
-}
+	HttpData::url_t
+	HttpData::url () const {
+		return this->url_;
+	}
 
-HttpData::body_t
-HttpData::body () const {
-	return this->body_;
-}
+	HttpData::query_vt
+	HttpData::query_item (const qg::HttpData::query_vt &key) const {
+		return this->query_[key];
+	}
+
+	HttpData::header_vt
+	HttpData::header_item (const qg::HttpData::header_kt &key) const {
+		return this->header_[key];
+	}
+
+	HttpData::header_t
+	HttpData::header () const {
+		return this->header_;
+	}
+
+	HttpData::body_t
+	HttpData::body () const {
+		return this->body_;
+	}
 
 } //namespace qg
