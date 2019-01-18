@@ -56,9 +56,19 @@ namespace qg{
 		return this->method_;
 	}
 
+	void
+	HttpData::set_methd (const qg::HttpData::method_t &method) {
+		this->method_ = method;
+	}
+
 	HttpData::version_t
 	HttpData::version () const {
 		return this->version_;
+	}
+
+	void
+	HttpData::set_version (const qg::HttpData::version_t &version) {
+		this->version_ = version;
 	}
 
 	HttpData::url_t
@@ -66,24 +76,58 @@ namespace qg{
 		return this->url_;
 	}
 
+	void
+	HttpData::set_url (const qg::HttpData::url_t &url) {
+		this->url_ = url;
+	}
+
+	void
+	HttpData::set_query (const qg::HttpData::query_t &query) {
+		//TODO (qinggniq) judge whether NULL
+		this->query_ = query;
+	}
+
 	HttpData::query_vt
 	HttpData::query_item (const qg::HttpData::query_vt &key) const {
+		//TODO (qinggniq) fix the bug when key not in query
 		return this->query_[key];
+	}
+
+	void
+	HttpData::set_query_item (const qg::HttpData::query_kt &key, const qg::HttpData::query_vt &value) {
+		//best practice to insert/update a key-value in c++.
+		//https://stackoverflow.com/questions/14218042/most-efficient-way-to-assign-values-to-maps
+		this->query_.emplace (key, value);
 	}
 
 	HttpData::header_vt
 	HttpData::header_item (const qg::HttpData::header_kt &key) const {
+		//TODO (qinggniq) fix the bug when key is not in header
 		return this->header_[key];
 	}
 
-	HttpData::header_t
-	HttpData::header () const {
-		return this->header_;
+	void
+	HttpData::set_header_item (const qg::HttpData::header_kt &key, const qg::HttpData::header_vt &value) {
+		//best practice to insert/update a key-value in c++.
+		//https://stackoverflow.com/questions/14218042/most-efficient-way-to-assign-values-to-maps
+
+		this->header_.emplace (key, value);
 	}
+	void
+	HttpData::set_header (const header_t &header) const {
+		//TODO (qinggniq) judge header (null ？)
+		this->header_ = header;
+	}
+
 
 	HttpData::body_t
 	HttpData::body () const {
 		return this->body_;
 	}
 
+	void
+	HttpData::set_body (const qg::HttpData::body_t &body) {
+		//TODO (qinggniq) judge body (null ？)
+		this->body_ = body;
+	}
 } //namespace qg

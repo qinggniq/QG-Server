@@ -2,7 +2,7 @@ set(SRCS
         core/HttpData.cc
         core/HttpParser.cc
         util/type.h
-        )
+        util/log.h)
 include_directories(${PROJECT_SOURCE_DIR}/base)
 
 

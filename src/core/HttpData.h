@@ -35,22 +35,21 @@ namespace qg{
 
 	class MIMEType{
 		public:
-			typedef qg_string mime_vt;
-			typedef qg_string mime_kt;
-			typedef std::unordered_map<mime_kt, mime_vt> mime_type_map;
-
-    public:
-        MIMEType ();
-        MIMEType (const MIMEType&);
-        ~MIMEType ();
-        static void init ();
-				static mime_vt mime_item (mime_kt &suffix) const;
-    private:
-        static mime_type_map mime_type_;
-    };
+		typedef qg_string mime_vt;
+		typedef qg_string mime_kt;
+		typedef std::unordered_map<mime_kt, mime_vt> mime_type_map;
+		public:
+		MIMEType ();
+		MIMEType (const MIMEType&);
+		~MIMEType ();
+		static void init ();
+		static mime_vt mime_item (mime_kt &suffix) const;
+		private:
+		static mime_type_map mime_type_;
+	};
 
     class HttpData{
-		public:
+    	public:
 			typedef qg_string method_t;
 			typedef qg_string version_t;
 			typedef qg_string url_t;
@@ -61,13 +60,14 @@ namespace qg{
 			typedef qg_string query_kt;
 			typedef qg_string header_vt;
 			typedef qg_string header_kt;
-    public:
-			HttpData (const method_t method,
-								const version_t version,
-								const url_t url,
-								const query_t query,
-								const header_t header,
-								const body_t body):
+
+			public:
+			HttpData (const method_t &method,
+								const version_t &version,
+								const url_t &url,
+								const query_t &query,
+								const header_t &header,
+								const body_t &body):
 					method_ (method),
 					version_ (version),
 					url_ (url),
@@ -79,12 +79,19 @@ namespace qg{
 			~HttpData ();
 
 			version_t version () const;
+			void set_version (const version_t &version) ;
 			method_t method () const ;
+			void set_methd (const method_t &method) ;
 			url_t url () const ;
+			void set_url (const url_t &url) ;
+			void set_query (const query_t &query) ;
 			query_vt query_item (const query_vt &) const;
-			header_t header () const;
+			void set_query_item (const query_kt &key, const query_vt &value);
+			void set_header (const header_t &header) const;
+			void set_header_item (const header_kt &key, const header_vt &value);
 			header_vt header_item (const header_kt &) const;
-			body_t body() const;
+			void set_body (const body_t &body);
+			body_t body () const;
     private:
 			method_t method_;
       version_t version_;

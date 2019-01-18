@@ -3,12 +3,16 @@
 //
 
 #include "HttpParser.h"
+
 #include "../util/type.h"
+
+#include <iostream>
+
 
 namespace qg{
 
 	HttpParser::HttpParser () :
-	http_d (HttpParser::http_dt ()) {
+	http_dt (HttpParser::http_dt ()) {
 
 	}
 
@@ -66,15 +70,25 @@ namespace qg{
 				} else {
 					return ERROR;
 				}
-				header = this->parse_header ()
+
+				this->http_d_.set_methd (method);
+				this->http_d_.set_version (version);
+				this->http_d_.set_url (url);
+
+
+				return this->parse_query (query_s) &&
+							 this->parse_header (stream);
 			}
 			
 		}
+		return OK;
 
 	}
+
+
 	HttpParser::http_dt
 	HttpParser::http_data () const {
-		return this->http_d;
+		return this->http_d_;
 	}
 
 	HttpParser::ok_t
@@ -95,7 +109,9 @@ namespace qg{
 
 	HttpParser::ok_t
 	HttpParser::parse_query (const qg::HttpParser::msg_t &msg) {
+		ok_t s = OK;
 
+		return s;
 	}
 
 	HttpParser::ok_t
@@ -106,13 +122,21 @@ namespace qg{
 
 	HttpParser::ok_t
 	HttpParser::parse_header (const qg::HttpParser::msg_t &header_msg) {
-		ok_t s = -1;
+		ok_t s = OK;
 		return s;
+
+	}
+
+	HttpParser::ok_t
+	HttpParser::parse_header (qg::qg_istream &stream) {
+		ok_t s = OK;
+
+		return OK;
 	}
 
 	HttpParser::ok_t
 	HttpParser::parse_body (const qg::HttpParser::msg_t &body_msg) {
-		ok_t s = -1;
-		return s;
+		ok_t s = OK;
+		return OK;
 	}
 } //namespace qg

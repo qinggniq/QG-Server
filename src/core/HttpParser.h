@@ -60,11 +60,12 @@ namespace qg{
 			ok_t parse_query (const msg_t &msg);
 			ok_t parse_version (const msg_t &msg);
 			ok_t parse_header (const msg_t &msg);
+			ok_t parse_header (qg_istream &stream);
 
 			ok_t parse_body (const msg_t &msg);
 
 
-			http_dt http_d;
+			http_dt http_d_;
 
     };
 } //namespace qg
