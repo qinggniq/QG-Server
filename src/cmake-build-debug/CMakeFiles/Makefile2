@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/wc/CLionProjects/QG-Server/src/cmake-build-debug
 CMakeFiles/QG-Server.dir/all:
 	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/depend
 	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target QG-Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target QG-Server"
 .PHONY : CMakeFiles/QG-Server.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/QG-Server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/QG-Server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/QG-Server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/QG-Server.dir/rule

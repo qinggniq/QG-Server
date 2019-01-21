@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/QG-Server.dir/core/HttpData.o"
-  "CMakeFiles/QG-Server.dir/core/HttpParser.o"
+  "CMakeFiles/QG-Server.dir/test/test_http_paser.o"
   "QG-Server.pdb"
   "QG-Server"
 )

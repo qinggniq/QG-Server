@@ -5,6 +5,7 @@
 #include "HttpData.h"
 
 namespace qg{
+	MIMEType::mime_type_map MIMEType::mime_type_ = MIMEType::mime_type_map ();
 	MIMEType::MIMEType () {}
 
 	MIMEType::MIMEType (const qg::MIMEType &mime) {
@@ -13,34 +14,39 @@ namespace qg{
 
 	MIMEType::~MIMEType () {}
 
-	static
+
 	void
 	MIMEType::init () {
-		mime_type_[".html"] = "text/html";
-		mime_type_[".avi"] = "video/x-msvideo";
-		mime_type_[".bmp"] = "image/bmp";
-		mime_type_[".c"] = "text/plain";
-		mime_type_[".doc"] = "application/msword";
-		mime_type_[".gif"] = "image/gif";
-		mime_type_[".gz"] = "application/x-gzip";
-		mime_type_[".htm"] = "text/html";
-		mime_type_[".ico"] = "application/x-ico";
-		mime_type_[".jpg"] = "image/jpeg";
-		mime_type_[".png"] = "image/png";
-		mime_type_[".txt"] = "text/plain";
-		mime_type_[".mp3"] = "audio/mp3";
-		mime_type_["default"] = "text/html";
+		mime_type_.emplace(".html", "text/html");
+//		mime_type_[".avi"] = "video/x-msvideo";
+//		mime_type_[".bmp"] = "image/bmp";
+//		mime_type_[".c"] = "text/plain";
+//		mime_type_[".doc"] = "application/msword";
+//		mime_type_[".gif"] = "image/gif";
+//		mime_type_[".gz"] = "application/x-gzip";
+//		mime_type_[".htm"] = "text/html";
+//		mime_type_[".ico"] = "application/x-ico";
+//		mime_type_[".jpg"] = "image/jpeg";
+//		mime_type_[".png"] = "image/png";
+//		mime_type_[".txt"] = "text/plain";
+//		mime_type_[".mp3"] = "audio/mp3";
+//		mime_type_["default"] = "text/html";
 	}
-	static
+
 	MIMEType::mime_vt
-	MIMEType::mime_item (qg::MIMEType::mime_kt &suffix) const {
-		return mime_type_[suffix];
+	MIMEType::mime_item (qg::MIMEType::mime_kt &suffix) {
+		auto it = MIMEType::mime_type_.find (suffix);
+		if (it != MIMEType::mime_type_.end()) {
+			return it->second;
+		}else{
+			return mime_vt ();
+		}
 	}
 
 	HttpData::HttpData () {
 			this->method_ = "";
 			this->version_ = "";
-			this->url_ = "";
+			this->uri_ = "";
 			this->header_ = HttpData::header_t ();
 			this->body_ = HttpData::body_t ();
 	}
@@ -51,7 +57,7 @@ namespace qg{
 
 	}
 
-	HttpData::method_t&
+	HttpData::method_t
 	HttpData::method () const {
 		return this->method_;
 	}
@@ -61,7 +67,7 @@ namespace qg{
 		this->method_ = method;
 	}
 
-	HttpData::version_t&
+	HttpData::version_t
 	HttpData::version () const {
 		return this->version_;
 	}
@@ -71,28 +77,37 @@ namespace qg{
 		this->version_ = version;
 	}
 
-	HttpData::url_t&
-	HttpData::url () const {
-		return this->url_;
+	HttpData::uri_t
+	HttpData::uri () const {
+		return this->uri_;
 	}
 
+	inline
 	void
-	HttpData::set_url (const qg::HttpData::url_t &url) {
-		this->url_ = url;
+	HttpData::set_uri (const qg::HttpData::uri_t &uri) {
+		this->uri_ = uri;
 	}
 
+	inline
 	void
 	HttpData::set_query (const qg::HttpData::query_t &query) {
 		//TODO (qinggniq) judge whether NULL
 		this->query_ = query;
 	}
 
-	HttpData::query_vt&
+	inline
+	HttpData::query_vt
 	HttpData::query_item (const qg::HttpData::query_vt &key) const {
 		//TODO (qinggniq) fix the bug when key not in query
-		return this->query_[key];
+		auto it = query_.find (key);
+		if (it != query_.end()) {
+			return it->second;
+		}else{
+			return query_vt ();
+		}
 	}
 
+	inline
 	void
 	HttpData::set_query_item (const qg::HttpData::query_kt &key, const qg::HttpData::query_vt &value) {
 		//best practice to insert/update a key-value in c++.
@@ -100,10 +115,16 @@ namespace qg{
 		this->query_.emplace (key, value);
 	}
 
-	HttpData::header_vt&
+	inline
+	HttpData::header_vt
 	HttpData::header_item (const qg::HttpData::header_kt &key) const {
 		//TODO (qinggniq) fix the bug when key is not in header
-		return this->header_[key];
+		auto it = this->header_.find (key);
+		if (it != this->header_.end()) {
+			return it->second;
+		}else{
+			return header_vt ();
+		}
 	}
 
 	void
@@ -113,21 +134,41 @@ namespace qg{
 
 		this->header_.emplace (key, value);
 	}
+
+	inline
 	void
-	HttpData::set_header (const header_t &header) const {
+	HttpData::set_header (const header_t &header) {
 		//TODO (qinggniq) judge header (null ？)
 		this->header_ = header;
 	}
 
-
-	HttpData::body_t&
+	inline
+	HttpData::body_t
 	HttpData::body () const {
 		return this->body_;
 	}
 
+	inline
 	void
 	HttpData::set_body (const qg::HttpData::body_t &body) {
 		//TODO (qinggniq) judge body (null ？)
 		this->body_ = body;
+	}
+
+
+	qg_bool
+	HttpData::Encoded () const{
+
+		HttpData::header_t::const_iterator it = this->header_.find (HttpData::header_kt("Transfer-Encoding"));
+		if (it != this->header_.end ()) {
+			//TODO (qinggniq) find the real value of "Transfer-Encoding" field
+			return it->second == qg_string("True");
+		}
+		return kFalse;
+	}
+
+	HttpData::header_t
+	HttpData::header () const {
+		return this->header_;
 	}
 } //namespace qg

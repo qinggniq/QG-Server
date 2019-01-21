@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wc/CLionProjects/QG-Server/src/core/HttpData.cc
+HttpData.h
+/home/wc/CLionProjects/QG-Server/src/core/HttpData.h
+
+/home/wc/CLionProjects/QG-Server/src/core/HttpData.h
+unordered_map
+-
+memory
+-
+../util/type.h
+/home/wc/CLionProjects/QG-Server/src/util/type.h
+
+/home/wc/CLionProjects/QG-Server/src/core/HttpParser.cc
+HttpParser.h
+/home/wc/CLionProjects/QG-Server/src/core/HttpParser.h
+../util/type.h
+/home/wc/CLionProjects/QG-Server/src/util/type.h
+iostream
+-
+
+/home/wc/CLionProjects/QG-Server/src/core/HttpParser.h
+../util/type.h
+/home/wc/CLionProjects/QG-Server/src/util/type.h
+HttpData.h
+/home/wc/CLionProjects/QG-Server/src/core/HttpData.h
+
+/home/wc/CLionProjects/QG-Server/src/core/main.cpp
+
+/home/wc/CLionProjects/QG-Server/src/util/type.h
+string
+-
+

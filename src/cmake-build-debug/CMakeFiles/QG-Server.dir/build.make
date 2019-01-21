@@ -57,67 +57,41 @@ include CMakeFiles/QG-Server.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/QG-Server.dir/flags.make
 
-CMakeFiles/QG-Server.dir/core/HttpData.o: CMakeFiles/QG-Server.dir/flags.make
-CMakeFiles/QG-Server.dir/core/HttpData.o: ../core/HttpData.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/QG-Server.dir/core/HttpData.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/QG-Server.dir/core/HttpData.o -c /home/wc/CLionProjects/QG-Server/src/core/HttpData.cc
+CMakeFiles/QG-Server.dir/test/test_http_paser.o: CMakeFiles/QG-Server.dir/flags.make
+CMakeFiles/QG-Server.dir/test/test_http_paser.o: ../test/test_http_paser.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/QG-Server.dir/test/test_http_paser.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/QG-Server.dir/test/test_http_paser.o -c /home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc
 
-CMakeFiles/QG-Server.dir/core/HttpData.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/QG-Server.dir/core/HttpData.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wc/CLionProjects/QG-Server/src/core/HttpData.cc > CMakeFiles/QG-Server.dir/core/HttpData.i
+CMakeFiles/QG-Server.dir/test/test_http_paser.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/QG-Server.dir/test/test_http_paser.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc > CMakeFiles/QG-Server.dir/test/test_http_paser.i
 
-CMakeFiles/QG-Server.dir/core/HttpData.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/QG-Server.dir/core/HttpData.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wc/CLionProjects/QG-Server/src/core/HttpData.cc -o CMakeFiles/QG-Server.dir/core/HttpData.s
+CMakeFiles/QG-Server.dir/test/test_http_paser.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/QG-Server.dir/test/test_http_paser.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc -o CMakeFiles/QG-Server.dir/test/test_http_paser.s
 
-CMakeFiles/QG-Server.dir/core/HttpData.o.requires:
+CMakeFiles/QG-Server.dir/test/test_http_paser.o.requires:
 
-.PHONY : CMakeFiles/QG-Server.dir/core/HttpData.o.requires
+.PHONY : CMakeFiles/QG-Server.dir/test/test_http_paser.o.requires
 
-CMakeFiles/QG-Server.dir/core/HttpData.o.provides: CMakeFiles/QG-Server.dir/core/HttpData.o.requires
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpData.o.provides.build
-.PHONY : CMakeFiles/QG-Server.dir/core/HttpData.o.provides
+CMakeFiles/QG-Server.dir/test/test_http_paser.o.provides: CMakeFiles/QG-Server.dir/test/test_http_paser.o.requires
+	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/test/test_http_paser.o.provides.build
+.PHONY : CMakeFiles/QG-Server.dir/test/test_http_paser.o.provides
 
-CMakeFiles/QG-Server.dir/core/HttpData.o.provides.build: CMakeFiles/QG-Server.dir/core/HttpData.o
-
-
-CMakeFiles/QG-Server.dir/core/HttpParser.o: CMakeFiles/QG-Server.dir/flags.make
-CMakeFiles/QG-Server.dir/core/HttpParser.o: ../core/HttpParser.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/QG-Server.dir/core/HttpParser.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/QG-Server.dir/core/HttpParser.o -c /home/wc/CLionProjects/QG-Server/src/core/HttpParser.cc
-
-CMakeFiles/QG-Server.dir/core/HttpParser.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/QG-Server.dir/core/HttpParser.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wc/CLionProjects/QG-Server/src/core/HttpParser.cc > CMakeFiles/QG-Server.dir/core/HttpParser.i
-
-CMakeFiles/QG-Server.dir/core/HttpParser.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/QG-Server.dir/core/HttpParser.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wc/CLionProjects/QG-Server/src/core/HttpParser.cc -o CMakeFiles/QG-Server.dir/core/HttpParser.s
-
-CMakeFiles/QG-Server.dir/core/HttpParser.o.requires:
-
-.PHONY : CMakeFiles/QG-Server.dir/core/HttpParser.o.requires
-
-CMakeFiles/QG-Server.dir/core/HttpParser.o.provides: CMakeFiles/QG-Server.dir/core/HttpParser.o.requires
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpParser.o.provides.build
-.PHONY : CMakeFiles/QG-Server.dir/core/HttpParser.o.provides
-
-CMakeFiles/QG-Server.dir/core/HttpParser.o.provides.build: CMakeFiles/QG-Server.dir/core/HttpParser.o
+CMakeFiles/QG-Server.dir/test/test_http_paser.o.provides.build: CMakeFiles/QG-Server.dir/test/test_http_paser.o
 
 
 # Object files for target QG-Server
 QG__Server_OBJECTS = \
-"CMakeFiles/QG-Server.dir/core/HttpData.o" \
-"CMakeFiles/QG-Server.dir/core/HttpParser.o"
+"CMakeFiles/QG-Server.dir/test/test_http_paser.o"
 
 # External object files for target QG-Server
 QG__Server_EXTERNAL_OBJECTS =
 
-QG-Server: CMakeFiles/QG-Server.dir/core/HttpData.o
-QG-Server: CMakeFiles/QG-Server.dir/core/HttpParser.o
+QG-Server: CMakeFiles/QG-Server.dir/test/test_http_paser.o
 QG-Server: CMakeFiles/QG-Server.dir/build.make
 QG-Server: CMakeFiles/QG-Server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable QG-Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wc/CLionProjects/QG-Server/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable QG-Server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/QG-Server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,8 +99,7 @@ CMakeFiles/QG-Server.dir/build: QG-Server
 
 .PHONY : CMakeFiles/QG-Server.dir/build
 
-CMakeFiles/QG-Server.dir/requires: CMakeFiles/QG-Server.dir/core/HttpData.o.requires
-CMakeFiles/QG-Server.dir/requires: CMakeFiles/QG-Server.dir/core/HttpParser.o.requires
+CMakeFiles/QG-Server.dir/requires: CMakeFiles/QG-Server.dir/test/test_http_paser.o.requires
 
 .PHONY : CMakeFiles/QG-Server.dir/requires
 

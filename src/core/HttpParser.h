@@ -16,7 +16,7 @@ namespace qg{
 		public:
 			typedef HttpData::method_t method_t;
 			typedef HttpData::version_t version_t ;
-			typedef HttpData::url_t url_t;
+			typedef HttpData::uri_t uri_t;
 			typedef HttpData::header_t header_t;
 			typedef HttpData::body_t body_t;
 			typedef HttpData http_dt;
@@ -48,21 +48,23 @@ namespace qg{
 		public:
 			HttpParser ();
 			~HttpParser ();
-			ok_t parse (const msg_t &http_msg);
-			ok_t parse (qg_istream &stream);
+			ok_t Parse (const msg_t &http_msg);
+			ok_t Parse (qg_istream &stream);
 			http_dt http_data () const;
-
+			void Print () const;
 
 		private:
-			ok_t parse_start_line (const msg_t &msg);
-			ok_t parse_method (const msg_t &msg);
-			ok_t parse_url (const msg_t &msg);
-			ok_t parse_query (const msg_t &msg);
-			ok_t parse_version (const msg_t &msg);
-			ok_t parse_header (const msg_t &msg);
-			ok_t parse_header (qg_istream &stream);
+			ok_t ParseStartLine (const msg_t &msg);
+			ok_t ParseMethod (const msg_t &msg);
+			ok_t ParseUri (const msg_t &msg);
+			ok_t ParseQuery (const msg_t &msg);
+			ok_t ParseVersion (const msg_t &msg);
+			ok_t ParseHeader (const msg_t &msg);
+			ok_t ParseHeader (qg_istream &istream);
 
-			ok_t parse_body (const msg_t &msg);
+			ok_t ParseBody (const msg_t &msg);
+			ok_t ParseBody (qg_istream &istream);
+
 
 
 			http_dt http_d_;

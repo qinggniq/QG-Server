@@ -124,34 +124,19 @@ QG-Server/fast:
 .PHONY : QG-Server/fast
 
 # target to build an object file
-core/HttpData.o:
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpData.o
-.PHONY : core/HttpData.o
+test/test_http_paser.o:
+	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/test/test_http_paser.o
+.PHONY : test/test_http_paser.o
 
 # target to preprocess a source file
-core/HttpData.i:
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpData.i
-.PHONY : core/HttpData.i
+test/test_http_paser.i:
+	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/test/test_http_paser.i
+.PHONY : test/test_http_paser.i
 
 # target to generate assembly for a file
-core/HttpData.s:
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpData.s
-.PHONY : core/HttpData.s
-
-# target to build an object file
-core/HttpParser.o:
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpParser.o
-.PHONY : core/HttpParser.o
-
-# target to preprocess a source file
-core/HttpParser.i:
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpParser.i
-.PHONY : core/HttpParser.i
-
-# target to generate assembly for a file
-core/HttpParser.s:
-	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/core/HttpParser.s
-.PHONY : core/HttpParser.s
+test/test_http_paser.s:
+	$(MAKE) -f CMakeFiles/QG-Server.dir/build.make CMakeFiles/QG-Server.dir/test/test_http_paser.s
+.PHONY : test/test_http_paser.s
 
 # Help Target
 help:
@@ -162,12 +147,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... QG-Server"
-	@echo "... core/HttpData.o"
-	@echo "... core/HttpData.i"
-	@echo "... core/HttpData.s"
-	@echo "... core/HttpParser.o"
-	@echo "... core/HttpParser.i"
-	@echo "... core/HttpParser.s"
+	@echo "... test/test_http_paser.o"
+	@echo "... test/test_http_paser.i"
+	@echo "... test/test_http_paser.s"
 .PHONY : help
 
 

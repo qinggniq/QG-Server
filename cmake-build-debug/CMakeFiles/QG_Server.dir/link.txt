@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o CMakeFiles/QG_Server.dir/src/core/HttpData.cc.o CMakeFiles/QG_Server.dir/src/core/main.cpp.o  -o QG_Server 

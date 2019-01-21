@@ -9,6 +9,8 @@
 
 
 #include <unordered_map>
+#include <memory>
+
 #include "../util/type.h"
 
 // ----------------------------------------------------------------------
@@ -43,8 +45,8 @@ namespace qg{
 		MIMEType (const MIMEType&);
 		~MIMEType ();
 		static void init ();
-		static mime_vt mime_item (mime_kt &suffix) const;
-		private:
+		static mime_vt mime_item (mime_kt &suffix);
+		public:
 		static mime_type_map mime_type_;
 	};
 
@@ -52,7 +54,7 @@ namespace qg{
     	public:
 			typedef qg_string method_t;
 			typedef qg_string version_t;
-			typedef qg_string url_t;
+			typedef qg_string uri_t;
 			typedef qg_string body_t;
 			typedef std::unordered_map<qg_string, qg_string> header_t;
 			typedef std::unordered_map<qg_string, qg_string> query_t;
@@ -65,38 +67,41 @@ namespace qg{
 			HttpData (
 					const method_t &method,
 					const version_t &version,
-					const url_t &url,
+					const uri_t &uri,
 					const query_t &query,
 					const header_t &header,
 					const body_t &body):
 					method_ (method),
 					version_ (version),
-					url_ (url),
+					uri_ (uri),
 					query_ (query),
 					header_ (header),
 					body_ (body) {}
 			HttpData ();
 			~HttpData ();
 
-			version_t& version () const;
+			version_t version () const;
 			void set_version (const version_t &version) ;
-			method_t& method () const ;
+			method_t method () const ;
 			void set_methd (const method_t &method) ;
-			url_t& url () const ;
-			void set_url (const url_t &url) ;
+			uri_t uri () const ;
+			void set_uri (const uri_t &uri) ;
 			void set_query (const query_t &query) ;
-			query_vt& query_item (const query_vt &) const;
+			header_t header () const;
+			query_vt query_item (const query_vt &) const;
 			void set_query_item (const query_kt &key, const query_vt &value);
-			void set_header (const header_t &header) const;
+			void set_header (const header_t &header) ;
 			void set_header_item (const header_kt &key, const header_vt &value);
-			header_vt& header_item (const header_kt &) const;
+			header_vt header_item (const header_kt &) const;
 			void set_body (const body_t &body);
-			body_t& body () const;
+			body_t body () const;
+			qg_bool Encoded () const;
+
 
 			private:
 			method_t method_;
 			version_t version_;
-			url_t url_;
+			uri_t uri_;
 			query_t query_;
 			header_t header_;
 			body_t body_;

@@ -11,21 +11,17 @@
 
 namespace qg{
 
-	HttpParser::HttpParser () :
-	http_dt (HttpParser::http_dt ()) {
+	HttpParser::HttpParser () = default;
 
-	}
-
-	HttpParser::~HttpParser () {}
+	HttpParser::~HttpParser () = default ;
 
 	HttpParser::ok_t
-	HttpParser::parse (const msg_t &http_msg) {
-		ok_t s;
-		return s;
+	HttpParser::Parse (const msg_t &http_msg) {
+		return kOk;
 	}
 
 	HttpParser::ok_t
-	HttpParser::parse (qg_istream &stream) {
+	HttpParser::Parse (qg_istream &stream) {
 		qg_string line;
 		method_t method;
 		version_t version;
@@ -33,7 +29,7 @@ namespace qg{
 		header_t header;
 		body_t body;
 		
-		url_t url;
+		uri_t uri;
 
 		getline (stream, line);
 		size_t method_end = qg_string::npos;
@@ -42,46 +38,46 @@ namespace qg{
 			method = line.substr (0, method_end);
 			
 			qg::qg_sizt_t  query_start = qg_string::npos;
-			qg::qg_sizt_t  url_and_query_end = qg_string::npos;
+			qg::qg_sizt_t  uri_and_query_end = qg_string::npos;
 			qg::qg_sizt_t line_size = line.size ();
 
 			for (qg::qg_sizt_t i = method_end + 1; i < line_size; ++i) {
 				if (line[i] == '?' && i < line_size - 1) {
 					query_start = i;
 				} else if (line[i] == ' '){
-					url_and_query_end = i;
+					uri_and_query_end = i;
 					break;
 				}
 			}
 			//
-			if (url_and_query_end != qg_string::npos) {
+			if (uri_and_query_end != qg_string::npos) {
 				if (query_start != qg_string::npos) {
-					url = line.substr (method_end + 1, query_start);
-					query_s = line.substr (query_start, url_and_query_end);
+					uri = line.substr (method_end + 1, query_start);
+					query_s = line.substr (query_start, uri_and_query_end);
 				} else {
-					url = line.substr (method_end + 1, url_and_query_end);
+					uri = line.substr (method_end + 1, uri_and_query_end);
 				}
 				
 				qg::qg_sizt_t version_end = qg_string::npos;
-				if ((version_end = line.find ('/', url_and_query_end + 1)) != qg_string::npos) {
-					if(line.compare(url_and_query_end + 1, version_end - url_and_query_end - 1, "HTTP") != 0)
-						return ERROR;
+				if ((version_end = line.find ('/', uri_and_query_end + 1)) != qg_string::npos) {
+					if(line.compare(uri_and_query_end + 1, version_end - uri_and_query_end - 1, "HTTP") != 0)
+						return kError;
 					version = line.substr(version_end + 1, line.size() - version_end - 2);
 				} else {
-					return ERROR;
+					return kError;
 				}
 
 				this->http_d_.set_methd (method);
 				this->http_d_.set_version (version);
-				this->http_d_.set_url (url);
+				//this->http_d_.set_uri (uri);
 
 
-				return this->parse_query (query_s) &&
-							 this->parse_header (stream);
+				return this->ParseQuery (query_s) &&
+							 this->ParseHeader (stream);
 			}
 			
 		}
-		return OK;
+		return kOk;
 
 	}
 
@@ -92,51 +88,82 @@ namespace qg{
 	}
 
 	HttpParser::ok_t
-	HttpParser::parse_start_line (const HttpParser::msg_t &start_msg) {
+	HttpParser::ParseStartLine (const HttpParser::msg_t &start_msg) {
 		ok_t s = -1;
 
+		return kOk;
+	}
+	HttpParser::ok_t
+	HttpParser::ParseMethod (const HttpParser::msg_t &msg) {
+		return kOk;
+	}
+
+	HttpParser::ok_t
+	HttpParser::ParseUri (const qg::HttpParser::msg_t &msg) {
+		return kOk;
+	}
+
+	HttpParser::ok_t
+	HttpParser::ParseQuery (const qg::HttpParser::msg_t &msg) {
+
+		return kOk;
+	}
+
+	HttpParser::ok_t
+	HttpParser::ParseVersion (const qg::HttpParser::msg_t &msg) {
+		return kOk;
+	}
+
+
+	HttpParser::ok_t
+	HttpParser::ParseHeader (const qg::HttpParser::msg_t &header_msg) {
+		ok_t s = kOk;
 		return s;
-	}
-	HttpParser::ok_t
-	HttpParser::parse_method (const HttpParser::msg_t &msg) {
 
 	}
 
 	HttpParser::ok_t
-	HttpParser::parse_url (const qg::HttpParser::msg_t &msg) {
-
+	HttpParser::ParseHeader (qg::qg_istream &istream) {
+		qg_string line;
+		header_t header;
+		while (getline (istream, line)) {
+			qg_sizt_t key_end;
+			if ((key_end = line.find (":")) != qg_string::npos && line.length ()) {
+				this->http_d_.set_header_item (line.substr (0, key_end), line.substr (key_end + 1, line.length ()));
+			}
+		}
+		
+		return this->ParseBody (istream);
 	}
 
 	HttpParser::ok_t
-	HttpParser::parse_query (const qg::HttpParser::msg_t &msg) {
-		ok_t s = OK;
-
-		return s;
+	HttpParser::ParseBody (const qg::HttpParser::msg_t &body_msg) {
+		return kOk;
 	}
 
 	HttpParser::ok_t
-	HttpParser::parse_version (const qg::HttpParser::msg_t &msg) {
-
+	HttpParser::ParseBody (qg::qg_istream &istream) {
+		if (((this->http_d_).Encoded () )== kOk) {
+			return kOk;
+			//TODO(qinggniq) implement the encode/decode function
+		} else {
+			return kOk;
+			//TODO(qinggniq) implement the body parse function
+		}
+		return kOk;
 	}
 
-
-	HttpParser::ok_t
-	HttpParser::parse_header (const qg::HttpParser::msg_t &header_msg) {
-		ok_t s = OK;
-		return s;
-
-	}
-
-	HttpParser::ok_t
-	HttpParser::parse_header (qg::qg_istream &stream) {
-		ok_t s = OK;
-
-		return OK;
-	}
-
-	HttpParser::ok_t
-	HttpParser::parse_body (const qg::HttpParser::msg_t &body_msg) {
-		ok_t s = OK;
-		return OK;
+	void
+	HttpParser::Print () const {
+		std::cout << "Http Data:" << std::endl;
+		std::cout << "Http Method:" << this->http_d_.method () << std::endl;
+		std::cout << "Http Uri:" << this->http_d_.uri () << std::endl;
+		std::cout << "Http Version:" << this->http_d_.version () << std::endl;
+		std::cout << "Http Headers:" << std::endl;
+		HttpData::header_t header = this->http_d_.header ();
+		for (auto it = header.begin (); it != header.end(); it++) {
+			std::cout << it->first << " : " << it->second << std::endl;
+		}
+		std::cout << "Http Data End!" << std::endl;
 	}
 } //namespace qg
