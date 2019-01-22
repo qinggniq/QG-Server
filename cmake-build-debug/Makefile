@@ -212,33 +212,6 @@ src/core/HttpParser.cc.s:
 	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.s
 .PHONY : src/core/HttpParser.cc.s
 
-src/core/main.o: src/core/main.cpp.o
-
-.PHONY : src/core/main.o
-
-# target to build an object file
-src/core/main.cpp.o:
-	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/core/main.cpp.o
-.PHONY : src/core/main.cpp.o
-
-src/core/main.i: src/core/main.cpp.i
-
-.PHONY : src/core/main.i
-
-# target to preprocess a source file
-src/core/main.cpp.i:
-	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/core/main.cpp.i
-.PHONY : src/core/main.cpp.i
-
-src/core/main.s: src/core/main.cpp.s
-
-.PHONY : src/core/main.s
-
-# target to generate assembly for a file
-src/core/main.cpp.s:
-	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/core/main.cpp.s
-.PHONY : src/core/main.cpp.s
-
 src/test/test_http_paser.o: src/test/test_http_paser.cc.o
 
 .PHONY : src/test/test_http_paser.o
@@ -246,6 +219,7 @@ src/test/test_http_paser.o: src/test/test_http_paser.cc.o
 # target to build an object file
 src/test/test_http_paser.cc.o:
 	$(MAKE) -f CMakeFiles/unit_test.dir/build.make CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o
+	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o
 .PHONY : src/test/test_http_paser.cc.o
 
 src/test/test_http_paser.i: src/test/test_http_paser.cc.i
@@ -255,6 +229,7 @@ src/test/test_http_paser.i: src/test/test_http_paser.cc.i
 # target to preprocess a source file
 src/test/test_http_paser.cc.i:
 	$(MAKE) -f CMakeFiles/unit_test.dir/build.make CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.i
+	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.i
 .PHONY : src/test/test_http_paser.cc.i
 
 src/test/test_http_paser.s: src/test/test_http_paser.cc.s
@@ -264,6 +239,7 @@ src/test/test_http_paser.s: src/test/test_http_paser.cc.s
 # target to generate assembly for a file
 src/test/test_http_paser.cc.s:
 	$(MAKE) -f CMakeFiles/unit_test.dir/build.make CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.s
+	$(MAKE) -f CMakeFiles/QG_Server.dir/build.make CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.s
 .PHONY : src/test/test_http_paser.cc.s
 
 # Help Target
@@ -284,9 +260,6 @@ help:
 	@echo "... src/core/HttpParser.o"
 	@echo "... src/core/HttpParser.i"
 	@echo "... src/core/HttpParser.s"
-	@echo "... src/core/main.o"
-	@echo "... src/core/main.i"
-	@echo "... src/core/main.s"
 	@echo "... src/test/test_http_paser.o"
 	@echo "... src/test/test_http_paser.i"
 	@echo "... src/test/test_http_paser.s"

@@ -2,7 +2,7 @@
 // Created by wc on 1/15/19.
 //
 
-#include "HttpParser.h"
+#include "http_parser.h"
 
 #include "../util/type.h"
 
@@ -11,17 +11,17 @@
 
 namespace qg{
 
-	HttpParser::HttpParser () = default;
+	http_parser::http_parser () = default;
 
-	HttpParser::~HttpParser () = default ;
+	http_parser::~http_parser () = default ;
 
-	HttpParser::ok_t
-	HttpParser::Parse (const msg_t &http_msg) {
+	http_parser::ok_t
+	http_parser::Parse (const msg_t &http_msg) {
 		return kOk;
 	}
 
-	HttpParser::ok_t
-	HttpParser::Parse (qg_istream &stream) {
+	http_parser::ok_t
+	http_parser::Parse (qg_istream &stream) {
 		qg_string line;
 		method_t method;
 		version_t version;
@@ -53,27 +53,26 @@ namespace qg{
 			if (uri_and_query_end != qg_string::npos) {
 				if (query_start != qg_string::npos) {
 					uri = line.substr (method_end + 1, query_start);
-					query_s = line.substr (query_start, uri_and_query_end);
+					query_s = line.substr (query_start, uri_and_query_end - method_end);
 				} else {
-					uri = line.substr (method_end + 1, uri_and_query_end);
+					uri = line.substr (method_end + 1, uri_and_query_end - method_end);
 				}
 				
 				qg::qg_sizt_t version_end = qg_string::npos;
 				if ((version_end = line.find ('/', uri_and_query_end + 1)) != qg_string::npos) {
 					if(line.compare(uri_and_query_end + 1, version_end - uri_and_query_end - 1, "HTTP") != 0)
 						return kError;
-					version = line.substr(version_end + 1, line.size() - version_end - 2);
+					version = line.substr(version_end + 1, line.size() - version_end - 1);
 				} else {
 					return kError;
 				}
 
 				this->http_d_.set_methd (method);
 				this->http_d_.set_version (version);
-				//this->http_d_.set_uri (uri);
+				this->http_d_.set_uri (uri);
 
 
-				return this->ParseQuery (query_s) &&
-							 this->ParseHeader (stream);
+				return this->ParseHeader (stream) &&this->ParseQuery (query_s) ;
 			}
 			
 		}
@@ -82,48 +81,48 @@ namespace qg{
 	}
 
 
-	HttpParser::http_dt
-	HttpParser::http_data () const {
+	http_parser::http_dt
+	http_parser::http_data () const {
 		return this->http_d_;
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseStartLine (const HttpParser::msg_t &start_msg) {
+	http_parser::ok_t
+	http_parser::ParseStartLine (const http_parser::msg_t &start_msg) {
 		ok_t s = -1;
 
 		return kOk;
 	}
-	HttpParser::ok_t
-	HttpParser::ParseMethod (const HttpParser::msg_t &msg) {
+	http_parser::ok_t
+	http_parser::ParseMethod (const http_parser::msg_t &msg) {
 		return kOk;
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseUri (const qg::HttpParser::msg_t &msg) {
+	http_parser::ok_t
+	http_parser::ParseUri (const qg::http_parser::msg_t &msg) {
 		return kOk;
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseQuery (const qg::HttpParser::msg_t &msg) {
+	http_parser::ok_t
+	http_parser::ParseQuery (const qg::http_parser::msg_t &msg) {
 
 		return kOk;
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseVersion (const qg::HttpParser::msg_t &msg) {
+	http_parser::ok_t
+	http_parser::ParseVersion (const qg::http_parser::msg_t &msg) {
 		return kOk;
 	}
 
 
-	HttpParser::ok_t
-	HttpParser::ParseHeader (const qg::HttpParser::msg_t &header_msg) {
+	http_parser::ok_t
+	http_parser::ParseHeader (const qg::http_parser::msg_t &header_msg) {
 		ok_t s = kOk;
 		return s;
 
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseHeader (qg::qg_istream &istream) {
+	http_parser::ok_t
+	http_parser::ParseHeader (qg::qg_istream &istream) {
 		qg_string line;
 		header_t header;
 		while (getline (istream, line)) {
@@ -136,13 +135,13 @@ namespace qg{
 		return this->ParseBody (istream);
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseBody (const qg::HttpParser::msg_t &body_msg) {
+	http_parser::ok_t
+	http_parser::ParseBody (const qg::http_parser::msg_t &body_msg) {
 		return kOk;
 	}
 
-	HttpParser::ok_t
-	HttpParser::ParseBody (qg::qg_istream &istream) {
+	http_parser::ok_t
+	http_parser::ParseBody (qg::qg_istream &istream) {
 		if (((this->http_d_).Encoded () )== kOk) {
 			return kOk;
 			//TODO(qinggniq) implement the encode/decode function
@@ -154,13 +153,13 @@ namespace qg{
 	}
 
 	void
-	HttpParser::Print () const {
+	http_parser::Print () const {
 		std::cout << "Http Data:" << std::endl;
 		std::cout << "Http Method:" << this->http_d_.method () << std::endl;
 		std::cout << "Http Uri:" << this->http_d_.uri () << std::endl;
 		std::cout << "Http Version:" << this->http_d_.version () << std::endl;
 		std::cout << "Http Headers:" << std::endl;
-		HttpData::header_t header = this->http_d_.header ();
+		http_data::header_t header = this->http_d_.header ();
 		for (auto it = header.begin (); it != header.end(); it++) {
 			std::cout << it->first << " : " << it->second << std::endl;
 		}

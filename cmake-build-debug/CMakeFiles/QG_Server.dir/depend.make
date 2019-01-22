@@ -10,5 +10,8 @@ CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o: ../src/core/HttpParser.cc
 CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o: ../src/core/HttpParser.h
 CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o: ../src/util/type.h
 
-CMakeFiles/QG_Server.dir/src/core/main.cpp.o: ../src/core/main.cpp
+CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o: ../src/core/HttpData.h
+CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o: ../src/core/HttpParser.h
+CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o: ../src/test/test_http_paser.cc
+CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o: ../src/util/type.h
 

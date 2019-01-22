@@ -10,5 +10,8 @@ CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o
  /home/wc/CLionProjects/QG-Server/src/core/HttpParser.cc
  /home/wc/CLionProjects/QG-Server/src/core/HttpParser.h
  /home/wc/CLionProjects/QG-Server/src/util/type.h
-CMakeFiles/QG_Server.dir/src/core/main.cpp.o
- /home/wc/CLionProjects/QG-Server/src/core/main.cpp
+CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o
+ /home/wc/CLionProjects/QG-Server/src/core/HttpData.h
+ /home/wc/CLionProjects/QG-Server/src/core/HttpParser.h
+ /home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc
+ /home/wc/CLionProjects/QG-Server/src/util/type.h

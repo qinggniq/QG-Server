@@ -13,28 +13,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69316b34-f974-4d53-98ac-5a6d8fa29a1a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/core/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/test_http_paser.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/QG-Server.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmake-build-debug/Project.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmake-build-debug/Project.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpData.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpData.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpData.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpParser.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpParser.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/HttpParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HttpParser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/log.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/log.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/type.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/type.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/HttpData.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/HttpData.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/HttpParser.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/unit_test.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/unit_test.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/QG_Server" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/QG_Server" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/QG_Server.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/QG_Server.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/HttpData.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/http_data.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/HttpData.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/http_data.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/HttpParser.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/http_parser.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/HttpParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/http_parser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test_http_paser.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test_http_paser.cc" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/src/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -48,20 +48,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="HttpData.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+      <file leaf-file-name="http_data.cc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="157" selection-start-line="157" selection-end-line="157" />
+            <state relative-caret-position="110">
+              <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpData.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+      <file leaf-file-name="http_data.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="93" column="11" selection-start-line="93" selection-start-column="11" selection-end-line="93" selection-end-column="11" />
+            <state relative-caret-position="72">
+              <caret line="184" column="25" selection-start-line="184" selection-start-column="25" selection-end-line="184" selection-end-column="25" />
               <folding>
                 <element signature="e#160#184#0" expanded="true" />
               </folding>
@@ -69,10 +69,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpParser.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+      <file leaf-file-name="http_parser.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
+            <state relative-caret-position="506">
               <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
               <folding>
                 <element signature="e#117#142#0" expanded="true" />
@@ -81,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpParser.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+      <file leaf-file-name="http_parser.cc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="145" column="28" selection-start-line="145" selection-start-column="28" selection-end-line="145" selection-end-column="28" />
+            <state relative-caret-position="2658">
+              <caret line="163" column="18" selection-start-line="163" selection-start-column="18" selection-end-line="163" selection-end-column="18" />
               <folding>
                 <element signature="e#36#59#0" expanded="true" />
               </folding>
@@ -96,8 +96,8 @@
       <file leaf-file-name="test_http_paser.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/test_http_paser.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            <state relative-caret-position="278">
+              <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
               <folding>
                 <element signature="e#35#66#0" expanded="true" />
               </folding>
@@ -121,17 +121,17 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="82">
+              <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+            <state relative-caret-position="66">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -139,17 +139,8 @@
       <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cmake-build-debug/util/Makefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
+            <state relative-caret-position="2948">
               <caret line="134" selection-start-line="134" selection-end-line="134" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="type.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/util/type.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -178,6 +169,8 @@
       <find>Parse(.?)(.*?)</find>
       <find>p</find>
       <find>copy</find>
+      <find>inline</find>
+      <find>http_data</find>
     </findStrings>
     <replaceStrings>
       <replace>Http</replace>
@@ -192,6 +185,7 @@
       <replace>uri</replace>
       <replace>Parse$1</replace>
       <replace>P</replace>
+      <replace>RequestData</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/core</dir>
@@ -211,19 +205,22 @@
         <option value="$PROJECT_DIR$/src/util/log.h" />
         <option value="$PROJECT_DIR$/src/util/type.h" />
         <option value="$PROJECT_DIR$/src/core/HttpParser.h" />
-        <option value="$PROJECT_DIR$/src/test/test_http_paser.cc" />
         <option value="$PROJECT_DIR$/src/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/core/HttpData.h" />
-        <option value="$PROJECT_DIR$/src/core/HttpParser.cc" />
-        <option value="$PROJECT_DIR$/src/core/HttpData.cc" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/core/main.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/test/test_http_paser.cc" />
+        <option value="$PROJECT_DIR$/src/core/HttpData.cc" />
+        <option value="$PROJECT_DIR$/src/core/HttpParser.cc" />
+        <option value="$PROJECT_DIR$/src/core/http_parser.cc" />
+        <option value="$PROJECT_DIR$/src/core/http_data.cc" />
+        <option value="$PROJECT_DIR$/src/core/http_data.h" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="292" />
-    <option name="y" value="52" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="232" />
+    <option name="y" value="41" />
     <option name="width" value="1049" />
     <option name="height" value="728" />
   </component>
@@ -242,16 +239,6 @@
             <path>
               <item name="QG_Server" type="b2602c69:ProjectViewProjectNode" />
               <item name="QG-Server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QG_Server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QG-Server" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="QG_Server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="QG-Server" type="462c0819:PsiDirectoryNode" />
-              <item name="doc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="QG_Server" type="b2602c69:ProjectViewProjectNode" />
@@ -278,7 +265,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -298,12 +286,10 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Unnamed">
-    <configuration name="QG_Server" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QG_Server" TARGET_NAME="QG_Server" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QG_Server" RUN_TARGET_NAME="QG_Server" />
     <configuration name="Unnamed" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$/src" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QG_Server" TARGET_NAME="QG_Server" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QG_Server" RUN_TARGET_NAME="QG_Server" />
     <configuration name="unit_test" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QG_Server" TARGET_NAME="unit_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QG_Server" RUN_TARGET_NAME="unit_test" />
     <list>
       <item itemvalue="Application.Unnamed" />
-      <item itemvalue="Application.QG_Server" />
       <item itemvalue="Application.unit_test" />
     </list>
   </component>
@@ -323,27 +309,29 @@
       <workItem from="1547796584081" duration="7265000" />
       <workItem from="1547808396142" duration="99000" />
       <workItem from="1548062947920" duration="9309000" />
-      <workItem from="1548074579199" duration="2323000" />
+      <workItem from="1548074579199" duration="2458000" />
+      <workItem from="1548138890443" duration="3998000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36537000" />
+    <option name="totallyTimeSpent" value="40670000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="292" y="52" width="1049" height="728" extended-state="1" />
+    <frame x="232" y="41" width="1049" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24730128" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.4052993" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.5061082" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.50598294" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.46422338" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32984293" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32991454" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41538462" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.391453" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -351,21 +339,39 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32991454" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/core/http_parser.cc</url>
+          <line>36</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="5" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="902">
           <caret line="41" column="41" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
@@ -375,7 +381,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1166">
           <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
@@ -385,7 +391,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2882">
           <caret line="131" selection-start-line="131" selection-end-line="131" />
@@ -423,14 +429,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1166">
           <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1364">
           <caret line="62" column="45" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
@@ -440,7 +446,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2596">
           <caret line="118" selection-start-line="118" selection-end-line="118" />
@@ -468,7 +474,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1452">
           <caret line="66" column="6" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
@@ -478,14 +484,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1166">
           <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1364">
           <caret line="62" column="45" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
@@ -495,7 +501,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2596">
           <caret line="118" selection-start-line="118" selection-end-line="118" />
@@ -523,7 +529,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1452">
           <caret line="66" column="6" lean-forward="true" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
@@ -533,14 +539,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1012">
           <caret line="46" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1474">
           <caret line="67" column="35" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
@@ -550,7 +556,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
           <caret line="68" column="37" selection-start-line="68" selection-start-column="37" selection-end-line="68" selection-end-column="37" />
@@ -567,7 +573,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1232">
           <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
@@ -577,14 +583,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1144">
           <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1452">
           <caret line="66" column="20" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="20" />
@@ -594,7 +600,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
           <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
@@ -604,7 +610,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1100">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
@@ -628,14 +634,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
           <caret line="22" column="13" selection-start-line="21" selection-start-column="29" selection-end-line="22" selection-end-column="13" />
@@ -645,14 +651,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
@@ -716,9 +722,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.h">
+    <entry file="file://$PROJECT_DIR$/src/cmake-build-debug/util/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2948">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/test_http_paser.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
+          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+          <folding>
+            <element signature="e#35#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
           <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
           <folding>
             <element signature="e#117#142#0" expanded="true" />
@@ -726,61 +763,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.h">
+    <entry file="file://$PROJECT_DIR$/src/core/http_parser.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="93" column="11" selection-start-line="93" selection-start-column="11" selection-end-line="93" selection-end-column="11" />
-          <folding>
-            <element signature="e#160#184#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpParser.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="145" column="28" selection-start-line="145" selection-start-column="28" selection-end-line="145" selection-end-column="28" />
+        <state relative-caret-position="2658">
+          <caret line="163" column="18" selection-start-line="163" selection-start-column="18" selection-end-line="163" selection-end-column="18" />
           <folding>
             <element signature="e#36#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HttpData.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="157" selection-start-line="157" selection-end-line="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmake-build-debug/util/Makefile">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+          <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/src/core/http_data.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/test_http_paser.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state relative-caret-position="72">
+          <caret line="184" column="25" selection-start-line="184" selection-start-column="25" selection-end-line="184" selection-end-column="25" />
           <folding>
-            <element signature="e#35#66#0" expanded="true" />
+            <element signature="e#160#184#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
         </state>
       </provider>
     </entry>

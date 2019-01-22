@@ -6,20 +6,20 @@
 #define QG_SERVER_REQUESTPARSER_H
 
 #include "../util/type.h"
-#include "HttpData.h"
+#include "http_data.h"
 
 class HttpData;
 
 namespace qg{
 
-    class HttpParser{
+    class http_parser{
 		public:
-			typedef HttpData::method_t method_t;
-			typedef HttpData::version_t version_t ;
-			typedef HttpData::uri_t uri_t;
-			typedef HttpData::header_t header_t;
-			typedef HttpData::body_t body_t;
-			typedef HttpData http_dt;
+			typedef http_data::method_t method_t;
+			typedef http_data::version_t version_t ;
+			typedef http_data::uri_t uri_t;
+			typedef http_data::header_t header_t;
+			typedef http_data::body_t body_t;
+			typedef http_data http_dt;
 			typedef qg_int ok_t;
 			typedef qg_string msg_t;
 
@@ -46,8 +46,8 @@ namespace qg{
 			};
 
 		public:
-			HttpParser ();
-			~HttpParser ();
+			http_parser ();
+			~http_parser ();
 			ok_t Parse (const msg_t &http_msg);
 			ok_t Parse (qg_istream &stream);
 			http_dt http_data () const;

@@ -166,11 +166,9 @@
 		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/HttpParser.h">
 			<Option target="QG_Server"/>
 		</Unit>
-		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/main.cpp">
-			<Option target="QG_Server"/>
-		</Unit>
 		<Unit filename="/home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc">
 			<Option target="unit_test"/>
+			<Option target="QG_Server"/>
 		</Unit>
 		<Unit filename="/home/wc/CLionProjects/QG-Server/src/util/log.h">
 			<Option target="QG_Server"/>
