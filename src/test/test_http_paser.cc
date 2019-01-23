@@ -7,10 +7,10 @@
 
 using namespace qg;
 
-	void TestHttpParser (qg::qg_istream &istream) {
-		http_parser htpp = http_parser ();
-		htpp.Parse (istream);
-		htpp.Print ();
+	void TestReqParser (qg::qg_istream &istream) {
+		RequestParser reqp = RequestParser ();
+		reqp.Parse (istream);
+		reqp.Print ();
 	}
 
 
@@ -22,7 +22,7 @@ using namespace qg;
 										 "Accept-Encoding: gzip, deflate\n"
 										 "Connection: Keep-Alive\n");
 		std::istringstream is (s);
-		TestHttpParser (is);
+		TestReqParser (is);
 
 		return 0;
 	}

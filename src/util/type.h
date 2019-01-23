@@ -10,8 +10,9 @@
 namespace qg{
 using qg_short = short;
 using qg_uint = unsigned int;
-using qg_sizt_t = size_t ;
+using qg_size_t = size_t ;
 using qg_ssize_t = ssize_t ;
+using qg_time_t = time_t ;
 using qg_int = int;
 using qg_long = long;
 using qg_longlong = long long;

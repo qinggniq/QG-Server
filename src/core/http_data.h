@@ -108,17 +108,17 @@ namespace qg{
 	};
 
 	enum StatusCode {
-		kContinue=100,
-		kOk=200,
-		kMultipleChoice=300,
-		kBadRequest=400,
-		kUnauthorized=401,
-		kForbidden=403,
-		kNotFound=404,
-		kInternalServerError=500,
-		kBadGateway=501,
-		kServiceUnavailable=503,
-		kHttpVersionNotSupported=505
+		CONTINUE=100,
+		OK=200,
+		MULTIPLE_CHOICE=300,
+		BAD_REQUEST=400,
+		UNAUTHORIZED=401,
+		FORBIDDEN=403,
+		NOT_FOUND=404,
+		INTERNAL_SERVER_ERROR=500,
+		BAD_GATEWAY=501,
+		SERVICE_UNAVAILABLE=503,
+		HTTPVERSION_NOT_SUPPORTED=505
 	};
 
 
@@ -139,7 +139,6 @@ namespace qg{
 		typedef qg_string header_kt;
 		typedef StatusCode status_t;
 		typedef qg_string reason_t;
-		typedef qg_string body_t;
 
 	public:
 		ResponseData () = default;

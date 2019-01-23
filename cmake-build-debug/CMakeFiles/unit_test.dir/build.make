@@ -81,17 +81,69 @@ CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o.provides: CMakeFiles/unit
 CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o.provides.build: CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o
 
 
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o: CMakeFiles/unit_test.dir/flags.make
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o: ../src/core/event_loop.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o -c /home/wc/CLionProjects/QG-Server/src/core/event_loop.cpp
+
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_test.dir/src/core/event_loop.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wc/CLionProjects/QG-Server/src/core/event_loop.cpp > CMakeFiles/unit_test.dir/src/core/event_loop.cpp.i
+
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_test.dir/src/core/event_loop.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wc/CLionProjects/QG-Server/src/core/event_loop.cpp -o CMakeFiles/unit_test.dir/src/core/event_loop.cpp.s
+
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.requires
+
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.provides: CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_test.dir/build.make CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.provides
+
+CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.provides.build: CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o
+
+
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.o: CMakeFiles/unit_test.dir/flags.make
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.o: ../src/core/reactor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/unit_test.dir/src/core/reactor.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_test.dir/src/core/reactor.cpp.o -c /home/wc/CLionProjects/QG-Server/src/core/reactor.cpp
+
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_test.dir/src/core/reactor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wc/CLionProjects/QG-Server/src/core/reactor.cpp > CMakeFiles/unit_test.dir/src/core/reactor.cpp.i
+
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_test.dir/src/core/reactor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wc/CLionProjects/QG-Server/src/core/reactor.cpp -o CMakeFiles/unit_test.dir/src/core/reactor.cpp.s
+
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.requires
+
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.provides: CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_test.dir/build.make CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.provides
+
+CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.provides.build: CMakeFiles/unit_test.dir/src/core/reactor.cpp.o
+
+
 # Object files for target unit_test
 unit_test_OBJECTS = \
-"CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o"
+"CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o" \
+"CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o" \
+"CMakeFiles/unit_test.dir/src/core/reactor.cpp.o"
 
 # External object files for target unit_test
 unit_test_EXTERNAL_OBJECTS =
 
 unit_test: CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o
+unit_test: CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o
+unit_test: CMakeFiles/unit_test.dir/src/core/reactor.cpp.o
 unit_test: CMakeFiles/unit_test.dir/build.make
 unit_test: CMakeFiles/unit_test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable unit_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable unit_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unit_test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +152,8 @@ CMakeFiles/unit_test.dir/build: unit_test
 .PHONY : CMakeFiles/unit_test.dir/build
 
 CMakeFiles/unit_test.dir/requires: CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o.requires
+CMakeFiles/unit_test.dir/requires: CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o.requires
+CMakeFiles/unit_test.dir/requires: CMakeFiles/unit_test.dir/src/core/reactor.cpp.o.requires
 
 .PHONY : CMakeFiles/unit_test.dir/requires
 

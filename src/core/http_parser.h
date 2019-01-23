@@ -12,45 +12,22 @@ class HttpData;
 
 namespace qg{
 
-    class http_parser{
+    class RequestParser{
 		public:
-			typedef http_data::method_t method_t;
-			typedef http_data::version_t version_t ;
-			typedef http_data::uri_t uri_t;
-			typedef http_data::header_t header_t;
-			typedef http_data::body_t body_t;
-			typedef http_data http_dt;
+			typedef RequestData::method_t method_t;
+			typedef RequestData::version_t version_t ;
+			typedef RequestData::uri_t uri_t;
+			typedef RequestData::header_t header_t;
+			typedef RequestData::body_t body_t;
+			typedef RequestData http_dt;
 			typedef qg_int ok_t;
 			typedef qg_string msg_t;
-
-			enum HeaderState
-			{
-					H_START = 0,
-					H_KEY,
-					H_COLON,
-					H_SPACE_AFTER_COLON,
-					H_VALUE,
-					H_CR,
-					H_LF,
-					H_END_CR,
-					H_END_LF
-			};
-
-			enum ParseState
-			{
-					PARSE_URL = 0,
-					PARSE_HEADER,
-					PARSE_BODY,
-					PARSE_END,
-					PARSE_ERROR
-			};
-
-		public:
-			http_parser ();
-			~http_parser ();
+			public:
+			RequestParser ();
+			~RequestParser ();
 			ok_t Parse (const msg_t &http_msg);
 			ok_t Parse (qg_istream &stream);
-			http_dt http_data () const;
+			http_dt request_data () const;
 			void Print () const;
 
 		private:
@@ -67,7 +44,7 @@ namespace qg{
 
 
 
-			http_dt http_d_;
+			http_dt request_d_;
 
     };
 } //namespace qg

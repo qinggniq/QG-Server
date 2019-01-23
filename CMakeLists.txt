@@ -13,8 +13,8 @@ add_executable(QG_Server
         src/core/http_data.h
         src/util/log.h
         src/util/type.h
-        src/test/test_http_paser.cc)
+        src/test/test_http_paser.cc src/core/event_loop.cpp src/core/event_loop.h src/core/reactor.cpp src/core/reactor.h)
 add_executable(
         unit_test
         src/test/test_http_paser.cc
-)
+        src/core/event_loop.cpp src/core/event_loop.h src/core/reactor.cpp src/core/reactor.h)

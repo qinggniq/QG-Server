@@ -11,17 +11,17 @@
 
 namespace qg{
 
-	http_parser::http_parser () = default;
+	RequestParser::RequestParser () = default;
 
-	http_parser::~http_parser () = default ;
+	RequestParser::~RequestParser () = default ;
 
-	http_parser::ok_t
-	http_parser::Parse (const msg_t &http_msg) {
+	RequestParser::ok_t
+	RequestParser::Parse (const msg_t &http_msg) {
 		return kOk;
 	}
 
-	http_parser::ok_t
-	http_parser::Parse (qg_istream &stream) {
+	RequestParser::ok_t
+	RequestParser::Parse (qg_istream &stream) {
 		qg_string line;
 		method_t method;
 		version_t version;
@@ -37,9 +37,9 @@ namespace qg{
 		if ((method_end = line.find (' ')) != qg_string::npos) {
 			method = line.substr (0, method_end);
 			
-			qg::qg_sizt_t  query_start = qg_string::npos;
-			qg::qg_sizt_t  uri_and_query_end = qg_string::npos;
-			qg::qg_sizt_t line_size = line.size ();
+			qg::qg_size_t  query_start = qg_string::npos;
+			qg::qg_size_t  uri_and_query_end = qg_string::npos;
+			qg::qg_size_t line_size = line.size ();
 
 			for (qg::qg_sizt_t i = method_end + 1; i < line_size; ++i) {
 				if (line[i] == '?' && i < line_size - 1) {
@@ -58,7 +58,7 @@ namespace qg{
 					uri = line.substr (method_end + 1, uri_and_query_end - method_end);
 				}
 				
-				qg::qg_sizt_t version_end = qg_string::npos;
+				qg::qg_size_t version_end = qg_string::npos;
 				if ((version_end = line.find ('/', uri_and_query_end + 1)) != qg_string::npos) {
 					if(line.compare(uri_and_query_end + 1, version_end - uri_and_query_end - 1, "HTTP") != 0)
 						return kError;
@@ -67,9 +67,9 @@ namespace qg{
 					return kError;
 				}
 
-				this->http_d_.set_methd (method);
-				this->http_d_.set_version (version);
-				this->http_d_.set_uri (uri);
+				this->request_d_.set_methd (method);
+				this->request_d_.set_version (version);
+				this->request_d_.set_uri (uri);
 
 
 				return this->ParseHeader (stream) &&this->ParseQuery (query_s) ;
@@ -81,68 +81,68 @@ namespace qg{
 	}
 
 
-	http_parser::http_dt
-	http_parser::http_data () const {
-		return this->http_d_;
+	RequestParser::http_dt
+	RequestParser::request_data () const {
+		return this->request_d_;
 	}
 
-	http_parser::ok_t
-	http_parser::ParseStartLine (const http_parser::msg_t &start_msg) {
+	RequestParser::ok_t
+	RequestParser::ParseStartLine (const RequestParser::msg_t &start_msg) {
 		ok_t s = -1;
 
 		return kOk;
 	}
-	http_parser::ok_t
-	http_parser::ParseMethod (const http_parser::msg_t &msg) {
+	RequestParser::ok_t
+	RequestParser::ParseMethod (const RequestParser::msg_t &msg) {
 		return kOk;
 	}
 
-	http_parser::ok_t
-	http_parser::ParseUri (const qg::http_parser::msg_t &msg) {
+	RequestParser::ok_t
+	RequestParser::ParseUri (const qg::RequestParser::msg_t &msg) {
 		return kOk;
 	}
 
-	http_parser::ok_t
-	http_parser::ParseQuery (const qg::http_parser::msg_t &msg) {
+	RequestParser::ok_t
+	RequestParser::ParseQuery (const qg::RequestParser::msg_t &msg) {
 
 		return kOk;
 	}
 
-	http_parser::ok_t
-	http_parser::ParseVersion (const qg::http_parser::msg_t &msg) {
+	RequestParser::ok_t
+	RequestParser::ParseVersion (const qg::RequestParser::msg_t &msg) {
 		return kOk;
 	}
 
 
-	http_parser::ok_t
-	http_parser::ParseHeader (const qg::http_parser::msg_t &header_msg) {
+	RequestParser::ok_t
+	RequestParser::ParseHeader (const qg::RequestParser::msg_t &header_msg) {
 		ok_t s = kOk;
 		return s;
 
 	}
 
-	http_parser::ok_t
-	http_parser::ParseHeader (qg::qg_istream &istream) {
+	RequestParser::ok_t
+	RequestParser::ParseHeader (qg::qg_istream &istream) {
 		qg_string line;
 		header_t header;
 		while (getline (istream, line)) {
 			qg_sizt_t key_end;
 			if ((key_end = line.find (":")) != qg_string::npos && line.length ()) {
-				this->http_d_.set_header_item (line.substr (0, key_end), line.substr (key_end + 1, line.length ()));
+				this->request_d_.set_header_item (line.substr (0, key_end), line.substr (key_end + 1, line.length ()));
 			}
 		}
 		
 		return this->ParseBody (istream);
 	}
 
-	http_parser::ok_t
-	http_parser::ParseBody (const qg::http_parser::msg_t &body_msg) {
+	RequestParser::ok_t
+	RequestParser::ParseBody (const qg::RequestParser::msg_t &body_msg) {
 		return kOk;
 	}
 
-	http_parser::ok_t
-	http_parser::ParseBody (qg::qg_istream &istream) {
-		if (((this->http_d_).Encoded () )== kOk) {
+	RequestParser::ok_t
+	RequestParser::ParseBody (qg::qg_istream &istream) {
+		if (((this->request_d_).Encoded () )== kOk) {
 			return kOk;
 			//TODO(qinggniq) implement the encode/decode function
 		} else {
@@ -153,13 +153,13 @@ namespace qg{
 	}
 
 	void
-	http_parser::Print () const {
+	RequestParser::Print () const {
 		std::cout << "Http Data:" << std::endl;
-		std::cout << "Http Method:" << this->http_d_.method () << std::endl;
-		std::cout << "Http Uri:" << this->http_d_.uri () << std::endl;
-		std::cout << "Http Version:" << this->http_d_.version () << std::endl;
+		std::cout << "Http Method:" << this->request_d_.method () << std::endl;
+		std::cout << "Http Uri:" << this->request_d_.uri () << std::endl;
+		std::cout << "Http Version:" << this->request_d_.version () << std::endl;
 		std::cout << "Http Headers:" << std::endl;
-		http_data::header_t header = this->http_d_.header ();
+		RequestData::header_t header = this->request_d_.header ();
 		for (auto it = header.begin (); it != header.end(); it++) {
 			std::cout << it->first << " : " << it->second << std::endl;
 		}

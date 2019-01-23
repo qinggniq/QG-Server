@@ -154,16 +154,32 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/HttpData.cc">
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/event_loop.cpp">
+			<Option target="unit_test"/>
 			<Option target="QG_Server"/>
 		</Unit>
-		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/HttpData.h">
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/event_loop.h">
+			<Option target="unit_test"/>
 			<Option target="QG_Server"/>
 		</Unit>
-		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/HttpParser.cc">
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/http_data.cc">
 			<Option target="QG_Server"/>
 		</Unit>
-		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/HttpParser.h">
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/http_data.h">
+			<Option target="QG_Server"/>
+		</Unit>
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/http_parser.cc">
+			<Option target="QG_Server"/>
+		</Unit>
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/http_parser.h">
+			<Option target="QG_Server"/>
+		</Unit>
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/reactor.cpp">
+			<Option target="unit_test"/>
+			<Option target="QG_Server"/>
+		</Unit>
+		<Unit filename="/home/wc/CLionProjects/QG-Server/src/core/reactor.h">
+			<Option target="unit_test"/>
 			<Option target="QG_Server"/>
 		</Unit>
 		<Unit filename="/home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc">
