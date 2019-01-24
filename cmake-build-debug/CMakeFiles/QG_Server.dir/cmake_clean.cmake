@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o"
   "CMakeFiles/QG_Server.dir/src/core/event_loop.cpp.o"
   "CMakeFiles/QG_Server.dir/src/core/reactor.cpp.o"
+  "CMakeFiles/QG_Server.dir/src/core/sync_event_demultiplexer.cpp.o"
   "QG_Server.pdb"
   "QG_Server"
 )

@@ -19,10 +19,15 @@ using qg_longlong = long long;
 using qg_istream = std::istream;
 using qg_string = std::string;
 using qg_bool = bool;
+using qg_fd_t = qg_int;
+using qg_event_t = qg_int;
+
 
 const qg_int kError = -1;
 const qg_int kOk = 0;
 const qg_int kTrue = 1;
 const qg_int kFalse = 0;
+
+
 } //namespace qg
 #endif //QG_SERVER_TYPE_H

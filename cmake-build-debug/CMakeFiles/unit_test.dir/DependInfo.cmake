@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wc/CLionProjects/QG-Server/src/core/event_loop.cpp" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/unit_test.dir/src/core/event_loop.cpp.o"
   "/home/wc/CLionProjects/QG-Server/src/core/reactor.cpp" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/unit_test.dir/src/core/reactor.cpp.o"
+  "/home/wc/CLionProjects/QG-Server/src/core/sync_event_demultiplexer.cpp" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/unit_test.dir/src/core/sync_event_demultiplexer.cpp.o"
   "/home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/unit_test.dir/src/test/test_http_paser.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

@@ -1,4 +1,4 @@
-/home/wc/software/clion/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/wc/CLionProjects/QG-Server
+/home/wc/Downloads/clion-2018.3.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/wc/CLionProjects/QG-Server
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/wc/CLionProjects/QG-Server/cmake-build-debug

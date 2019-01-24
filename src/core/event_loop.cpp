@@ -4,6 +4,6 @@
 
 #include "event_loop.h"
 
-namespace qg{
+namespace qg {
 
 }

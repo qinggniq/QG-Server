@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wc/CLionProjects/QG-Server/src/core/http_data.cc" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/http_data.cc.o"
   "/home/wc/CLionProjects/QG-Server/src/core/http_parser.cc" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/http_parser.cc.o"
   "/home/wc/CLionProjects/QG-Server/src/core/reactor.cpp" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/reactor.cpp.o"
+  "/home/wc/CLionProjects/QG-Server/src/core/sync_event_demultiplexer.cpp" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/QG_Server.dir/src/core/sync_event_demultiplexer.cpp.o"
   "/home/wc/CLionProjects/QG-Server/src/test/test_http_paser.cc" "/home/wc/CLionProjects/QG-Server/cmake-build-debug/CMakeFiles/QG_Server.dir/src/test/test_http_paser.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
