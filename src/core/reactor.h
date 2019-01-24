@@ -21,6 +21,8 @@
 #include <unordered_map>
 
 namespace qg {
+
+class SyncEventDemultiplexer;
 typedef qg_uint events_t;
 
 enum EventMode {
@@ -42,7 +44,7 @@ class EventHandler {
  public:
   virtual handle_t GetHandle() const = 0;
   virtual void HandleEvent() = 0;
-  virtual event_t GetEvents() const = 0;
+  virtual events_t GetEvents() const = 0;
 
  protected:
   EventHandler() = default;
@@ -69,12 +71,12 @@ class Dispatcher {
  public:
   typedef std::shared_ptr<EventHandler> event_handler_pt;
   typedef std::shared_ptr<SyncEventDemultiplexer> sync_event_demulp_pt;
-  typedef std::unordered_map<event_t, std::shared_ptr<EventHandler>> handler_map_t;
+  typedef std::unordered_map<events_t, std::shared_ptr<EventHandler>> handler_map_t;
 
   Dispatcher();
   ~Dispatcher();
-  qg_int RegisterHandler(event_t ev, event_handler_pt &eh);
-  qg_int RemoveHandler(event_t ev, event_handler_pt &eh);
+  qg_int RegisterHandler(events_t ev, event_handler_pt &eh);
+  qg_int RemoveHandler(events_t ev, event_handler_pt &eh);
   //
   void Loop();
 

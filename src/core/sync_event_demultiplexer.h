@@ -8,8 +8,7 @@
 #include "type.h"
 #include "reactor.h"
 #include <sys/epoll.h>
-#include <bits/shared_ptr.h>
-
+#include <memory>
 namespace qg {
 /*
  * Here I decide use epoll to implement the demuliplexer.

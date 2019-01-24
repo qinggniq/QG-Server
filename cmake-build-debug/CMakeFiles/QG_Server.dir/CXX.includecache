@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/util/type.h
+string
+-
+
+/home/wc/CLionProjects/QG-Server/src/core/reactor.cpp
+reactor.h
+/home/wc/CLionProjects/QG-Server/src/core/reactor.h
+
+/home/wc/CLionProjects/QG-Server/src/core/reactor.h
+../util/type.h
+/home/wc/CLionProjects/QG-Server/src/util/type.h
+sync_event_demultiplexer.h
+/home/wc/CLionProjects/QG-Server/src/core/sync_event_demultiplexer.h
+memory
+-
+unordered_map
+-
+
+/home/wc/CLionProjects/QG-Server/src/core/sync_event_demultiplexer.h
+type.h
+/home/wc/CLionProjects/QG-Server/src/core/type.h
+reactor.h
+/home/wc/CLionProjects/QG-Server/src/core/reactor.h
+sys/epoll.h
+-
+memory
+-
+
+/home/wc/CLionProjects/QG-Server/src/util/type.h
+string
+-
+

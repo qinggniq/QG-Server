@@ -40,7 +40,7 @@ RequestParser::Parse(qg_istream &stream) {
     qg::qg_size_t uri_and_query_end = qg_string::npos;
     qg::qg_size_t line_size = line.size();
 
-    for (qg::qg_sizt_t i = method_end + 1; i < line_size; ++i) {
+    for (qg::qg_size_t i = method_end + 1; i < line_size; ++i) {
       if (line[i] == '?' && i < line_size - 1) {
         query_start = i;
       } else if (line[i] == ' ') {
@@ -122,7 +122,7 @@ RequestParser::ParseHeader(qg::qg_istream &istream) {
   qg_string line;
   header_t header;
   while (getline(istream, line)) {
-    qg_sizt_t key_end;
+    qg_size_t key_end;
     if ((key_end = line.find(":")) != qg_string::npos && line.length()) {
       this->request_d_.set_header_item(line.substr(0, key_end), line.substr(key_end + 1, line.length()));
     }

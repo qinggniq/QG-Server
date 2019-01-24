@@ -45,7 +45,7 @@ void SyncEventDemultiplexer::Update(handler_pt &handler) {
 }
 
 void SyncEventDemultiplexer::Wait() {
-  epoll_wait(int epfd, struct epoll_event *evlist, int maxevents, int timeout);
+  //epoll_wait(int epfd, struct epoll_event *evlist, int maxevents, int timeout);
 
 }
 }//qg

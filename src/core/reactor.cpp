@@ -18,18 +18,18 @@ void
 Dispatcher::Loop() {
   //TODO (qinggniq) we should wait and handle
   for (;;) {
-    res = sed_impl_->Wait();
+    sed_impl_->Wait();
 
   }
 }
 
 qg_int
-Dispatcher::RegisterHandler(qg::event_t ev, qg::Dispatcher::event_handler_pt &eh) {
+Dispatcher::RegisterHandler(qg::events_t ev, qg::Dispatcher::event_handler_pt &eh) {
   this->handler_map_.emplace(ev, eh);
 }
 
 qg_int
-Dispatcher::RemoveHandler(qg::event_t ev, qg::Dispatcher::event_handler_pt &eh) {
+Dispatcher::RemoveHandler(qg::events_t ev, qg::Dispatcher::event_handler_pt &eh) {
   handler_map_t::const_iterator it = this->handler_map_.find(ev);
   if (it != this->handler_map_.end()) {
     this->handler_map_.erase(it);
