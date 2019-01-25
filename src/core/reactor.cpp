@@ -5,6 +5,14 @@
 #include "reactor.h"
 namespace qg {
 
+const SockHandler::
+void
+SockHandler::HandleEvent() {
+  //TODO read the Linux Programing Interface to figure out the real logic
+
+}
+
+
 Dispatcher::Dispatcher() {
 
 }
@@ -19,7 +27,7 @@ Dispatcher::Loop() {
   //TODO (qinggniq) we should wait and handle
   for (;;) {
     sed_impl_->Wait();
-
+    break;
   }
 }
 
@@ -37,5 +45,8 @@ Dispatcher::RemoveHandler(qg::events_t ev, qg::Dispatcher::event_handler_pt &eh)
     //TODO (qinggniq) log it.
   }
 }
+
+
+
 
 }//namespace qg

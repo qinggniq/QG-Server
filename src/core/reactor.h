@@ -19,11 +19,14 @@
 #include "sync_event_demultiplexer.h"
 #include <memory>
 #include <unordered_map>
+#include <vector>
 
 namespace qg {
+const qg_int kMaxEventsSize = 10;
 
 class SyncEventDemultiplexer;
 typedef qg_uint events_t;
+typedef qg_int handle_t;
 
 enum EventMode {
   kEventRead = 0x01,
@@ -31,8 +34,6 @@ enum EventMode {
   kEventError = 0x03,
   kEventMask = 0xff
 };
-
-typedef qg_int handle_t;
 
 /* You could not implement the read/write handle of file describer,
  * but you must implement the error handle.
@@ -42,29 +43,38 @@ typedef qg_int handle_t;
 
 class EventHandler {
  public:
-  virtual handle_t GetHandle() const = 0;
+  typedef std::functor<void()> Functor;
   virtual void HandleEvent() = 0;
-  virtual events_t GetEvents() const = 0;
+
+  handle_t GetHandle() const;
+  void SetHandle(const handle_t handle);
+  void SetReadCallBack(Functor &rcb);
+  void SetWriteCallBack(Functor &wcb);
+  void SetErrorCallBack(Functor &ecb);
+
+  events_t GetEvent() const;
+  void SetEvent(const events_t ev);
 
  protected:
   EventHandler() = default;
   virtual ~EventHandler() = 0;
+
   handle_t handle_;
   events_t events_;
+  Functor read_call_back_;
+  Functor write_call_back_;
+  Functor error_call_back_;
 };
 
 class SockHandler : public EventHandler {
  public:
-  handle_t GetHandle() const override {
-    return handle_;
-  };
-  events_t GetEvents() const override {
-    return events_ ;
-  }
-  void HandleEvent () ;
+  void HandleEvent();
   SockHandler() = default;
   ~SockHandler() = default;
-
+ private:
+  const events_t kNoneEvent = 0x0;
+  const events_t kReadEvent = 0x1;
+  const events_t kWriteEvent = 0x2;
 };
 
 class Dispatcher {
@@ -88,6 +98,49 @@ class Dispatcher {
   sync_event_demulp_pt sed_impl_;
   handler_map_t handler_map_;
 };
+
+inline
+void
+EventHandler::SetHandle(const qg::handle_t handle) {
+  this->handle_ = handle;
+}
+
+inline
+void
+EventHandler::GetHandle() const {
+  return this->handle_;
+}
+
+inline
+void
+EventHandler::GetEvent() const {
+ return this->events_;
+}
+
+inline
+void
+EventHandler::SetEvent(const qg::events_t ev) {
+  this->events_ = ev;
+}
+
+inline
+void
+EventHandler::SetReadCallBack(std::functor<void()> &rcb) {
+  this->read_call_back_ = rcb;
+}
+
+inline
+void
+EventHandler::SetWriteCallBack(std::functor<void()> &wcb) {
+  this->write_call_back_ = wcb;
+}
+
+inline
+void
+EventHandler::SetErrorCallBack(std::functor<void()> &ecb) {
+  this->error_call_back_ = ecb;
+}
+
 
 } //namespace qg
 #endif //QG_SERVER_REACTOR_H
