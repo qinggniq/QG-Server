@@ -39,7 +39,10 @@ enum EventMode {
  * but you must implement the error handle.
 *
  */
-
+struct EventStatus{
+  qg_fd_t fd;
+  qg_uint revents;
+};
 
 class EventHandler {
  public:
@@ -52,15 +55,22 @@ class EventHandler {
   void SetWriteCallBack(Functor &wcb);
   void SetErrorCallBack(Functor &ecb);
 
-  events_t GetEvent() const;
-  void SetEvent(const events_t ev);
+  events_t GetIEvent() const;
+  void SetIEvents(const events_t iev);
+  void SetREvents(const events_t rev);
+
+ private:
+  const events_t kNoneEvent = 0x0;
+  const events_t kReadEvent = 0x1;
+  const events_t kWriteEvent = 0x2;
 
  protected:
   EventHandler() = default;
   virtual ~EventHandler() = 0;
 
   handle_t handle_;
-  events_t events_;
+  events_t ievents_; //interest events
+  events_t revents_; //the result of sync_event_demuliplexer(epoll) returned
   Functor read_call_back_;
   Functor write_call_back_;
   Functor error_call_back_;
@@ -72,23 +82,24 @@ class SockHandler : public EventHandler {
   SockHandler() = default;
   ~SockHandler() = default;
  private:
-  const events_t kNoneEvent = 0x0;
-  const events_t kReadEvent = 0x1;
-  const events_t kWriteEvent = 0x2;
+
 };
 
 class Dispatcher {
  public:
   typedef std::shared_ptr<EventHandler> event_handler_pt;
   typedef std::shared_ptr<SyncEventDemultiplexer> sync_event_demulp_pt;
-  typedef std::unordered_map<events_t, std::shared_ptr<EventHandler>> handler_map_t;
+  typedef std::unordered_map<handle_t, std::shared_ptr<EventHandler>> handler_map_t;
+
 
   Dispatcher();
   ~Dispatcher();
-  qg_int RegisterHandler(events_t ev, event_handler_pt &eh);
-  qg_int RemoveHandler(events_t ev, event_handler_pt &eh);
+  void RegisterHandler(event_handler_pt &eh);
+  void RemoveHandler(event_handler_pt &eh);
+  void ModHandler(event_handler_pt &eh);
   //
   void Loop();
+
 
  private:
   Dispatcher(const Dispatcher &);
@@ -97,6 +108,7 @@ class Dispatcher {
  private:
   sync_event_demulp_pt sed_impl_;
   handler_map_t handler_map_;
+
 };
 
 inline
@@ -114,13 +126,19 @@ EventHandler::GetHandle() const {
 inline
 void
 EventHandler::GetEvent() const {
- return this->events_;
+ return this->ievents_;
 }
 
 inline
 void
-EventHandler::SetEvent(const qg::events_t ev) {
-  this->events_ = ev;
+EventHandler::SetIEvents(const qg::events_t iev) {
+  this->ievents_ = ev;
+}
+
+inline
+void
+EventHandler::SetREvents(const qg::events_t rev) {
+  this->revents_ = rev;
 }
 
 inline
