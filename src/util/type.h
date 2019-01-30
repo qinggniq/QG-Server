@@ -18,7 +18,7 @@ using qg_long = long;
 using qg_longlong = long long;
 using qg_istream = std::istream;
 using qg_string = std::string;
-using qg_bool = bool;
+using qg_bool = int;
 using qg_fd_t = qg_int;
 using qg_event_t = qg_int;
 

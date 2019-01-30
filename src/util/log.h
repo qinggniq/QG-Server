@@ -39,63 +39,67 @@ namespace qg {
 }
 #endif
 
-
+namespace qg {
 enum LogLevel {
-	LOGINFO=0,
-	LOGWARN,
-	LOGWRROR,
-	LOGDEBUG,
-	LOGDEBUG1,
-	LOGDEBUG2,
-	LOGDEBUG3,
-	LOGDEBUG4
+  kLogInfo = 0,
+  kLogWarn,
+  kLogError,
+  kLogDebug,
+  kLogDebug1,
+  kLogDebug2,
+  kLogDebug3,
+  kLogDebug4
 };
 
+class Logger {
+ public:
+  typedef std::ostringstream ostream_t;
 
+ public:
+  Logger();
+  virtual ~Logger();
+  ostream_t &Get(LogLevel level = kLogInfo);
 
-class Log {
-public:
-	typedef std::ostringstream ostream_t;
+  static LogLevel ReportingLevel();
 
-public:
-	Log () ;
-	virtual ~Log () ;
-	ostream_t& Get (LogLevel level=LOGINFO) ;
+ protected:
+  std::ostringstream ostream;
+ private:
+  Logger(const Logger &);
+  Logger &operator=(const Logger &);
 
-	static LogLevel&  ReportingLevel ();
-
-protected:
-	std::ostringstream ostream;
-private:
-	Log (const Log&) ;
-	Log& operator = (const Log&);
-
-private:
-	LogLevel level_;
+ private:
+  LogLevel level_;
 };
 
-
-Log::ostream_t&
-Log::Get (LogLevel level)
-{
-	this->ostream << "- " << qg::NowTime ();
-	this->ostream << " " << (level) << ": ";
-	this->ostream << qg::qg_string (level > LOGDEBUG ? 0 : level - LOGDEBUG, '\t');
-	this->level_ = level;
-	return this->ostream;
+LogLevel
+Logger::ReportingLevel() {
+  return level_;
+}
+Logger::ostream_t &
+Logger::Get(LogLevel level) {
+  this->ostream << "- " << qg::NowTime();
+  this->ostream << " " << (level) << ": ";
+  this->ostream << qg::qg_string(level > kLogDebug ? 0 : level - kLogDebug, '\t');
+  this->level_ = level;
+  return this->ostream;
 }
 
-
-Log::~Log ()
-{
-	if (this->level_ >= Log::ReportingLevel ())
-	{
-		this->ostream << std::endl;
-		fprintf (stderr, "%s", this->ostream.str ().c_str ());
-		fflush (stderr);
-	}
+Logger::~Logger() {
+  if (this->level_ >= Logger::ReportingLevel()) {
+	this->ostream << std::endl;
+	fprintf(stderr, "%s", this->ostream.str().c_str());
+	fflush(stderr);
+  }
 }
+
+extern LogLevel log_level;
+
 #define Log (level) \
-if (level > qg::Log::ReportingLevel ()); \
-else Log ().Get (level)
+do {\
+if (level > log_level) ; \
+else Logger().Get(level)\
+}while (0)
+
+}//namespace qg
 #endif //PROJECT_LOG_H

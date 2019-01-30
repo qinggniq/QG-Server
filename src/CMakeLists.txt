@@ -22,7 +22,7 @@ if(Boost_FOUND)
             core/sync_event_demultiplexer.cpp
             core/sync_event_demultiplexer.h
             util/log.h
-            util/type.h)
+            util/type.h core/event_handler.cpp core/event_handler.h)
     add_executable(Test
             test/test_http_paser.cc
             core/event_loop.cpp
@@ -37,7 +37,10 @@ if(Boost_FOUND)
             core/sync_event_demultiplexer.h
             util/log.h
             util/type.h
-    )
+            core/event_handler.cpp core/event_handler.h)
+    add_executable(TestStruct
+            test/test_http_paser.cc
+            )
     target_link_libraries(main ${Boost_LIBRARIES})
 endif()
 

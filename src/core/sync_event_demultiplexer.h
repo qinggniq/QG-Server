@@ -6,7 +6,7 @@
 #define QG_SERVER_SYNC_EVENT_DEMULTIPLEXER_H
 
 #include "type.h"
-#include "reactor.h"
+#include "event_handler.h"
 #include <sys/epoll.h>
 #include <memory>
 #include <vector>
@@ -38,7 +38,7 @@ class SyncEventDemultiplexer {
   void Remove(handler_pt &handler);
   std::vector<EventStatus> Wait();//TODO
  private:
-
+  const qg_int kMaxEventsSize = 5;
   handle_t sed_fd_;
 
 };
