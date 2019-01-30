@@ -20,6 +20,7 @@
 #include <memory>
 #include <unordered_map>
 #include <vector>
+#include <boost/function.hpp>
 
 namespace qg {
 const qg_int kMaxEventsSize = 10;
@@ -46,7 +47,7 @@ struct EventStatus{
 
 class EventHandler {
  public:
-  typedef std::functor<void()> Functor;
+  typedef boost::function<void()> Functor;
   virtual void HandleEvent() = 0;
 
   handle_t GetHandle() const;
@@ -66,7 +67,7 @@ class EventHandler {
 
  protected:
   EventHandler() = default;
-  virtual ~EventHandler() = 0;
+  ~EventHandler() = default ;
 
   handle_t handle_;
   events_t ievents_; //interest events
@@ -80,7 +81,9 @@ class SockHandler : public EventHandler {
  public:
   void HandleEvent();
   SockHandler() = default;
-  ~SockHandler() = default;
+  ~SockHandler(){
+   //TODO
+  }
  private:
 
 };
@@ -118,21 +121,21 @@ EventHandler::SetHandle(const qg::handle_t handle) {
 }
 
 inline
-void
+handle_t
 EventHandler::GetHandle() const {
   return this->handle_;
 }
 
 inline
-void
-EventHandler::GetEvent() const {
+events_t
+EventHandler::GetIEvent() const {
  return this->ievents_;
 }
 
 inline
 void
 EventHandler::SetIEvents(const qg::events_t iev) {
-  this->ievents_ = ev;
+  this->ievents_ = iev;
 }
 
 inline
@@ -143,19 +146,19 @@ EventHandler::SetREvents(const qg::events_t rev) {
 
 inline
 void
-EventHandler::SetReadCallBack(std::functor<void()> &rcb) {
+EventHandler::SetReadCallBack(Functor &rcb) {
   this->read_call_back_ = rcb;
 }
 
 inline
 void
-EventHandler::SetWriteCallBack(std::functor<void()> &wcb) {
+EventHandler::SetWriteCallBack(Functor &wcb) {
   this->write_call_back_ = wcb;
 }
 
 inline
 void
-EventHandler::SetErrorCallBack(std::functor<void()> &ecb) {
+EventHandler::SetErrorCallBack(Functor &ecb) {
   this->error_call_back_ = ecb;
 }
 

@@ -19,7 +19,7 @@ SyncEventDemultiplexer::Register(handler_pt &handler) {
   struct epoll_event eevent;
 
   eevent.data.fd = handler->GetHandle();
-  eevent.events = handler->GetEvent();
+  eevent.events = handler->GetIEvent();
   qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_ADD, handler->GetHandle(), &eevent);
   if (ret == -1) {
     //TODO (qinggniq) error handling [errorn = EEXIST]
@@ -32,7 +32,7 @@ SyncEventDemultiplexer::Remove(handler_pt &handler) {
   struct epoll_event eevent;
 
   eevent.data.fd = handler->GetHandle();
-  eevent.events = handler->GetEvent();
+  eevent.events = handler->GetIEvent();
   qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_DEL, handler->GetHandle(), &eevent);
   if (ret == -1) {
     //TODO (qinggniq) error handling [errorn = ENOENT]
