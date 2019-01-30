@@ -39,3 +39,4 @@
 # cmake debug
 cmake-build-debug/
 src/cmake-build-debug
+.idea/
