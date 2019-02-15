@@ -51,55 +51,6 @@ enum LogLevel {
   kLogDebug4
 };
 
-class Logger {
- public:
-  typedef std::ostringstream ostream_t;
-
- public:
-  Logger();
-  virtual ~Logger();
-  ostream_t &Get(LogLevel level = kLogInfo);
-
-  static LogLevel ReportingLevel();
-
- protected:
-  std::ostringstream ostream;
- private:
-  Logger(const Logger &);
-  Logger &operator=(const Logger &);
-
- private:
-  LogLevel level_;
-};
-
-LogLevel
-Logger::ReportingLevel() {
-  return level_;
-}
-Logger::ostream_t &
-Logger::Get(LogLevel level) {
-  this->ostream << "- " << qg::NowTime();
-  this->ostream << " " << (level) << ": ";
-  this->ostream << qg::qg_string(level > kLogDebug ? 0 : level - kLogDebug, '\t');
-  this->level_ = level;
-  return this->ostream;
-}
-
-Logger::~Logger() {
-  if (this->level_ >= Logger::ReportingLevel()) {
-	this->ostream << std::endl;
-	fprintf(stderr, "%s", this->ostream.str().c_str());
-	fflush(stderr);
-  }
-}
-
-extern LogLevel log_level;
-
-#define Log (level) \
-do {\
-if (level > log_level) ; \
-else Logger().Get(level)\
-}while (0)
 
 }//namespace qg
 #endif //PROJECT_LOG_H
