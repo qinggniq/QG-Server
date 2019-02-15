@@ -1,9 +1,9 @@
 //
-// Created by wc on 1/30/19.
+// Created by wc on 2/15/19.
 //
 
-#ifndef SRC_EVENT_HANDLER_H
-#define SRC_EVENT_HANDLER_H
+#ifndef SRC_EVENT_HANDLER_INHERIT_H
+#define SRC_EVENT_HANDLER_INHERIT_H
 
 #include "../util/type.h"
 #include <boost/function.hpp>
@@ -33,14 +33,10 @@ struct EventStatus{
 
 class EventHandler {
  public:
-  typedef boost::function<void()> Functor;
   virtual void HandleEvent();
 
   handle_t GetHandle() const;
   void SetHandle(const handle_t &handle);
-  void SetReadCallBack(Functor &rcb);
-  void SetWriteCallBack(Functor &wcb);
-  void SetErrorCallBack(Functor &ecb);
 
   events_t GetIEvent() const;
   void SetIEvents(const events_t &iev);
@@ -57,9 +53,9 @@ class EventHandler {
   handle_t handle_;
   events_t ievents_; //interest events
   events_t revents_; //the result of sync_event_demuliplexer(epoll) returned
-  Functor read_call_back_;
-  Functor write_call_back_;
-  Functor error_call_back_;
+  virtual void HandleRead() = 0;
+  virtual void HandleWrite() = 0;
+  virtual void HandleError() = 0;
 };
 
 
@@ -94,23 +90,6 @@ EventHandler::SetREvents(const qg::events_t &rev) {
   this->revents_ = rev;
 }
 
-inline
-void
-EventHandler::SetReadCallBack(Functor &rcb) {
-  this->read_call_back_ = rcb;
-}
-
-inline
-void
-EventHandler::SetWriteCallBack(Functor &wcb) {
-  this->write_call_back_ = wcb;
-}
-
-inline
-void
-EventHandler::SetErrorCallBack(Functor &ecb) {
-  this->error_call_back_ = ecb;
-}
 
 inline
 qg_bool
@@ -131,4 +110,4 @@ EventHandler::IsError() const {
 }
 
 }//namespace qg
-#endif //SRC_EVENT_HANDLER_H
+#endif //SRC_EVENT_HANDLER_INHERIT_H
