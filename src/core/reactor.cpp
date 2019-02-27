@@ -9,11 +9,6 @@
 
 namespace qg {
 
-void
-SockHandler::HandleEvent() {
-  //TODO read the Linux Programing Interface to figure out the real logic
-
-}
 
 
 Dispatcher::Dispatcher() = default;
@@ -43,7 +38,7 @@ Dispatcher::ModHandler(qg::Dispatcher::event_handler_pt &eh) {
 void
 Dispatcher::RemoveHandler(qg::Dispatcher::event_handler_pt &eh) {
   //TODO (qinggniq) shoud remove the map ????
-  handler_map_t::const_iterator it = this->handler_map_.find(eh->GetHandle());
+  auto it = this->handler_map_.find(eh->GetHandle());
   if (it != this->handler_map_.end()) {
     this->handler_map_.erase(it);
   } else {

@@ -11,7 +11,7 @@
 
 namespace qg{
 typedef qg_uint events_t;
-typedef qg_int handle_t;
+typedef fd_t handle_t;
 
 enum EventMode {
   kEventNone=0x00,
@@ -47,7 +47,7 @@ class EventHandler {
   qg_bool IsError() const;
 
  protected:
-  EventHandler();
+  EventHandler(qg_int fd, events_t ie);
   ~EventHandler() = default ;
 
   handle_t handle_;

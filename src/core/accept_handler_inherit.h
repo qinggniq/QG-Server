@@ -11,6 +11,9 @@
 namespace qg{
   class EventHandler;
   class AcceptHandler:public EventHandler {
+   public:
+    AcceptHandler(qg_int fd, events_t ie):EventHandler(fd, ie) {}
+    ~AcceptHandler() = default;
    protected:
     void HandleRead();
     void HandleWrite();
@@ -20,7 +23,7 @@ namespace qg{
 
 class SockHandler : public EventHandler {
  public:
-  void HandleEvent();
+  void HandleEvent(qg_int fd, events_t ie);
   SockHandler() = default;
   ~SockHandler(){
     //TODO

@@ -6,9 +6,9 @@
 
 namespace qg{
 
-EventHandler::EventHandler():
-handle_(0),
-ievents_(EventMode::kEventNone),
+EventHandler::EventHandler(qg_int fd, events_t ie):
+handle_(fd),
+ievents_(ie),
 revents_(EventMode::kEventNone){
 }
 

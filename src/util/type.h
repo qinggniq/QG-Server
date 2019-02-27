@@ -6,6 +6,7 @@
 #define QG_SERVER_TYPE_H
 
 #include <string>
+#include <sys/socket.h>
 
 namespace qg{
 using qg_short = short;
@@ -21,12 +22,17 @@ using qg_string = std::string;
 using qg_bool = int;
 using qg_fd_t = qg_int;
 using qg_event_t = qg_int;
-
+using qg_char_t = char;
 
 const qg_int kError = -1;
 const qg_int kOk = 0;
 const qg_int kTrue = 1;
 const qg_int kFalse = 0;
+
+
+//network
+
+
 
 
 } //namespace qg

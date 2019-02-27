@@ -51,7 +51,7 @@ class EventHandler {
   qg_bool IsError() const;
 
  protected:
-  EventHandler();
+  EventHandler(qg_int fd, events_t ie);
   ~EventHandler() = default ;
 
   handle_t handle_;
