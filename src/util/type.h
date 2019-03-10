@@ -15,11 +15,14 @@ using qg_size_t = size_t ;
 using qg_ssize_t = ssize_t ;
 using qg_time_t = time_t ;
 using qg_int = int;
+using qg_int64_t = int64_t ;
+
 using qg_long = long;
 using qg_longlong = long long;
 using qg_istream = std::istream;
 using qg_string = std::string;
-using qg_bool = int;
+using qg_double = double ;
+using qg_bool = bool;
 using qg_fd_t = qg_int;
 using qg_event_t = qg_int;
 using qg_char_t = char;

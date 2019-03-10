@@ -40,7 +40,7 @@ class Dispatcher {
   void ModHandler(event_handler_pt &eh);
   //
   void Loop();
-
+  void Stop();
 
  private:
   Dispatcher(const Dispatcher &);

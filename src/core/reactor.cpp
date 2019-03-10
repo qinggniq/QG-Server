@@ -38,6 +38,7 @@ Dispatcher::ModHandler(qg::Dispatcher::event_handler_pt &eh) {
 void
 Dispatcher::RemoveHandler(qg::Dispatcher::event_handler_pt &eh) {
   //TODO (qinggniq) shoud remove the map ????
+  //here don't need use auto&
   auto it = this->handler_map_.find(eh->GetHandle());
   if (it != this->handler_map_.end()) {
     this->handler_map_.erase(it);
@@ -62,7 +63,10 @@ Dispatcher::Loop() {
   }
 }
 
+void
+Dispatcher::Stop() {
 
+}
 
 
 }//namespace qg
