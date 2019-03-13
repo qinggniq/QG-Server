@@ -40,15 +40,17 @@ namespace qg {
 #endif
 
 namespace qg {
-enum LogLevel {
-  kLogInfo = 0,
-  kLogWarn,
-  kLogError,
-  kLogDebug,
-  kLogDebug1,
-  kLogDebug2,
-  kLogDebug3,
-  kLogDebug4
+
+class Logger{
+ public:
+  enum LogLevel {
+	kLogInfo,
+	kLogWarn,
+	kLogError,
+	kLogDebug,
+  };
+
+
 };
 
 

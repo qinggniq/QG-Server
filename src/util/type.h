@@ -7,7 +7,7 @@
 
 #include <string>
 #include <sys/socket.h>
-
+#include <sstream>
 namespace qg{
 using qg_short = short;
 using qg_uint = unsigned int;
@@ -20,6 +20,8 @@ using qg_int64_t = int64_t ;
 using qg_long = long;
 using qg_longlong = long long;
 using qg_istream = std::istream;
+using qg_ostringstream = std::istringstream;
+using qg_istringstream = std::istringstream;
 using qg_string = std::string;
 using qg_double = double ;
 using qg_bool = bool;

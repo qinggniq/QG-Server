@@ -10,8 +10,11 @@
  * inherit from it should always be value type.
  */
 namespace qg{
-class Copyable{
-
+class copyable
+{
+ protected:
+  copyable() = default;
+  ~copyable() = default;
 };
 }//namesapce qg
 #endif //SRC_COPYABLE_H
