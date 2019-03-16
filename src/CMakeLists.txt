@@ -22,7 +22,7 @@ if(Boost_FOUND)
             core/sync_event_demultiplexer.cpp
             core/sync_event_demultiplexer.h
             util/log.h
-            util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h util/nettool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h)
+            util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h util/nettool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h)
     add_executable(Test
             test/test_http_paser.cc
             core/event_loop.cpp
@@ -37,7 +37,7 @@ if(Boost_FOUND)
             core/sync_event_demultiplexer.h
             util/log.h
             util/type.h
-            core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h)
+            core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h)
     add_executable(TestStruct
             test/test_http_paser.cc
             core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h util/rwtool.h)
