@@ -17,5 +17,16 @@ add_executable(QG_Server
         src/test/test_http_paser.cc src/core/event_loop.cpp src/core/event_loop.h src/core/reactor.cpp src/core/reactor.h src/core/sync_event_demultiplexer.cpp src/core/sync_event_demultiplexer.h)
 add_executable(
         unit_test
-        src/test/test_http_paser.cc
-        src/core/event_loop.cpp src/core/event_loop.h src/core/reactor.cpp src/core/reactor.h src/core/sync_event_demultiplexer.cpp src/core/sync_event_demultiplexer.h)
+        src/core/reactor.cpp src/core/reactor.h src/core/sync_event_demultiplexer.cpp src/core/sync_event_demultiplexer.h)
+
+add_executable(
+        test_timer
+        src/test/test_timer.cc
+        src/core/timer.cpp
+        src/core/timer.h
+        src/core/timer_heap.cpp
+        src/core/timer_heap.h
+        src/util/time_stamp.cpp
+        src/util/time_stamp.h
+        src/util/type.h
+)

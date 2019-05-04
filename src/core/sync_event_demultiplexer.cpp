@@ -6,7 +6,6 @@
 #include "../util/log.h"
 
 namespace qg {
-LogLevel log_level = kLogError;
 
 
 SyncEventDemultiplexer::SyncEventDemultiplexer() {
@@ -41,8 +40,8 @@ SyncEventDemultiplexer::Remove(handler_pt &handler) {
   qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_DEL, handler->GetHandle(), &eevent);
   if (ret == -1) {
     //TODO (qinggniq) error handling [errorn = ENOENT]
-    log_level = kLogDebug4;
-    Log(kLogError) << "The event handler is not registered!" << std::endl;
+    //log_level = kLogDebug4;
+    //Log(kLogError) << "The event handler is not registered!" << std::endl;
   }
 }
 

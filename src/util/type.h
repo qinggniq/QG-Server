@@ -16,11 +16,12 @@ using qg_ssize_t = ssize_t ;
 using qg_time_t = time_t ;
 using qg_int = int;
 using qg_int64_t = int64_t ;
+using qg_uint64_t = uint64_t ;
 
 using qg_long = long;
 using qg_longlong = long long;
 using qg_istream = std::istream;
-using qg_ostringstream = std::istringstream;
+using qg_ostringstream = std::ostringstream;
 using qg_istringstream = std::istringstream;
 using qg_string = std::string;
 using qg_double = double ;
@@ -33,6 +34,11 @@ const qg_int kError = -1;
 const qg_int kOk = 0;
 const qg_int kTrue = 1;
 const qg_int kFalse = 0;
+
+//占位符
+class Todo {
+
+};
 
 
 //network

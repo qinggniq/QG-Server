@@ -3,6 +3,7 @@
 //
 
 #include "time_stamp.h"
+#include <sstream>
 #include <iomanip>
 #include <chrono>
 

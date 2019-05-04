@@ -8,33 +8,46 @@
 #include "type.h"
 #include "time_stamp.h"
 #include "noncopyable.h"
+#include <boost/function.hpp>
+#include <boost/shared_ptr.hpp>
+#include <queue>
+#include <chrono>
 
 
 namespace qg{
+
+ class TimerHeap;
  class Timer : public noncopyable {
- public:
-  	Timer();
-  	Timer(TimeStamp expiration, qg_double interval) :
-  		expiration_(expiration),
-  		interval_(interval),
-  		repeat_(interval > 0.0),
-  		sequence_(0)	// TODO(qinggniq) the sequence of Timer shoule be generated
-  						// atomaticaly.
-  		{}
-  	void handle();
-	TimeStamp expiration() const {return expiration_;}
-	qg_bool repeat() const {return repeat_;}
-	qg_int64_t sequence() const {return sequence_;}
+  public :
+   typedef boost::function<void()> timer_handler_cb_t;
+   explicit Timer(TimeStamp when, const timer_handler_cb_t& call_back, qg_time_t interval);
 
-	void Restart(TimeStamp now);
- private:
-	TimeStamp expiration_;
-	const qg_double interval_;
-	const qg_bool repeat_;
-	const qg_int64_t sequence_;
+   TimeStamp expire() const {return expire_;}
+   qg_bool cycle() const {return cycle_;}
+   qg_bool timeout() const {return now() > expire();}
+   static TimeStamp  now();
 
-	//TODO(qinggniq) add Atom
-};
+   void update(int timeout);
+   void run();
+
+   bool operator<(const Timer& rhs) { return expire() < rhs.expire();}
+
+  private:
+   friend class TimerHeap;
+   TimeStamp expire_;
+
+   qg_bool cycle_;
+   qg_time_t interval_;
+
+   timer_handler_cb_t timer_hander_;
+
+   //qg_ssize_t heap_idx_;
+ };
+
+
+
+
+
 
 }//namespace qg
 #endif //SRC_TIMER_H

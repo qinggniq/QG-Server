@@ -7,6 +7,7 @@
 
 #include "../util/type.h"
 #include <boost/function.hpp>
+#include <boost/shared_ptr.hpp>
 #include <sys/epoll.h>
 
 namespace qg{
@@ -30,10 +31,11 @@ struct EventStatus{
   qg_uint revents;
 };
 
-
+class Dispatcher;
 class EventHandler {
  public:
   typedef boost::function<void()> Functor;
+  typedef boost::shared_ptr<Dispatcher> dispatcher_pt;
   virtual void HandleEvent();
 
   handle_t GetHandle() const;
@@ -60,6 +62,9 @@ class EventHandler {
   Functor read_call_back_;
   Functor write_call_back_;
   Functor error_call_back_;
+
+  dispatcher_pt dispatcher_;
+
 };
 
 
@@ -115,19 +120,19 @@ EventHandler::SetErrorCallBack(Functor &ecb) {
 inline
 qg_bool
 EventHandler::IsReadable() const {
-  return this->revents_ & EventMode ::kEventRead;
+  return static_cast<qg_bool>(this->revents_ & EventMode ::kEventRead);
 }
 
 inline
 qg_bool
 EventHandler::IsWriteable() const {
-  return this->revents_ & EventMode ::kEventWrite;
+  return static_cast<qg_bool>(this->revents_ & EventMode ::kEventWrite);
 }
 
 inline
 qg_bool
 EventHandler::IsError() const {
-  return this->revents_ & EventMode ::kEventError;
+  return static_cast<qg_bool>(this->revents_ & EventMode ::kEventError);
 }
 
 }//namespace qg

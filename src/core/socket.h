@@ -11,7 +11,7 @@
  *  https://stackoverflow.com/questions/5906175/what-do-a-benefit-from-changing-from-blocking-to-non-blocking-sockets
  */
 namespace qg{
-class Socket:public noncopyable{
+class Socket:public noncopyable {
   Socket(qg_int fd,
          qg_bool reuse,
          qg_bool nonblock,
@@ -24,11 +24,14 @@ class Socket:public noncopyable{
   void makeAddrReuseable();
   void makeNonblock();
 
+  void bindAndListen();
+
  private:
   qg_int sfd_;
   qg_bool reuse_;
   qg_bool nonblock_;
   qg_bool cork_;
+
 
 };
 }

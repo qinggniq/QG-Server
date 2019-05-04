@@ -11,7 +11,7 @@
 
 namespace qg{
 typedef qg_uint events_t;
-typedef fd_t handle_t;
+typedef qg_fd_t handle_t;
 
 enum EventMode {
   kEventNone=0x00,
