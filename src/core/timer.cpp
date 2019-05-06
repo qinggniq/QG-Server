@@ -29,6 +29,9 @@ void Timer::run() {
   timer_hander_();
 }
 
+void Timer::restart() {
+  update(interval_);
+}
 TimeStamp Timer::now() {
   auto time_point = std::chrono::system_clock::now();
   auto res = std::chrono::system_clock::to_time_t(time_point);

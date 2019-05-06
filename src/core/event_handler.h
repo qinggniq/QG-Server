@@ -16,7 +16,7 @@ typedef qg_int handle_t;
 
 enum EventMode {
   kEventNone=0x00,
-  kEventRead = EPOLLIN,
+  kEventRead = EPOLLIN ,
   kEventWrite = EPOLLOUT,
   kEventError = EPOLLERR,
   kEventMask = 0xff
@@ -34,15 +34,19 @@ struct EventStatus{
 class Dispatcher;
 class EventHandler {
  public:
-  typedef boost::function<void()> Functor;
-  typedef boost::shared_ptr<Dispatcher> dispatcher_pt;
+  typedef std::function<void()> Functor;
+  typedef std::shared_ptr<Dispatcher> dispatcher_pt;
+
+  EventHandler(dispatcher_pt dp, qg_fd_t fd, events_t ie);
+  EventHandler(dispatcher_pt dp, qg_fd_t fd);
+  ~EventHandler() = default ;
   virtual void HandleEvent();
 
   handle_t GetHandle() const;
-  void SetHandle(const handle_t &handle);
-  void SetReadCallBack(Functor &rcb);
-  void SetWriteCallBack(Functor &wcb);
-  void SetErrorCallBack(Functor &ecb);
+  void SetHandle(const handle_t handle);
+  void SetReadCallBack(Functor rcb);
+  void SetWriteCallBack(Functor wcb);
+  void SetErrorCallBack(Functor ecb);
 
   events_t GetIEvent() const;
   void SetIEvents(const events_t &iev);
@@ -53,8 +57,7 @@ class EventHandler {
   qg_bool IsError() const;
 
  protected:
-  EventHandler(qg_int fd, events_t ie);
-  ~EventHandler() = default ;
+
 
   handle_t handle_;
   events_t ievents_; //interest events
@@ -62,7 +65,6 @@ class EventHandler {
   Functor read_call_back_;
   Functor write_call_back_;
   Functor error_call_back_;
-
   dispatcher_pt dispatcher_;
 
 };
@@ -71,7 +73,7 @@ class EventHandler {
 
 inline
 void
-EventHandler::SetHandle(const qg::handle_t &handle) {
+EventHandler::SetHandle(const qg::handle_t handle) {
   this->handle_ = handle;
 }
 
@@ -101,19 +103,19 @@ EventHandler::SetREvents(const qg::events_t &rev) {
 
 inline
 void
-EventHandler::SetReadCallBack(Functor &rcb) {
+EventHandler::SetReadCallBack(Functor rcb) {
   this->read_call_back_ = rcb;
 }
 
 inline
 void
-EventHandler::SetWriteCallBack(Functor &wcb) {
+EventHandler::SetWriteCallBack(Functor wcb) {
   this->write_call_back_ = wcb;
 }
 
 inline
 void
-EventHandler::SetErrorCallBack(Functor &ecb) {
+EventHandler::SetErrorCallBack(Functor ecb) {
   this->error_call_back_ = ecb;
 }
 

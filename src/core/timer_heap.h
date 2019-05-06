@@ -8,10 +8,7 @@
 #include <vector>
 #include <boost/chrono.hpp>
 #include <boost/shared_ptr.hpp>
-#include <sys/timerfd.h>
-#include <time.h>
-#include <stdio.h>
-#include <string.h>
+
 #include "type.h"
 #include "time_stamp.h"
 #include "timer.h"
@@ -27,6 +24,7 @@ class TimerHeap{
   //No need to cancel the timer
   //void detachTimer(qg_size_t idx);
   timer_pt top() {return heap_.empty() ? nullptr:heap_[0];}
+  qg_bool empty() {return heap_.empty();}
  private:
   void down(qg_size_t idx);
   void up(qg_size_t idx);

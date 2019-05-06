@@ -29,6 +29,7 @@ namespace qg{
 
    void update(int timeout);
    void run();
+   void restart();
 
    bool operator<(const Timer& rhs) { return expire() < rhs.expire();}
 

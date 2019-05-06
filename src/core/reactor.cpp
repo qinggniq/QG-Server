@@ -11,7 +11,9 @@ namespace qg {
 
 
 
-Dispatcher::Dispatcher() = default;
+Dispatcher::Dispatcher():
+sed_impl_(new SyncEventDemultiplexer())
+{}
 
 
 Dispatcher::~Dispatcher() {
@@ -24,22 +26,22 @@ Dispatcher::~Dispatcher() {
 
 
 void
-Dispatcher::RegisterHandler(qg::Dispatcher::event_handler_pt &eh) {
-  this->handler_map_.emplace(eh->GetHandle(), eh);
+Dispatcher::registerHandler(qg::Dispatcher::event_handler &eh) {
+  this->handler_map_.emplace(eh.GetHandle(), &eh);
   //TODO (qinggniq) refactor it, the sync_event_demuliplexer shouldn't know much about the EventHander
   this->sed_impl_->Register(eh);
 }
 
 void
-Dispatcher::ModHandler(qg::Dispatcher::event_handler_pt &eh) {
+Dispatcher::modHandler(qg::Dispatcher::event_handler &eh) {
   this->sed_impl_->Update(eh);
 }
 
 void
-Dispatcher::RemoveHandler(qg::Dispatcher::event_handler_pt &eh) {
+Dispatcher::removeHandler(qg::Dispatcher::event_handler &eh) {
   //TODO (qinggniq) shoud remove the map ????
   //here don't need use auto&
-  auto it = this->handler_map_.find(eh->GetHandle());
+  auto it = this->handler_map_.find(eh.GetHandle());
   if (it != this->handler_map_.end()) {
     this->handler_map_.erase(it);
   } else {
@@ -50,7 +52,7 @@ Dispatcher::RemoveHandler(qg::Dispatcher::event_handler_pt &eh) {
 }
 
 void
-Dispatcher::Loop() {
+Dispatcher::loop() {
   //TODO (qinggniq) we should wait and handle
   for (;;) {
     std::vector<EventStatus> ess = sed_impl_->Wait();
@@ -64,7 +66,7 @@ Dispatcher::Loop() {
 }
 
 void
-Dispatcher::Stop() {
+Dispatcher::stop() {
 
 }
 

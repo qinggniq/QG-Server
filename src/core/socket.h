@@ -31,8 +31,6 @@ class Socket:public noncopyable {
   qg_bool reuse_;
   qg_bool nonblock_;
   qg_bool cork_;
-
-
 };
 }
 #endif //SRC_SOCKET_H

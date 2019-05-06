@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iomanip>
 #include <chrono>
+#include <sys/time.h>
 
 namespace qg{
 TimeStamp::TimeStamp():unix_time_stamp_(0) {}
@@ -26,8 +27,9 @@ TimeStamp::toFormatedString() const {
 
 TimeStamp TimeStamp::Now()
 {
-  auto t = std::chrono::system_clock::now();
-  qg_int64_t time_t = std::chrono::system_clock::to_time_t(t);
-  return TimeStamp(time_t);
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  int64_t seconds = tv.tv_sec;
+  return TimeStamp(seconds * kMicroSecondsPerSecond + tv.tv_usec);
 }
 }//namespace qg

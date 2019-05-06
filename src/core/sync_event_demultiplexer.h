@@ -28,14 +28,14 @@ class SyncEventDemultiplexer {
 
 
   typedef qg_event_t ev_t;
-  typedef std::shared_ptr<EventHandler>  handler_pt;
+  typedef EventHandler  handler;
 
 
   SyncEventDemultiplexer();
   ~SyncEventDemultiplexer();
-  void Register(handler_pt &handler); //Add
-  void Update(handler_pt &handler);
-  void Remove(handler_pt &handler);
+  void Register(handler &handler); //Add
+  void Update(handler &handler);
+  void Remove(handler &handler);
   std::vector<EventStatus> Wait();//TODO
  private:
   const qg_int kMaxEventsSize = 5;

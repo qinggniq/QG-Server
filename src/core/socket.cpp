@@ -10,7 +10,9 @@ namespace qg{
 void Socket::makeAddrReuseable() {
   qg_int enable = 1;
   if (setsockopt(sfd_, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(qg_int)) < 0);
-    //TODO (qinggniq) log
+  //TODO (qinggniq) log
+  reuse_ = true;
+
 }
 /*
  * copyright:
@@ -22,6 +24,7 @@ void Socket::makeNonblock() {
   if (flags == -1) ;//TODO (qinggniq) log.
   flags = flags | O_NONBLOCK;
   if (fcntl(sfd_, F_SETFL, flags) != 0); //TODO (qinggniq) log
+  nonblock_ = true;
 }
 
 }//namespace qg

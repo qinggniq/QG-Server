@@ -28,19 +28,19 @@ class SyncEventDemultiplexer;
 
 class Dispatcher {
  public:
-  typedef std::shared_ptr<EventHandler> event_handler_pt;
+  typedef EventHandler event_handler;
   typedef std::shared_ptr<SyncEventDemultiplexer> sync_event_demulp_pt;
-  typedef std::unordered_map<handle_t, std::shared_ptr<EventHandler>> handler_map_t;
+  typedef std::unordered_map<handle_t, EventHandler*> handler_map_t;
 
 
   Dispatcher();
   ~Dispatcher();
-  void RegisterHandler(event_handler_pt &eh);
-  void RemoveHandler(event_handler_pt &eh);
-  void ModHandler(event_handler_pt &eh);
+  void registerHandler(event_handler &eh);
+  void removeHandler(event_handler &eh);
+  void modHandler(event_handler &eh);
   //
-  void Loop();
-  void Stop();
+  void loop();
+  void stop();
 
  private:
   Dispatcher(const Dispatcher &);

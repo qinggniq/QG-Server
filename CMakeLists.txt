@@ -21,7 +21,7 @@ add_executable(
 
 add_executable(
         test_timer
-        src/test/test_timer.cc
+        src/test/test_timer_heap.cc
         src/core/timer.cpp
         src/core/timer.h
         src/core/timer_heap.cpp

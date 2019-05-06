@@ -17,11 +17,11 @@ class TimeStamp:public copyable {
   qg_string toString() const;
   qg_string toFormatedString() const;
 
-  qg_int64_t getUnixTimeStamp() const {return unix_time_stamp_;}
+  qg_int64_t getUnixTimeStamp() const {return unix_time_stamp_ ;}
 
   static TimeStamp Now();
 
-  static const qg_int kMicroSecondsPerSecond = 1000 * 100;
+  static const qg_int kMicroSecondsPerSecond = 1000 * 1000;
  private:
   qg_int64_t unix_time_stamp_;
 
@@ -47,7 +47,7 @@ operator>(TimeStamp lhs, TimeStamp rhs) {
 
 inline
 TimeStamp addTime(TimeStamp timeStamp, qg_double seconds) {
-  auto delta = static_cast<qg_int64_t >(seconds);
+  auto delta = static_cast<qg_int64_t >(seconds * TimeStamp::kMicroSecondsPerSecond);
   return TimeStamp(timeStamp.getUnixTimeStamp() + delta);
 }
 
