@@ -10,7 +10,6 @@
 
 namespace qg {
 
-RequestParser::RequestParser() = default;
 
 RequestParser::~RequestParser() = default;
 
@@ -66,9 +65,9 @@ RequestParser::Parse(qg_istream &stream) {
         return kError;
       }
 
-      this->request_d_.set_methd(method);
-      this->request_d_.set_version(version);
-      this->request_d_.set_uri(uri);
+      this->request_d_->set_methd(method);
+      this->request_d_->set_version(version);
+      this->request_d_->set_uri(uri);
 
       return this->ParseHeader(stream) && this->ParseQuery(query_s);
     }
@@ -78,26 +77,11 @@ RequestParser::Parse(qg_istream &stream) {
 
 }
 
-RequestParser::http_dt
+RequestParser::http_d_pt
 RequestParser::request_data() const {
   return this->request_d_;
 }
 
-RequestParser::ok_t
-RequestParser::ParseStartLine(const RequestParser::msg_t &start_msg) {
-  ok_t s = -1;
-
-  return kOk;
-}
-RequestParser::ok_t
-RequestParser::ParseMethod(const RequestParser::msg_t &msg) {
-  return kOk;
-}
-
-RequestParser::ok_t
-RequestParser::ParseUri(const qg::RequestParser::msg_t &msg) {
-  return kOk;
-}
 
 RequestParser::ok_t
 RequestParser::ParseQuery(const qg::RequestParser::msg_t &msg) {
@@ -105,17 +89,6 @@ RequestParser::ParseQuery(const qg::RequestParser::msg_t &msg) {
   return kOk;
 }
 
-RequestParser::ok_t
-RequestParser::ParseVersion(const qg::RequestParser::msg_t &msg) {
-  return kOk;
-}
-
-RequestParser::ok_t
-RequestParser::ParseHeader(const qg::RequestParser::msg_t &header_msg) {
-  ok_t s = kOk;
-  return s;
-
-}
 
 RequestParser::ok_t
 RequestParser::ParseHeader(qg::qg_istream &istream) {
@@ -124,7 +97,7 @@ RequestParser::ParseHeader(qg::qg_istream &istream) {
   while (getline(istream, line)) {
     qg_size_t key_end;
     if ((key_end = line.find(":")) != qg_string::npos && line.length()) {
-      this->request_d_.set_header_item(line.substr(0, key_end), line.substr(key_end + 1, line.length()));
+      this->request_d_->set_header_item(line.substr(0, key_end), line.substr(key_end + 1, line.length()));
     }
   }
 
@@ -151,11 +124,11 @@ RequestParser::ParseBody(qg::qg_istream &istream) {
 void
 RequestParser::Print() const {
   std::cout << "Http Data:" << std::endl;
-  std::cout << "Http Method:" << this->request_d_.method() << std::endl;
-  std::cout << "Http Uri:" << this->request_d_.uri() << std::endl;
-  std::cout << "Http Version:" << this->request_d_.version() << std::endl;
+  std::cout << "Http Method:" << this->request_d_->method() << std::endl;
+  std::cout << "Http Uri:" << this->request_d_->uri() << std::endl;
+  std::cout << "Http Version:" << this->request_d_->version() << std::endl;
   std::cout << "Http Headers:" << std::endl;
-  RequestData::header_t header = this->request_d_.header();
+  RequestData::header_t header = this->request_d_->header();
   for (auto it = header.begin(); it != header.end(); it++) {
     std::cout << it->first << " : " << it->second << std::endl;
   }

@@ -43,7 +43,7 @@ class EventHandler {
   virtual void HandleEvent();
 
   handle_t GetHandle() const;
-  void SetHandle(const handle_t handle);
+  void SetHandle(handle_t handle);
   void SetReadCallBack(Functor rcb);
   void SetWriteCallBack(Functor wcb);
   void SetErrorCallBack(Functor ecb);
@@ -51,6 +51,11 @@ class EventHandler {
   events_t GetIEvent() const;
   void SetIEvents(const events_t &iev);
   void SetREvents(const events_t &rev);
+
+  void enableRead() {SetIEvents(EventMode::kEventRead);}
+  void enableWrite() {SetIEvents(EventMode::kEventWrite);}
+  void enableError() {SetIEvents(EventMode::kEventError);}
+  void enableAll() {enableRead(); enableWrite(); enableError();}
 
   qg_bool IsReadable() const;
   qg_bool IsWriteable() const;
@@ -92,13 +97,13 @@ EventHandler::GetIEvent() const {
 inline
 void
 EventHandler::SetIEvents(const qg::events_t &iev) {
-  this->ievents_ = iev;
+  this->ievents_ |= iev;
 }
 
 inline
 void
 EventHandler::SetREvents(const qg::events_t &rev) {
-  this->revents_ = rev;
+  this->revents_ |= rev;
 }
 
 inline

@@ -58,9 +58,9 @@ void resetTimerfd(qg_fd_t fd, TimeStamp new_time) {
 TimerQueue::TimerQueue(qg::TimerQueue::event_loop_pt el):
 loop_(el),
 timer_fd_(timer_tool::createTimerfd()),
-handler_(EventHandler(el, timer_fd_)),
+handler_(new EventHandler(el, timer_fd_)),
 timer_heap_(TimerHeap()) {
-  handler_.SetReadCallBack(std::bind(&TimerQueue::handleTimer, this));
+  handler_->SetReadCallBack(std::bind(&TimerQueue::handleTimer, this));
   loop_->registerHandler(handler_);
 }
 

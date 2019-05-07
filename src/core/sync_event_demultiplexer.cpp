@@ -23,11 +23,11 @@ SyncEventDemultiplexer::Register(handler &handler) {
   //TODO (qinggniq) add the Error Handler
   struct epoll_event eevent;
 
-  eevent.data.fd = handler.GetHandle();
-  eevent.events = handler.GetIEvent();
+  eevent.data.fd = handler->GetHandle();
+  eevent.events = handler->GetIEvent();
   std::cout <<  (eevent.events == EPOLLIN) << std::endl;
-  std::cout << sed_fd_ << " " << handler.GetHandle() << std::endl;
-  qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_ADD, handler.GetHandle(), &eevent);
+  std::cout << sed_fd_ << " " << handler->GetHandle() << std::endl;
+  qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_ADD, handler->GetHandle(), &eevent);
   if (ret == -1) {
     //TODO (qinggniq) error handling [errorn = EEXIST]
   }
@@ -38,9 +38,9 @@ void
 SyncEventDemultiplexer::Remove(handler &handler) {
   struct epoll_event eevent;
 
-  eevent.data.fd = handler.GetHandle();
-  eevent.events = handler.GetIEvent();
-  qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_DEL, handler.GetHandle(), &eevent);
+  eevent.data.fd = handler->GetHandle();
+  eevent.events = handler->GetIEvent();
+  qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_DEL, handler->GetHandle(), &eevent);
   if (ret == -1) {
     //TODO (qinggniq) error handling [errorn = ENOENT]
     //log_level = kLogDebug4;
@@ -52,9 +52,9 @@ void
 SyncEventDemultiplexer::Update(handler &handler) {
   struct epoll_event eevent;
 
-  eevent.data.fd = handler.GetHandle();
-  eevent.events = handler.GetIEvent();
-  qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_MOD, handler.GetHandle(), &eevent);
+  eevent.data.fd = handler->GetHandle();
+  eevent.events = handler->GetIEvent();
+  qg_int ret = epoll_ctl(sed_fd_, EPOLL_CTL_MOD, handler->GetHandle(), &eevent);
   if (ret == -1) {
     //TODO (qinggniq) error handling [errorn = ENOENT]
   }

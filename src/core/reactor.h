@@ -28,9 +28,9 @@ class SyncEventDemultiplexer;
 
 class Dispatcher {
  public:
-  typedef EventHandler event_handler;
+  typedef std::shared_ptr<EventHandler> event_handler;
   typedef std::shared_ptr<SyncEventDemultiplexer> sync_event_demulp_pt;
-  typedef std::unordered_map<handle_t, EventHandler*> handler_map_t;
+  typedef std::unordered_map<handle_t, event_handler> handler_map_t;
 
 
   Dispatcher();

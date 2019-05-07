@@ -4,33 +4,36 @@
 
 #ifndef SRC_SOCKET_H
 #define SRC_SOCKET_H
+
 #include "noncopyable.h"
 #include "type.h"
+
+
 /*
- * 当使用非阻塞的Socket时，如果需要处理已经断开连接的客户端连接，请设置心跳，或者定时任务。
+ *  当使用非阻塞的Socket时，如果需要处理已经断开连接的客户端连接，请设置心跳，或者定时任务。
  *  https://stackoverflow.com/questions/5906175/what-do-a-benefit-from-changing-from-blocking-to-non-blocking-sockets
  */
 namespace qg{
-class Socket:public noncopyable {
-  Socket(qg_int fd,
-         qg_bool reuse,
-         qg_bool nonblock,
-         qg_bool cork):
-         sfd_(fd),
-         reuse_(reuse),
-         nonblock_(nonblock),
-         cork_(cork){}
-
+class Socket {
+ public :
+  Socket() ;
+  explicit Socket(qg_int back_log);
+  qg_fd_t sfd() const {return sfd_;};
   void makeAddrReuseable();
-  void makeNonblock();
+  void makePortReuseable();
+  void makeNonBlock();
+  void makeCloseExe();
+  void makeCork();
+  void makeKeepAlive();
 
-  void bindAndListen();
+  void setBackLog(qg_int back_log) {back_log_ = back_log;}
+  void bindAndListen(qg_int port);
+  qg_fd_t accept();
+  void close();
 
  private:
-  qg_int sfd_;
-  qg_bool reuse_;
-  qg_bool nonblock_;
-  qg_bool cork_;
+  qg_fd_t sfd_;
+  qg_int back_log_;
 };
 }
 #endif //SRC_SOCKET_H

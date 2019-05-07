@@ -19,30 +19,27 @@ class RequestParser {
   typedef RequestData::uri_t uri_t;
   typedef RequestData::header_t header_t;
   typedef RequestData::body_t body_t;
-  typedef RequestData http_dt;
+  typedef std::shared_ptr<RequestData> http_d_pt;
   typedef qg_int ok_t;
   typedef qg_string msg_t;
  public:
-  RequestParser();
+  explicit RequestParser(http_d_pt http_data) : request_d_(std::move(http_data)) {}
   ~RequestParser();
   ok_t Parse(const msg_t &http_msg);
   ok_t Parse(qg_istream &stream);
-  http_dt request_data() const;
+  http_d_pt request_data() const;
   void Print() const;
 
  private:
-  ok_t ParseStartLine(const msg_t &msg);
-  ok_t ParseMethod(const msg_t &msg);
-  ok_t ParseUri(const msg_t &msg);
+
   ok_t ParseQuery(const msg_t &msg);
-  ok_t ParseVersion(const msg_t &msg);
-  ok_t ParseHeader(const msg_t &msg);
+
   ok_t ParseHeader(qg_istream &istream);
 
   ok_t ParseBody(const msg_t &msg);
   ok_t ParseBody(qg_istream &istream);
 
-  http_dt request_d_;
+  http_d_pt request_d_;
 
 };
 } //namespace qg

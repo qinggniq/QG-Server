@@ -27,7 +27,7 @@ Dispatcher::~Dispatcher() {
 
 void
 Dispatcher::registerHandler(qg::Dispatcher::event_handler &eh) {
-  this->handler_map_.emplace(eh.GetHandle(), &eh);
+  this->handler_map_.emplace(eh->GetHandle(), eh);
   //TODO (qinggniq) refactor it, the sync_event_demuliplexer shouldn't know much about the EventHander
   this->sed_impl_->Register(eh);
 }
@@ -41,7 +41,7 @@ void
 Dispatcher::removeHandler(qg::Dispatcher::event_handler &eh) {
   //TODO (qinggniq) shoud remove the map ????
   //here don't need use auto&
-  auto it = this->handler_map_.find(eh.GetHandle());
+  auto it = this->handler_map_.find(eh->GetHandle());
   if (it != this->handler_map_.end()) {
     this->handler_map_.erase(it);
   } else {

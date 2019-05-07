@@ -28,7 +28,7 @@ class SyncEventDemultiplexer {
 
 
   typedef qg_event_t ev_t;
-  typedef EventHandler  handler;
+  typedef std::shared_ptr<EventHandler>  handler;
 
 
   SyncEventDemultiplexer();

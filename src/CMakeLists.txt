@@ -22,7 +22,7 @@ if(Boost_FOUND)
             core/sync_event_demultiplexer.cpp
             core/sync_event_demultiplexer.h
             util/log.h
-            util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h util/nettool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h core/timer_heap.cpp core/timer_heap.h core/timer_queue.cpp core/timer_queue.h core/tcp_connection.cpp core/tcp_connection.h)
+            util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h util/nettool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h core/timer_heap.cpp core/timer_heap.h core/timer_queue.cpp core/timer_queue.h core/tcp_connection.cpp core/tcp_connection.h core/Server.cpp core/Server.h util/config.h core/http_handler.cpp core/http_handler.h)
     add_executable(Test
             test/test_http_paser.cc
             core/event_loop.cpp
@@ -81,9 +81,25 @@ if(Boost_FOUND)
                 core/reactor.h
                 core/reactor.cpp
                 test/test_timer_in_loop.cpp)
+        add_executable(
+                test_acceptor
+                core/socket.cpp
+                core/socket.h
+                core/Server.cpp
+                core/Server.h
+                core/event_handler.cpp
+                core/event_handler.h
+                core/reactor.cpp
+                core/reactor.h
+                core/sync_event_demultiplexer.cpp
+                core/sync_event_demultiplexer.h
+                util/type.h
+                util/noncopyable.h
+                util/config.h core/http_handler.cpp core/http_handler.h)
     target_link_libraries(main ${Boost_LIBRARIES})
     target_link_libraries(test_timer_heap ${Boost_LIBRARIES})
     target_link_libraries(test_timer_in_reactor ${Boost_LIBRARIES})
+    target_link_libraries(test_acceptor ${Boost_LIBRARIES})
 endif()
 
 include_directories(core)

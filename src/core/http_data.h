@@ -94,7 +94,10 @@ class RequestData {
   header_vt header_item(const header_kt &) const;
   void set_body(const body_t &body);
   body_t body() const;
-  qg_bool Encoded() const;
+
+ public:
+  qg_bool Encoded() const ;
+  qg_bool KeepAlive() const;
 
  private:
   method_t method_;
@@ -149,7 +152,7 @@ class ResponseData {
   reason_t reason() const {
     return this->reason_;
   }
-  header_vt header_item(const header_kt &) const;
+  header_vt header_item(header_kt &) const;
 
   header_t header() const {
     return this->header_;
