@@ -33,7 +33,7 @@ MIMEType::init() {
 }
 
 MIMEType::mime_vt
-MIMEType::mime_item(qg::MIMEType::mime_kt &suffix) {
+MIMEType::mime_item(qg::MIMEType::mime_kt &&suffix) {
   auto it = MIMEType::mime_type_.find(suffix);
   if (it != MIMEType::mime_type_.end()) {
     return it->second;
@@ -101,12 +101,7 @@ RequestData::query_item(const qg::RequestData::query_vt &key) const {
   }
 }
 
-void
-RequestData::set_query_item(const qg::RequestData::query_kt &key, const qg::RequestData::query_vt &value) {
-  //best practice to insert/update a key-value in c++.
-  //https://stackoverflow.com/questions/14218042/most-efficient-way-to-assign-values-to-maps
-  this->query_.emplace(key, value);
-}
+
 
 RequestData::header_vt
 RequestData::header_item(const qg::RequestData::header_kt &key) const {

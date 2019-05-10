@@ -44,7 +44,7 @@ class MIMEType {
   MIMEType(const MIMEType &);
   ~MIMEType();
   static void init();
-  static mime_vt mime_item(mime_kt &suffix);
+  static mime_vt mime_item(mime_kt &&suffix);
  public:
   static mime_type_map mime_type_;
 };
@@ -64,18 +64,18 @@ class RequestData {
 
  public:
   RequestData(
-      const method_t &method,
-      const version_t &version,
-      const uri_t &uri,
-      const query_t &query,
-      const header_t &header,
-      const body_t &body) :
-      method_(method),
-      version_(version),
-      uri_(uri),
-      query_(query),
-      header_(header),
-      body_(body) {}
+      method_t &&method,
+      version_t &&version,
+      uri_t &&uri,
+      query_t &&query,
+      header_t &&header,
+      body_t &&body) :
+      method_(std::move(method)),
+      version_(std::move(version)),
+      uri_(std::move(uri)),
+      query_(std::move(query)),
+      header_(std::move(header)),
+      body_(std::move(body)) {}
   RequestData();
   ~RequestData();
 
@@ -86,13 +86,17 @@ class RequestData {
   uri_t uri() const;
   void set_uri(const uri_t &uri);
   void set_query(const query_t &query);
+  void set_file(const qg_string &file){file_ = file;}
+  void set_path(const qg_string &path){path_ = path;}
   header_t header() const;
   query_vt query_item(const query_vt &) const;
-  void set_query_item(const query_kt &key, const query_vt &value);
-  void set_header(const header_t &header);
+  qg_string file() const {return file_;}
+  qg_string path() const {return path_;}
+  //void set_query_item(const query_kt &key, const query_vt &value);
+  //void set_header(const header_t &header);
   void set_header_item(const header_kt &key, const header_vt &value);
   header_vt header_item(const header_kt &) const;
-  void set_body(const body_t &body);
+  //void set_body(const body_t &body);
   body_t body() const;
 
  public:
@@ -103,6 +107,8 @@ class RequestData {
   method_t method_;
   version_t version_;
   uri_t uri_;
+  qg_string path_;
+  qg_string file_;
   query_t query_;
   header_t header_;
   body_t body_;

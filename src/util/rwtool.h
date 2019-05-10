@@ -12,7 +12,6 @@ namespace qg{
 //The max size of one read() read.
 const qg_size_t kBufferSize = 4096;
 
-
 /*
  * The QGReadN, QGWriteN performs the NONBLOCKING read/write, for in nonblocking IO,
  * read and write system callbcak may not read write the needed number of bytes.
@@ -48,8 +47,8 @@ qg_size_t QGReadN(qg_fd_t sfd, qg_string& buffer, qg_size_t size) {
   if ((nread = QGReadN(sfd, cbuffer, size)) > 0) {
     buffer = cbuffer;
     //TODO (qinggniq) here maybe produce many fragments of memory, so use stack?
-    delete[] cbuffer;
   };
+  delete[] cbuffer;
 
   return nread;
 }

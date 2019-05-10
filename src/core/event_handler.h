@@ -19,6 +19,7 @@ enum EventMode {
   kEventRead = EPOLLIN ,
   kEventWrite = EPOLLOUT,
   kEventError = EPOLLERR,
+  kEventAll = EPOLLIN | EPOLLOUT | EPOLLERR,
   kEventMask = 0xff
 };
 
@@ -48,15 +49,20 @@ class EventHandler {
   void SetWriteCallBack(Functor wcb);
   void SetErrorCallBack(Functor ecb);
 
-  events_t GetIEvent() const;
+  events_t& GetIEvents() ;
+  events_t& GetREvents() ;
   void SetIEvents(const events_t &iev);
   void SetREvents(const events_t &rev);
 
   void enableRead() {SetIEvents(EventMode::kEventRead);}
   void enableWrite() {SetIEvents(EventMode::kEventWrite);}
   void enableError() {SetIEvents(EventMode::kEventError);}
-  void enableAll() {enableRead(); enableWrite(); enableError();}
+  void enableAll() {SetIEvents(EventMode::kEventAll);}
 
+  void disableRead() {this->ievents_ &= ~EventMode::kEventRead;}
+  void disableWrite() {this->ievents_ &= ~EventMode::kEventWrite;}
+  void disableError() {this->ievents_ &= ~EventMode::kEventError;}
+  void disableAll() {this->ievents_ = EventMode::kEventNone;}
   qg_bool IsReadable() const;
   qg_bool IsWriteable() const;
   qg_bool IsError() const;
@@ -89,9 +95,14 @@ EventHandler::GetHandle() const {
 }
 
 inline
-events_t
-EventHandler::GetIEvent() const {
+events_t&
+EventHandler::GetIEvents()  {
   return this->ievents_;
+}
+inline
+events_t&
+EventHandler::GetREvents()  {
+  return this->revents_;
 }
 
 inline

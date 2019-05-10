@@ -40,14 +40,37 @@ RequestParser::Parse(qg_istream &stream) {
     qg::qg_size_t line_size = line.size();
 
     for (qg::qg_size_t i = method_end + 1; i < line_size; ++i) {
-      if (line[i] == '?' && i < line_size - 1) {
+      if ( i < line_size - 1 && line[i] == '?') {
         query_start = i;
       } else if (line[i] == ' ') {
         uri_and_query_end = i;
         break;
       }
     }
-    //
+    //parse file
+    qg_ssize_t file_pos = line.find("/", method_end);
+    if (file_pos == qg_string::npos) {
+      request_d_->set_file("index.html");
+    }
+    if (file_pos != qg_string::npos) {
+      qg_ssize_t tmp_pos = line.find(' ', file_pos);
+      if (tmp_pos == qg_string::npos) {
+        error_code_ = ErrorCode ::kQueryError;
+        return kError;
+      }else {
+        if (tmp_pos - file_pos > 1) {
+          qg_string file = line.substr(file_pos + 1, tmp_pos-file_pos-1);
+          qg_ssize_t _query_start = file.find("?");
+          if (_query_start != qg_string::npos) {
+            file = file.substr(0, _query_start);
+          }
+          request_d_->set_file(file);
+        }else{
+          request_d_->set_file("index.html");
+        }
+      }
+    }
+
     if (uri_and_query_end != qg_string::npos) {
       if (query_start != qg_string::npos) {
         uri = line.substr(method_end + 1, query_start);
@@ -56,12 +79,16 @@ RequestParser::Parse(qg_istream &stream) {
         uri = line.substr(method_end + 1, uri_and_query_end - method_end);
       }
 
-      qg::qg_size_t version_end = qg_string::npos;
+
+      qg::qg_size_t version_end;
       if ((version_end = line.find('/', uri_and_query_end + 1)) != qg_string::npos) {
-        if (line.compare(uri_and_query_end + 1, version_end - uri_and_query_end - 1, "HTTP") != 0)
+        if (line.compare(uri_and_query_end + 1, version_end - uri_and_query_end - 1, "HTTP") != 0) {
+          error_code_ = ErrorCode ::kProtoclError;
           return kError;
+        }
         version = line.substr(version_end + 1, line.size() - version_end - 1);
       } else {
+        error_code_ = ErrorCode ::kQueryError;
         return kError;
       }
 
@@ -74,20 +101,8 @@ RequestParser::Parse(qg_istream &stream) {
 
   }
   return kOk;
-
 }
 
-RequestParser::http_d_pt
-RequestParser::request_data() const {
-  return this->request_d_;
-}
-
-
-RequestParser::ok_t
-RequestParser::ParseQuery(const qg::RequestParser::msg_t &msg) {
-
-  return kOk;
-}
 
 
 RequestParser::ok_t
@@ -111,7 +126,7 @@ RequestParser::ParseBody(const qg::RequestParser::msg_t &body_msg) {
 
 RequestParser::ok_t
 RequestParser::ParseBody(qg::qg_istream &istream) {
-  if (((this->request_d_).Encoded()) == kOk) {
+  if (((this->request_d_)->Encoded()) == kOk) {
     return kOk;
     //TODO(qinggniq) implement the encode/decode function
   } else {

@@ -8,8 +8,11 @@
 namespace qg{
 
 struct DetailConfig{
-  qg_int back_log;
-  qg_bool cork;
+  qg_int back_log:4;
+  qg_int keep_alive_timeout:4;
+  qg_bool cork:1;
+  qg_bool sendfile:1;
+
 };
 struct Config{
   struct DetailConfig detail;
