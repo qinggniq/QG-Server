@@ -90,8 +90,8 @@ class RequestData {
   void set_path(const qg_string &path){path_ = path;}
   header_t header() const;
   query_vt query_item(const query_vt &) const;
-  qg_string file() const {return file_;}
-  qg_string path() const {return path_;}
+  qg_string& file() {return file_;}
+  qg_string& path() {return path_;}
   //void set_query_item(const query_kt &key, const query_vt &value);
   //void set_header(const header_t &header);
   void set_header_item(const header_kt &key, const header_vt &value);

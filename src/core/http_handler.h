@@ -9,6 +9,10 @@
 #include "config.h"
 
 namespace qg{
+enum ConnectionStatus {
+  kDisConnected,
+  kConnected
+};
 
 class HttpHandler{
  public:
@@ -34,7 +38,9 @@ class HttpHandler{
   handler_pt handler_;
   response_data_pt response_;
   config_pt config_;
+  ConnectionStatus conn_status_;
   qg_bool keep_alive_;
+  qg_bool error_;
 };
 } //namespace qg
 #endif //SRC_HTTP_HANDLER_H
