@@ -5,10 +5,10 @@
 #ifndef SRC_EVENT_HANDLER_H
 #define SRC_EVENT_HANDLER_H
 
-#include "../util/type.h"
-#include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 #include <sys/epoll.h>
+#include <functional>
+
+#include "type.h"
 
 namespace qg{
 typedef qg_uint events_t;

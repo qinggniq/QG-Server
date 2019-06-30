@@ -5,10 +5,9 @@
 #ifndef QG_SERVER_REQUESTPARSER_H
 #define QG_SERVER_REQUESTPARSER_H
 
-#include "../util/type.h"
+#include "type.h"
 #include "http_data.h"
 
-class HttpData;
 
 namespace qg {
 

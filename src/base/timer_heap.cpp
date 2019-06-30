@@ -5,8 +5,6 @@
 #include "timer_heap.h"
 namespace qg{
 
-
-
 void TimerHeap::addTimer(qg::TimerHeap::timer_pt &timer) {
   heap_.push_back(timer);
   up(heap_.size()-1);

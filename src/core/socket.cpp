@@ -1,8 +1,8 @@
 //
 // Created by wc on 3/14/19.
 //
-
 #include "socket.h"
+
 #include <sys/socket.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <netinet/tcp.h>
 #include <netdb.h>
+
 
 #ifdef TCP_CORK
 #	define QGIO_NOPUSH TCP_CORK

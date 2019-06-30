@@ -22,10 +22,10 @@ add_executable(
 add_executable(
         test_timer
         src/test/test_timer_heap.cc
-        src/core/timer.cpp
-        src/core/timer.h
-        src/core/timer_heap.cpp
-        src/core/timer_heap.h
+        src/base/timer.cpp
+        src/base/timer.h
+        src/base/timer_heap.cpp
+        src/base/timer_heap.h
         src/util/time_stamp.cpp
         src/util/time_stamp.h
         src/util/type.h

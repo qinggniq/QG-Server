@@ -15,10 +15,11 @@
 #ifndef QG_SERVER_REACTOR_H
 #define QG_SERVER_REACTOR_H
 
-#include "../util/type.h"
-#include "sync_event_demultiplexer.h"
+
 #include <memory>
 #include <unordered_map>
+#include "type.h"
+#include "sync_event_demultiplexer.h"
 
 namespace qg {
 const qg_int kMaxEventsSize = 10;

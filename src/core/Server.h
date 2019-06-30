@@ -5,15 +5,15 @@
 #ifndef SRC_ACCPETOR_H
 #define SRC_ACCPETOR_H
 #include <memory>
-#include "socket.h"
 #include "noncopyable.h"
 #include "type.h"
-#include "event_handler.h"
-#include "config.h"
-#include "reactor.h"
 
 namespace qg{
 
+class Dispatcher;
+class Socket;
+class EventHandler;
+class Config;
 
 class Server : public qg::noncopyable{
  public:

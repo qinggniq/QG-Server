@@ -3,6 +3,7 @@
 //
 
 #include "timer.h"
+
 #include <chrono>
 
 namespace qg {

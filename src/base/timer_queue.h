@@ -4,14 +4,18 @@
 
 #ifndef SRC_TIMER_QUEUE_H
 #define SRC_TIMER_QUEUE_H
-#include "timer_heap.h"
+
 #include "type.h"
 #include "noncopyable.h"
-#include "event_handler.h"
-#include "reactor.h"
+
+
 
 namespace qg{
 
+class Dispatcher;
+class EventHandler;
+class TimerHeap;
+class Timer;
 class TimerQueue:public noncopyable{
  public:
   typedef std::shared_ptr<Dispatcher> event_loop_pt;

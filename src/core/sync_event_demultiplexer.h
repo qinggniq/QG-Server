@@ -5,12 +5,11 @@
 #ifndef QG_SERVER_SYNC_EVENT_DEMULTIPLEXER_H
 #define QG_SERVER_SYNC_EVENT_DEMULTIPLEXER_H
 
-#include "type.h"
-#include "event_handler.h"
+
 #include <sys/epoll.h>
 #include <memory>
 #include <vector>
-
+#include "type.h"
 namespace qg {
 
 /*

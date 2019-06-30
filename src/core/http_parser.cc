@@ -4,9 +4,11 @@
 
 #include "http_parser.h"
 
-#include "../util/type.h"
-
 #include <iostream>
+
+#include "type.h"
+#include "http_data.h"
+
 
 namespace qg {
 

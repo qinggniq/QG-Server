@@ -6,8 +6,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
-#include "timer_queue.h"
 
+#include "timer_queue.h"
+#include "timer.h"
+#include "timer_heap.h"
+#include "time_stamp.h"
+#include "event_handler.h"
+#include "reactor.h"
 
 
 namespace qg{

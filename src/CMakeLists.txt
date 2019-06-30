@@ -22,7 +22,7 @@ if(Boost_FOUND)
             core/sync_event_demultiplexer.cpp
             core/sync_event_demultiplexer.h
             util/log.h
-            util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h util/nettool.h core/timer.cpp core/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h core/timer_heap.cpp core/timer_heap.h core/timer_queue.cpp core/timer_queue.h core/tcp_connection.cpp core/tcp_connection.h core/Server.cpp core/Server.h util/config.h core/http_handler.cpp core/http_handler.h)
+            util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/event_handler_inherit.cpp core/event_handler_inherit.h core/request_handler_inherit.cpp core/request_handler_inherit.h util/rwtool.h util/nettool.h base/timer.cpp base/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h base/timer_heap.cpp base/timer_heap.h base/timer_queue.cpp base/timer_queue.h core/tcp_connection.cpp core/tcp_connection.h core/Server.cpp core/Server.h util/config.h core/http_handler.cpp core/http_handler.h base/thread_pool.cpp base/thread_pool.h)
     add_executable(Test
             test/test_http_paser.cc
             core/event_loop.cpp
@@ -45,35 +45,35 @@ if(Boost_FOUND)
             core/event_handler_inherit.h
             core/request_handler_inherit.cpp
             core/request_handler_inherit.h
-            util/rwtool.h core/timer.cpp
-            core/timer.h util/time_stamp.cpp
+            util/rwtool.h base/timer.cpp
+            base/timer.h util/time_stamp.cpp
             util/time_stamp.h util/copyable.h
             util/noncopyable.h util/atomic.h
             core/socket.cpp core/socket.h
-            core/timer_heap.cpp
-            core/timer_heap.h
+            base/timer_heap.cpp
+            base/timer_heap.h
             test/test_timer_heap.cc)
 
         add_executable(test_timer_heap
                 test/test_timer_heap.cc
-                core/timer.cpp
-                core/timer.h
-                core/timer_heap.cpp
-                core/timer_heap.h
+                base/timer.cpp
+                base/timer.h
+                base/timer_heap.cpp
+                base/timer_heap.h
                 util/time_stamp.cpp
                 util/time_stamp.h
                 util/type.h
-                core/timer_queue.cpp core/timer_queue.h)
+                base/timer_queue.cpp base/timer_queue.h)
         add_executable(test_timer_in_reactor
-                core/timer.cpp
-                core/timer.h
-                core/timer_heap.cpp
-                core/timer_heap.h
+                base/timer.cpp
+                base/timer.h
+                base/timer_heap.cpp
+                base/timer_heap.h
                 util/time_stamp.cpp
                 util/time_stamp.h
                 util/type.h
-                core/timer_queue.cpp
-                core/timer_queue.h
+                base/timer_queue.cpp
+                base/timer_queue.h
                 core/event_handler.cpp
                 core/event_handler.h
                 core/sync_event_demultiplexer.cpp

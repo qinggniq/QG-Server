@@ -8,6 +8,7 @@
 #include <string>
 #include <sys/socket.h>
 #include <sstream>
+#include <memory>
 namespace qg{
 using qg_short = short;
 using qg_uint = unsigned int;

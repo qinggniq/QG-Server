@@ -5,18 +5,17 @@
 #ifndef SRC_TIMER_H
 #define SRC_TIMER_H
 
-#include "type.h"
-#include "time_stamp.h"
-#include "noncopyable.h"
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
-#include <queue>
-#include <chrono>
 
+#include "type.h"
+#include "noncopyable.h"
+#include "time_stamp.h"
 
 namespace qg{
 
  class TimerHeap;
+ class TimeStamp;
  class Timer : public noncopyable {
   public :
    typedef boost::function<void()> timer_handler_cb_t;
