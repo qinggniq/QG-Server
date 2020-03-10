@@ -62,6 +62,8 @@ SyncEventDemultiplexer::Update(handler &handler) {
   }
 }
 
+#ifdef __linux__
+
 std::vector<EventStatus>
 SyncEventDemultiplexer::Wait() {
   struct epoll_event eevent;
@@ -81,8 +83,30 @@ SyncEventDemultiplexer::Wait() {
       std::cout << "fuck" << std::endl;
     }
   }
-
   //epoll_wait(int epfd, struct epoll_event *evlist, int maxevents, int timeout);
-
 }
+#elif __APPLE__
+
+    std::vector<EventStatus>
+    SyncEventDemultiplexer::Wait() {
+        struct epoll_event eevent;
+        struct epoll_event evlist[kMaxEventsSize];
+        std::vector<EventStatus> res;
+        //TODO add the real timeout paramenters
+        while (kTrue) {
+            qg_int ret = epoll_wait(this->sed_fd_, evlist, kMaxEventsSize, 300);
+            for (qg_int i=0; i<ret; ++i) {
+                EventStatus es({evlist[i].data.fd, evlist[i].events});
+                res.push_back(es);
+            }
+            if (ret > 0) {
+                std::cout << "ret" << std::endl;
+                return res;
+            }else{
+                std::cout << "fuck" << std::endl;
+            }
+        }
+        //epoll_wait(int epfd, struct epoll_event *evlist, int maxevents, int timeout);
+    }
+#endif
 }//qg

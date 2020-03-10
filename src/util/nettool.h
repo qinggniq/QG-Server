@@ -14,7 +14,6 @@
 #include <netdb.h>
 #include <cstring>
 #include <zconf.h>
-#include <boost/lexical_cast.hpp>
 
 #include "type.h"
 
@@ -110,7 +109,7 @@ QGInetPassiveSocket(const qg_char_t *service, qg_int type, socklen_t *addrlen, q
 
 qg_fd_t QGNetListen(qg_size_t port, socklen_t *addlen, qg_int backlog) {
   port = ((port < 1024 || port > 65535)) ? 6666 : port;
-  qg_string sport = boost::lexical_cast<qg_string>(port);
+  qg_string sport = std::to_string(port);
   return QGInetPassiveSocket(sport.c_str(), SOCK_STREAM, addlen, true, backlog);
 }
 

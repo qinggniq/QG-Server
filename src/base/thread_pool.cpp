@@ -12,6 +12,7 @@ ThreadPool<T>::ThreadPool(qg_size_t pool_size, qg_size_t queue_size) : pool_size
   }
   if (pthread_cond_init(&no_empty_, nullptr) != 0) {
     //TODO log
+
   }
   if (pthread_cond_init(&no_full_, nullptr) != 0) {
     //TOOD log
@@ -39,7 +40,7 @@ void ThreadPool<T>::execTask() {
     task_queue.pop();
     pthread_cond_signal(&no_full_);
     pthread_mutext_unlock(&mutex_);
-    t->handleEvents();              //the T must have the handleEvents method;
+    t();              // T是一个functor
   }
 }
 template<typename T>

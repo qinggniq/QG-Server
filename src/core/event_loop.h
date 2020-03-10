@@ -2,27 +2,61 @@
 // Created by wc on 1/23/19.
 //
 
+/*
+ * I decide use Dispatcher Design Pattern to implement the multiple
+ * connections.
+ * Here I cite many open source implement of Dispatcher Design Pattern such as
+ * https://github.com/song0071000/Reactor_Implemention,
+ * https://github.com/justinzhu/reactor,
+ * and the redis implemention.
+ * */
+
+
 #ifndef QG_SERVER_EVENT_LOOP_H
 #define QG_SERVER_EVENT_LOOP_H
 
-#include "../util/type.h"
+
 #include <memory>
-#include <functional>
+#include <unordered_map>
+#include "../util/type.h"
 
 namespace qg {
-class Channel;
-class Poller;
-class TimerQueue;
+    const qg_int kMaxEventsSize = 10;
 
-class EventLoop {
- public:
-  typedef std::function<void()> Functor;
-  EventLoop();
-  ~EventLoop();
+    class Poller;
 
-  void Loop();
-  void Stop();
+    class EventHandler;
 
-};
-}
+    class EventLoop {
+    public:
+        typedef EventHandler* event_handler;
+        typedef Poller *poller_pt;
+        typedef std::unordered_map<qg_fd_t, event_handler> handler_map_t;
+
+
+        EventLoop();
+
+        ~EventLoop();
+
+        void registerHandler(event_handler eh);
+
+        void removeHandler(event_handler eh);
+
+        void modHandler(event_handler eh);
+
+        void loop();
+
+        void stop();
+
+        EventLoop(const EventLoop &) = delete;
+
+        EventLoop &operator=(const EventLoop &) = delete;
+
+    private:
+        bool stop_;
+        poller_pt poller_;
+        const int defaultPollSize;
+        handler_map_t handler_map_;
+    };
+} //namespace qg
 #endif //QG_SERVER_EVENT_LOOP_H

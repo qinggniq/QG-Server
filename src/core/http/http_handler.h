@@ -5,7 +5,7 @@
 #ifndef SRC_HTTP_HANDLER_H
 #define SRC_HTTP_HANDLER_H
 #include "http_parser.h"
-#include "reactor.h"
+#include "event_loop.h"
 #include "config.h"
 
 namespace qg{

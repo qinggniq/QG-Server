@@ -12,15 +12,15 @@
 
 namespace qg{
 
-class Dispatcher;
+class EventLoop;
 class EventHandler;
 class TimerHeap;
 class Timer;
 class TimerQueue:public noncopyable{
  public:
-  typedef std::shared_ptr<Dispatcher> event_loop_pt;
-  typedef std::shared_ptr<EventHandler> event_handler_pt;
-  typedef std::shared_ptr<Timer> timer_pt;
+  typedef EventLoop event_loop_pt;
+  typedef EventHandler* event_handler_pt;
+  typedef Timer* timer_pt;
 
   explicit TimerQueue(event_loop_pt el);
   ~TimerQueue();

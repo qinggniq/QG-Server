@@ -15,7 +15,7 @@
 #include "socket.h"
 #include "event_handler.h"
 #include "config.h"
-#include "reactor.h"
+#include "event_loop.h"
 
 namespace qg{
 

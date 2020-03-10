@@ -19,14 +19,14 @@ namespace qg {
 
     class Config;
 
-    class Server : public qg::noncopyable {
+    class Accepter : public qg::noncopyable {
     public:
         typedef EventLoop *event_loop_pt;
         typedef EventHandler *event_handler_pt;
         typedef Socket *socket_pt;
         typedef Config *config_pt;
 
-        explicit Server(event_loop_pt dispatcher,
+        explicit Accepter(event_loop_pt el,
                         config_pt config);
 
         void run();

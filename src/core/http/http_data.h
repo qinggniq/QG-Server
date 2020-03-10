@@ -10,7 +10,7 @@
 #include <unordered_map>
 #include <memory>
 
-#include "../util/type.h"
+#include "type.h"
 
 // ----------------------------------------------------------------------
 // Here we define the RequestData Class to represent the Http Header & Body.

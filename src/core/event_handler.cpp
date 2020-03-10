@@ -3,11 +3,11 @@
 //
 
 #include "event_handler.h"
+#include "event_loop.h"
 
 namespace qg{
 
-EventHandler::EventHandler(dispatcher_pt dp, qg_fd_t fd, events_t ie):
-    dispatcher_(std::move(dp)),
+EventHandler::EventHandler( qg_fd_t fd, events_t ie):
     handle_(fd),
     ievents_(ie),
     revents_(EventMode::kEventNone){
@@ -16,10 +16,8 @@ EventHandler::EventHandler(dispatcher_pt dp, qg_fd_t fd, events_t ie):
 /*
  * C11 new feature: constructor agent
  */
-
-
-EventHandler::EventHandler(dispatcher_pt dp, qg_fd_t fd):
-EventHandler(std::move(dp), fd, EventMode::kEventRead)
+EventHandler::EventHandler( qg_fd_t fd):
+EventHandler(fd, EventMode::kEventRead|EventMode::kEventWrite)
 {}
 
 void

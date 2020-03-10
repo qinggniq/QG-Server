@@ -5,8 +5,6 @@
 #ifndef SRC_TIMER_H
 #define SRC_TIMER_H
 
-#include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "type.h"
 #include "noncopyable.h"
@@ -18,7 +16,7 @@ namespace qg{
  class TimeStamp;
  class Timer : public noncopyable {
   public :
-   typedef boost::function<void()> timer_handler_cb_t;
+   typedef std::function<void()> timer_handler_cb_t;
    explicit Timer(TimeStamp when, const timer_handler_cb_t& call_back, qg_time_t interval);
 
    TimeStamp expire() const {return expire_;}
@@ -38,9 +36,7 @@ namespace qg{
 
    qg_bool cycle_;
    qg_time_t interval_;
-
    timer_handler_cb_t timer_hander_;
-
    //qg_ssize_t heap_idx_;
  };
 

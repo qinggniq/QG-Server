@@ -12,7 +12,7 @@
 #include "timer_heap.h"
 #include "time_stamp.h"
 #include "event_handler.h"
-#include "reactor.h"
+#include "event_loop.h"
 
 
 namespace qg{
