@@ -35,6 +35,10 @@ namespace qg {
         info_ += "IPV4\n";
     }
 
+    Socket::~Socket() {
+      ::close(fd_);
+    }
+
      void Socket::makeAddrReuseable( ) {
         qg_int enable = 1;
         if (setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(qg_int)) < 0);
@@ -178,7 +182,7 @@ namespace qg {
     }
 
     //TODO: 客户端的信息应该在accpet的时候填入。。
-    Socket::socket_pt Socket::accept() {
+    qg_fd_t Socket::accept() {
         struct sockaddr cli_addr;
         socklen_t addr_len = sizeof(cli_addr);
         qg_fd_t new_fd = ::accept(fd_, &cli_addr, &addr_len);
@@ -227,12 +231,10 @@ namespace qg {
                 default:
                     break;
             }
-            return nullptr;
+
+            return -1;
         }
-        socket_pt new_socket = new Socket(new_fd);
-        new_socket->appendInfo("Addr : " + std::string(cli_addr.sa_data));
-        new_socket->appendInfo("Remote Port : " ); //TODO;
-        return new_socket;
+        return new_fd;
     }
 
 }//namespace qg

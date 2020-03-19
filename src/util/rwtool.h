@@ -32,6 +32,9 @@ qg_size_t QGReadN(qg_fd_t sfd, qg_char_t* buffer, qg_size_t size) {
     } else {
       //TODO (qinggniq) Error Handle
       //Here exist the EAGAIN ERROR
+      if (errno == EAGAIN) {
+        return nsum;
+      }
       return static_cast<qg_size_t >(-1);
     }
   }
@@ -55,10 +58,9 @@ qg_size_t QGReadN(qg_fd_t sfd, qg_string& buffer, qg_size_t size) {
 
 qg_size_t QGWriteN(qg_fd_t sfd, const char* buffer, qg_size_t size) {
   qg_ssize_t nwrite;
-  if ((nwrite = write(sfd, buffer, size)) != size) {
+  if ((nwrite = write(sfd, buffer, size)) < 0) {
     //Log
     nwrite = -1;
-
   }
   return static_cast<qg_size_t>(nwrite);
 }

@@ -143,7 +143,7 @@ void HttpHandler::handleRead() {
 	}
 	header += "Content-Type: " + file_type + "\r\n";
 	header += "Content-Length: " + std::to_string(sbuf.st_size) + "\r\n";
-	header += "Server: QG Server\r\n";
+	header += "server: QG server\r\n";
 
 	header += "\r\n";
 	response_ += header;
@@ -206,13 +206,13 @@ void HttpHandler::handleError(qg_int err_num, qg_string &&note) {
   body_buff += "<html><title>Error</title>";
   body_buff += "<body bgcolor=\"ffffff\">";
   body_buff += std::to_string(err_num) + note;
-  body_buff += "<hr><em> QG Server</em>\n</body></html>";
+  body_buff += "<hr><em> QG server</em>\n</body></html>";
 
   header_buff += "HTTP/1.1 " + std::to_string(err_num) + note + "\r\n";
   header_buff += "Content-Type: text/html\r\n";
   header_buff += "Connection: Close\r\n";
   header_buff += "Content-Length: " + std::to_string(body_buff.size()) + "\r\n";
-  header_buff += "Server: QG Server\r\n";
+  header_buff += "server: QG server\r\n";
   header_buff += "\r\n";
   sprintf(send_buff, "%s", header_buff.c_str());
   QGWriteN(fd_, send_buff, strlen(send_buff));

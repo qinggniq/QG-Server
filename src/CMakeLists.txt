@@ -17,7 +17,7 @@ add_executable(main
         core/event_loop.cpp
         core/event_loop.h
         util/log.h
-        util/type.h core/event_handler.cpp core/event_handler.h core/accept_handler_inherit.cpp core/accept_handler_inherit.h core/http/request_handler_inherit.cpp core/http/request_handler_inherit.h util/rwtool.h util/nettool.h base/timer.cpp base/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h base/timer_heap.cpp base/timer_heap.h base/timer_queue.cpp base/timer_queue.h core/tcp_connection.cpp core/tcp_connection.h core/Server.cpp core/Server.h util/config.h core/http/http_handler.cpp core/http/http_handler.h base/thread_pool.cpp base/thread_pool.h)
+        util/type.h core/event_handler.cpp core/event_handler.h core/http/accept_handler_inherit.cpp core/http/accept_handler_inherit.h core/http/request_handler_inherit.cpp core/http/request_handler_inherit.h util/rwtool.h util/nettool.h base/timer.cpp base/timer.h util/time_stamp.cpp util/time_stamp.h util/copyable.h util/noncopyable.h util/atomic.h core/socket.cpp core/socket.h base/timer_heap.cpp base/timer_heap.h base/timer_queue.cpp base/timer_queue.h core/tcp_connection.cpp core/tcp_connection.h core/server.cpp core/server.h util/config.h core/http/http_handler.cpp core/http/http_handler.h base/thread_pool.cpp base/thread_pool.h)
 add_executable(Test
         test/test_http_paser.cc
         core/http/http_data.cc
@@ -30,8 +30,8 @@ add_executable(Test
         util/type.h
         core/event_handler.cpp
         core/event_handler.h
-        core/accept_handler_inherit.cpp
-        core/accept_handler_inherit.h
+        core/http/accept_handler_inherit.cpp
+        core/http/accept_handler_inherit.h
         core/http/request_handler_inherit.cpp
         core/http/request_handler_inherit.h
         util/rwtool.h base/timer.cpp
@@ -74,8 +74,8 @@ add_executable(
         test_acceptor
         core/socket.cpp
         core/socket.h
-        core/Server.cpp
-        core/Server.h
+        core/server.cpp
+        core/server.h
         core/event_handler.cpp
         core/event_handler.h
         core/event_loop.cpp

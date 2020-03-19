@@ -26,7 +26,7 @@
 //           [ message-body ]
 
 // Http-Line = Method SP Http-URI SP HTTP-Version CRLF
-// Method = "OPTIONS"|"GET"|"POST"|"PUT"... (QG-Server only supports the "GET", "POST", "HEAD" methods.)
+// Method = "OPTIONS"|"GET"|"POST"|"PUT"... (QG-server only supports the "GET", "POST", "HEAD" methods.)
 //
 namespace qg {
 

@@ -16,7 +16,9 @@ class TimeStamp:public copyable {
   explicit TimeStamp(const qg_int64_t unixTimeStamp):unix_time_stamp_(unixTimeStamp) {};
   qg_string toString() const;
   qg_string toFormatedString() const;
-
+  qg_int64_t toMilliseconds() const {
+    return unix_time_stamp_ * 1000;
+  }
   qg_int64_t getUnixTimeStamp() const {return unix_time_stamp_ ;}
 
   static TimeStamp Now();
@@ -24,7 +26,6 @@ class TimeStamp:public copyable {
   static const qg_int kMicroSecondsPerSecond = 1000 * 1000;
  private:
   qg_int64_t unix_time_stamp_;
-
 };
 
 inline
@@ -43,6 +44,11 @@ inline
 qg_bool
 operator>(TimeStamp lhs, TimeStamp rhs) {
   return lhs.getUnixTimeStamp() > rhs.getUnixTimeStamp();
+}
+inline
+TimeStamp
+operator-(TimeStamp lhs, TimeStamp rhs) {
+  return TimeStamp(lhs.getUnixTimeStamp() - rhs.getUnixTimeStamp());
 }
 
 inline

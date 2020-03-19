@@ -2,45 +2,50 @@
 // Created by wc on 5/7/19.
 //
 
-#ifndef SRC_ACCPETOR_H
-#define SRC_ACCPETOR_H
+#ifndef SRC_CORE_ACCPETOR_H
+#define SRC_CORE_ACCPETOR_H
 
-#include <memory>
 #include "../util/noncopyable.h"
 #include "../util/type.h"
+#include <functional>
+#include <memory>
 
 namespace qg {
 
-    class EventLoop;
+class EventLoop;
 
-    class Socket;
+class Socket;
 
-    class EventHandler;
+class EventHandler;
 
-    class Config;
+class Config;
 
-    class Accepter : public qg::noncopyable {
-    public:
-        typedef EventLoop *event_loop_pt;
-        typedef EventHandler *event_handler_pt;
-        typedef Socket *socket_pt;
-        typedef Config *config_pt;
+class server;
 
-        explicit Accepter(event_loop_pt el,
-                        config_pt config);
+class Accepter : public qg::noncopyable {
+public:
+  typedef EventLoop *event_loop_pt;
+  typedef EventHandler *event_handler_pt;
+  typedef Socket *socket_pt;
+  typedef Config *config_pt;
+  typedef std::function<void(qg_fd_t)> ConnectionCallBack;
 
-        void run();
+  explicit Accepter(event_loop_pt el, config_pt config);
 
-        void handleNewCon();
+  void run();
 
-    private:
-        config_pt config_;
-        socket_pt socket_;
-        event_handler_pt handler_;
-        event_loop_pt event_loop_;
-    };
+  void handleRead();
 
-} //namespace qg
+  void setNewConnectionCallBack(ConnectionCallBack);
 
+private:
+  config_pt config_;
+  event_loop_pt event_loop_;
+  socket_pt socket_;
+  event_handler_pt handler_;
+  ConnectionCallBack connection_call_back_;
+};
 
-#endif //SRC_ACCPETOR_H
+} // namespace qg
+
+#endif // SRC_CORE_ACCPETOR_H

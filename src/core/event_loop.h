@@ -11,52 +11,49 @@
  * and the redis implemention.
  * */
 
-
 #ifndef QG_SERVER_EVENT_LOOP_H
 #define QG_SERVER_EVENT_LOOP_H
 
-
+#include "../util/type.h"
 #include <memory>
 #include <unordered_map>
-#include "../util/type.h"
 
 namespace qg {
-    const qg_int kMaxEventsSize = 10;
+const qg_int kMaxEventsSize = 10;
 
-    class Poller;
+class Poller;
+class EventHandler;
+class TimerQueue;
+class EventLoop {
+public:
+  typedef EventHandler *event_handler;
+  typedef Poller *poller_pt;
+  typedef std::unordered_map<qg_fd_t, event_handler> handler_map_t;
 
-    class EventHandler;
+  EventLoop();
 
-    class EventLoop {
-    public:
-        typedef EventHandler* event_handler;
-        typedef Poller *poller_pt;
-        typedef std::unordered_map<qg_fd_t, event_handler> handler_map_t;
+  ~EventLoop();
 
+  void registerHandler(event_handler eh);
 
-        EventLoop();
+  void removeHandler(event_handler eh);
 
-        ~EventLoop();
+  void updateHandler(event_handler eh);
 
-        void registerHandler(event_handler eh);
+  void loop();
 
-        void removeHandler(event_handler eh);
+  void stop();
 
-        void modHandler(event_handler eh);
+  EventLoop(const EventLoop &) = delete;
 
-        void loop();
+  EventLoop &operator=(const EventLoop &) = delete;
 
-        void stop();
-
-        EventLoop(const EventLoop &) = delete;
-
-        EventLoop &operator=(const EventLoop &) = delete;
-
-    private:
-        bool stop_;
-        poller_pt poller_;
-        const int defaultPollSize;
-        handler_map_t handler_map_;
-    };
-} //namespace qg
-#endif //QG_SERVER_EVENT_LOOP_H
+private:
+  bool stop_;
+  poller_pt poller_;
+  const int defaultPollSize;
+  std::unique_ptr<TimerQueue> timer_queue_;
+  handler_map_t handler_map_;
+};
+} // namespace qg
+#endif // QG_SERVER_EVENT_LOOP_H

@@ -3,10 +3,10 @@
 //
 
 #include "accept_handler_inherit.h"
+#include "request_handler_inherit.h"
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
-#include <arpa/inet.h>
-#include "http/request_handler_inherit.h"
 
 namespace qg{
   void

@@ -2,51 +2,58 @@
 // Created by wc on 3/14/19.
 //
 
-#ifndef SRC_SOCKET_H
-#define SRC_SOCKET_H
+#ifndef SRC_CORE_SOCKET_H_
+#define SRC_CORE_SOCKET_H_
 
+#include <string>
 #include "../util/noncopyable.h"
 #include "../util/type.h"
-
 
 /*
  *  当使用非阻塞的Socket时，如果需要处理已经断开连接的客户端连接，请设置心跳，或者定时任务。
  *  https://stackoverflow.com/questions/5906175/what-do-a-benefit-from-changing-from-blocking-to-non-blocking-sockets
  */
 namespace qg {
-    class Socket {
-    public :
-        typedef Socket* socket_pt;
-        Socket();
 
-        explicit Socket(qg_int back_log);
+class Socket {
+public:
+  typedef Socket *socket_pt;
 
-        qg_fd_t sfd() const { return fd_; };
+  Socket();
 
-        void makeAddrReuseable();
+  ~Socket();
 
-        void makePortReuseable();
+  explicit Socket(qg_int back_log);
 
-        void makeNonBlock();
+  qg_fd_t sfd() const { return fd_; }
 
-        void makeCloseExe();
+  void makeAddrReuseable();
 
-        void makeCork();
+  void makePortReuseable();
 
-        void makeKeepAlive();
+  void makeNonBlock();
 
-        void bindAndListen(qg_int);
+  void makeCloseExe();
 
-        socket_pt accept();
+  void makeCork();
 
-        void close();
+  void makeKeepAlive();
 
-        std::string Info() {return info_;}
-    private:
-        void appendInfo(std::string str) { info_ += str;};
-        std::string info_;
-        qg_fd_t fd_;
-        const qg_int back_log_;
-    };
-}
-#endif //SRC_SOCKET_H
+  void bindAndListen(qg_int);
+
+  qg_fd_t accept();
+
+  void close();
+
+  std::string Info() { return info_; }
+
+private:
+  void appendInfo(std::string str) { info_ += str; }
+
+  std::string info_;
+  qg_fd_t fd_;
+  const qg_int back_log_;
+};
+} // namespace qg
+
+#endif // SRC_CORE_SOCKET_H_

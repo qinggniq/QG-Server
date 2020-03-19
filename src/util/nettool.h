@@ -19,8 +19,8 @@
 
 /*
  * At the book 《The Linux Programing Interface》, it introduce the TCP_CROK
- * options at socket, it's very suitable to HTTP Server, so I add it in my
- * QG-Server.
+ * options at socket, it's very suitable to HTTP server, so I add it in my
+ * QG-server.
  */
 #ifdef TCP_CORK
 #	define QGIO_NOPUSH TCP_CORK
