@@ -5,45 +5,36 @@
 #ifndef SRC_TIMER_H
 #define SRC_TIMER_H
 
+#include "../util/noncopyable.h"
+#include "../util/time_stamp.h"
+#include "../util/type.h"
 
-#include "type.h"
-#include "noncopyable.h"
-#include "time_stamp.h"
+namespace qg {
 
-namespace qg{
+class TimerHeap;
+class TimeStamp;
+class Timer : public noncopyable {
+public:
+  Timer(TimeStamp when, qg_time_t interval, timer_handler_cb_t call_back,
+        qg_bool repeat = false);
 
- class TimerHeap;
- class TimeStamp;
- class Timer : public noncopyable {
-  public :
-   typedef std::function<void()> timer_handler_cb_t;
-   explicit Timer(TimeStamp when, const timer_handler_cb_t& call_back, qg_time_t interval);
+  TimeStamp expire() const { return expire_; }
+  qg_bool repeat() const { return repeat_; }
+  qg_bool timeout() const { return TimeStamp::Now() >= expire(); }
 
-   TimeStamp expire() const {return expire_;}
-   qg_bool cycle() const {return cycle_;}
-   qg_bool timeout() const {return now() > expire();}
-   static TimeStamp  now();
+  void update(qg_time_t timeout);
+  void run();
+  void restart();
 
-   void update(int timeout);
-   void run();
-   void restart();
+  bool operator<(const Timer &rhs) { return expire() < rhs.expire(); }
 
-   bool operator<(const Timer& rhs) { return expire() < rhs.expire();}
+private:
+  friend class TimerHeap;
+  TimeStamp expire_;
+  qg_bool repeat_;
+  qg_time_t interval_;
+  timer_handler_cb_t timer_handler_;
+};
 
-  private:
-   friend class TimerHeap;
-   TimeStamp expire_;
-
-   qg_bool cycle_;
-   qg_time_t interval_;
-   timer_handler_cb_t timer_hander_;
-   //qg_ssize_t heap_idx_;
- };
-
-
-
-
-
-
-}//namespace qg
-#endif //SRC_TIMER_H
+} // namespace qg
+#endif // SRC_TIMER_H

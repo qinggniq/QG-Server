@@ -4,31 +4,30 @@
 
 #ifndef SRC_THREAD_POOL_H
 #define SRC_THREAD_POOL_H
-#include <queue>
+#include "../util/noncopyable.h"
+#include "../util/type.h"
 #include <pthread.h>
-#include "noncopyable.h"
-#include "type.h"
+#include <queue>
 
-namespace qg{
+namespace qg {
 
-template<typename T>
-class ThreadPool:public noncopyable {
- public:
+template <typename T> class ThreadPool : public noncopyable {
+public:
   ThreadPool(qg_size_t pool_size, qg_size_t queue_size);
   ~ThreadPool() = default;
 
-  void addTask(T* t);
+  void addTask(T *t);
   void execTask();
   void start();
 
 private:
   const qg_size_t max_req_size_;
   const qg_size_t pool_size_;
-  queue<T*> task_queue_;
+  std::queue<T *> task_queue_;
   pthread_mutex_t mutex_;
   pthread_cond_t no_full_;
   pthread_cond_t no_empty_;
 };
-}//namespace qg
+} // namespace qg
 
-#endif //SRC_THREAD_POOL_H
+#endif // SRC_THREAD_POOL_H

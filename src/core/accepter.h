@@ -2,8 +2,8 @@
 // Created by wc on 5/7/19.
 //
 
-#ifndef SRC_CORE_ACCPETOR_H
-#define SRC_CORE_ACCPETOR_H
+#ifndef SRC_CORE_ACCEPTER_H
+#define SRC_CORE_ACCEPTER_H
 
 #include "../util/noncopyable.h"
 #include "../util/type.h"
@@ -28,7 +28,7 @@ public:
   typedef EventHandler *event_handler_pt;
   typedef Socket *socket_pt;
   typedef Config *config_pt;
-  typedef std::function<void(qg_fd_t)> ConnectionCallBack;
+  typedef std::function<void(std::unique_ptr<Socket>)> ConnectionCallBack;
 
   explicit Accepter(event_loop_pt el, config_pt config);
 
@@ -48,4 +48,4 @@ private:
 
 } // namespace qg
 
-#endif // SRC_CORE_ACCPETOR_H
+#endif // SRC_CORE_ACCEPTER_H_

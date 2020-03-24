@@ -16,6 +16,8 @@ namespace qg{
     public:
         typedef std::vector<pollfd> fd_list_t;
         typedef std::unordered_map<qg_fd_t , handler> handler_map_t;
+        Pollpoller();
+        ~Pollpoller();
         void registerHandler(handler) override ;
         void updateHandler(handler) override ;
         void removeHandler(handler) override;

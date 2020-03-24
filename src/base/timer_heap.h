@@ -16,7 +16,7 @@ namespace qg {
 class Timer;
 class TimerHeap {
 public:
-  typedef Timer *timer_pt;
+  typedef std::shared_ptr<Timer> timer_pt;
   void addTimer(timer_pt timer);
   void popTimer();
   // No need to cancel the timer

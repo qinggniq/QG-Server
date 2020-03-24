@@ -2,22 +2,23 @@
 // Created by wc on 5/6/19.
 //
 
-#include "event_loop.h"
+#include "../core/event_loop.h"
 #include "../base/timer_queue.h"
+#include "../util/time_stamp.h"
 #include <iostream>
-#include <sys/timerfd.h>
+#include <glog/logging.h>
+
 using namespace std;
 using namespace qg;
 
-int main() {
-  std::shared_ptr<Dispatcher> s(new EventLoop());
-  TimerQueue tq(s);
+int main(int argc, char** argv) {
+  google::InitGoogleLogging(argv[0]);
+  FLAGS_logtostderr = 1;
+  EventLoop* el = new EventLoop();
+
   TimeStamp t = TimeStamp::Now();
-  for (int i=0; i<=60; i++) {
-	auto fun = [=]() {cout << "runTimer" << i << endl;};
-	shared_ptr<Timer> ti(new Timer(addTime(t, 2+i), fun, 0));
-	//ti->run();
-	tq.addTimer(ti);
-  }
-  s->loop();
+//  el->runEvery(1, [](){cout << "time" << endl;});
+  el->runAt(TimeStamp::Now(), [](){cout << " now "<< endl;});
+  el->runAfter(3, [](){cout << " after " << endl;});
+  el->loop();
 }

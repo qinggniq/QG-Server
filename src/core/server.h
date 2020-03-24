@@ -4,11 +4,11 @@
 
 #ifndef SRC_ACCPETOR_H
 #define SRC_ACCPETOR_H
-#include <memory>
-#include <map>
 #include "../util/noncopyable.h"
 #include "../util/type.h"
-
+#include <map>
+#include <memory>
+#include <utility>
 
 namespace qg {
 
@@ -24,34 +24,36 @@ class Accepter;
 
 class TcpConnection;
 
-// server 是唯一暴露给用户的东西，所以注册"写回调、读回调、连接回调"需要通过Server来注册
+// server
+// 是唯一暴露给用户的东西，所以注册"写回调、读回调、连接回调"需要通过Server来注册
 class Server : public qg::noncopyable {
 public:
   typedef EventLoop *event_loop_pt;
-  typedef EventHandler *event_handler_pt;
+  typedef std::unique_ptr<EventHandler> event_handler_pt;
   typedef Socket *socket_pt;
   typedef Config *config_pt;
-  typedef Accepter* accepter_pt;
-  typedef std::map<qg_fd_t, TcpConnection*> mp_t;
-  //需要将缓冲区的定义移到外面
-  typedef std::string* buf_pt;
-  typedef std::function<void(std::shared_ptr<TcpConnection>, buf_pt)> MessageCallBack;
-  typedef std::function<void(std::shared_ptr<TcpConnection>, buf_pt)>
-      WriteCompleteCallBack; // TODO(qinggni), ERROR;
-  typedef std::function<void(std::shared_ptr<TcpConnection>)> ConnectionCallBack;
-  typedef std::function<void()> HandleWriteCallBack;
+  typedef Accepter *accepter_pt;
+  typedef std::map<qg_fd_t, std::shared_ptr<TcpConnection>> mp_t;
 
-  explicit Server(event_loop_pt event_loop, config_pt config);
+  explicit Server(config_pt config);
+
+  ~Server();
 
   void run();
 
-  void handleNewCon(qg_fd_t);
+  void handleNewCon(std::unique_ptr<Socket>);
 
-  void setMessageCallback(MessageCallBack);
+  void setMessageCallback(MessageCallBack cb) {
+    message_call_back_ = std::move(cb);
+  }
 
-  void setWriteCompleteCallBack(WriteCompleteCallBack);
+  void setWriteCompleteCallBack(WriteCompleteCallBack cb) {
+    write_complete_call_back_ = std::move(cb);
+  }
 
-  void setConnectionCallBack(ConnectionCallBack);
+  void setConnectionCallBack(ConnectionCallBack cb) {
+    connection_call_back_ = std::move(cb);
+  }
 
 private:
   event_loop_pt event_loop_;

@@ -11,8 +11,11 @@
 #include "./poll/Epollpoller.h"
 #defing POLL Epollpoller
 #endif
+#include "../base/timer.h"
 #include "../base/timer_queue.h"
 #include <cassert>
+#include <glog/logging.h>
+#include <iostream>
 
 namespace qg {
 
@@ -20,6 +23,7 @@ EventLoop::EventLoop()
     : poller_(new POLL()), stop_(false),
       defaultPollSize(10) // TODO: default size should be configable
 {
+  LOG(INFO) << "event loop construct";
   timer_queue_ = std::make_unique<TimerQueue>();
 }
 
@@ -31,16 +35,34 @@ EventLoop::~EventLoop() {
   }
 }
 
-void EventLoop::registerHandler(qg::EventLoop::event_handler eh) {
+void EventLoop::runAfter(qg_time_t time, timer_handler_cb_t cb) {
+  timer_queue_->addTimer(std::make_shared<Timer>(
+      addTime(TimeStamp::Now(), time), 0, std::move(cb), false));
+}
+
+void EventLoop::runAt(TimeStamp time, timer_handler_cb_t cb) {
+  timer_queue_->addTimer(
+      std::make_shared<Timer>(time, static_cast<qg_time_t>(0), cb, false));
+}
+
+void EventLoop::runEvery(qg_time_t interval, timer_handler_cb_t cb) {
+  timer_queue_->addTimer(
+      std::make_shared<Timer>(TimeStamp::Now(), interval, cb, true));
+}
+
+void EventLoop::registerHandler(qg::EventLoop::event_handler_pt eh) {
+  assert(eh != nullptr);
   this->handler_map_.emplace(eh->GetHandle(), eh);
   this->poller_->registerHandler(eh);
 }
 
-void EventLoop::updateHandler(event_handler eh) {
+void EventLoop::updateHandler(event_handler_pt eh) {
+  assert(eh != nullptr);
   this->poller_->updateHandler(eh);
 }
 
-void EventLoop::removeHandler(qg::EventLoop::event_handler eh) {
+void EventLoop::removeHandler(qg::EventLoop::event_handler_pt eh) {
+  assert(eh != nullptr);
   auto it = this->handler_map_.find(eh->GetHandle());
   assert(it != handler_map_.end());
   handler_map_.erase(it);
@@ -58,13 +80,13 @@ void EventLoop::loop() {
         next_time = next_time - now;
       }
     }
+    LOG(INFO) << " loop \n";
     std::vector<EventHandler *> ess = poller_->Wait(defaultPollSize, next_time);
     for (const auto &it : ess) {
+      LOG(INFO) << it->toString();
       it->HandleEvent();
     }
+    LOG(INFO) << "loop end";
   }
 }
-
-void EventLoop::stop() {}
-
 } // namespace qg

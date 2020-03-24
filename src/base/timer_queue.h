@@ -18,14 +18,14 @@ class TimerQueue : public noncopyable {
 public:
   typedef EventLoop event_loop_pt;
   typedef EventHandler *event_handler_pt;
-  typedef Timer *timer_pt;
+  typedef std::shared_ptr<Timer> timer_pt;
 #ifdef __linux__
   explicit TimerQueue(event_loop_pt el, qg_fd_t);
 #elif __APPLE__
   TimerQueue();
 #endif
   ~TimerQueue();
-  TimeStamp getNextTimeStamp() const {return next_time_;}
+  TimeStamp getNextTimeStamp() const { return next_time_; }
   void addTimer(timer_pt timer);
   void handleTimer();
   bool _push(timer_pt timer);

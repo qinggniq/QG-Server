@@ -15,6 +15,7 @@
 #define QG_SERVER_EVENT_LOOP_H
 
 #include "../util/type.h"
+#include "../util/time_stamp.h"
 #include <memory>
 #include <unordered_map>
 
@@ -26,19 +27,25 @@ class EventHandler;
 class TimerQueue;
 class EventLoop {
 public:
-  typedef EventHandler *event_handler;
+  typedef EventHandler *event_handler_pt;
   typedef Poller *poller_pt;
-  typedef std::unordered_map<qg_fd_t, event_handler> handler_map_t;
+  typedef std::unordered_map<qg_fd_t, event_handler_pt> handler_map_t;
 
   EventLoop();
 
   ~EventLoop();
 
-  void registerHandler(event_handler eh);
+  void registerHandler(event_handler_pt eh);
 
-  void removeHandler(event_handler eh);
+  void removeHandler(event_handler_pt eh);
 
-  void updateHandler(event_handler eh);
+  void updateHandler(event_handler_pt eh);
+
+  void runAfter(qg_time_t time, timer_handler_cb_t cb);
+
+  void runEvery(qg_time_t interval, timer_handler_cb_t cb);
+
+  void runAt(TimeStamp time, timer_handler_cb_t cb);
 
   void loop();
 

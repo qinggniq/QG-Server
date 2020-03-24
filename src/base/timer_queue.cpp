@@ -9,7 +9,6 @@
 #endif
 #include "../core/event_handler.h"
 #include "../core/event_loop.h"
-#include "../util/time_stamp.h"
 #include "./timer_heap.h"
 #include "./timer_queue.h"
 
@@ -76,11 +75,10 @@ TimerQueue::TimerQueue() : timer_heap_(new TimerHeap()), next_time_(0) {}
 
 TimerQueue::~TimerQueue() {
 #ifdef __linux__
- ::close(timerfd);
+  ::close(timerfd);
 #endif
   delete timer_heap_;
 }
-
 
 void TimerQueue::addTimer(qg::TimerQueue::timer_pt timer) {
   if (_push(timer)) {
@@ -96,14 +94,15 @@ void TimerQueue::addTimer(qg::TimerQueue::timer_pt timer) {
 }
 
 void TimerQueue::handleTimer() {
-  TimeStamp now(TimeStamp::Now());
+
 #ifdef __linux__
   timer_tool::readTimerfd(timer_fd_);
 #endif
   while (!timer_heap_->empty()) {
     auto latestTimer = timer_heap_->top();
-    if (now > latestTimer->expire()) {
-      if (latestTimer->cycle()) {
+    if (latestTimer->timeout()) {
+
+      if (latestTimer->repeat()) {
         latestTimer->restart();
         timer_heap_->popTimer();
         timer_heap_->addTimer(latestTimer);
@@ -116,12 +115,15 @@ void TimerQueue::handleTimer() {
       timer_tool::resetTimerfd(timer_fd_, latestTimer->expire());
 #elif __APPLE__
       if (next_time_.getUnixTimeStamp() == 0 ||
-          latestTimer->expire() < next_time_) {
+          latestTimer->expire() > next_time_) {
         next_time_ = latestTimer->expire();
       }
 #endif
-      return;
+      break;
     }
+  }
+  if (timer_heap_->empty()) {
+    next_time_ = TimeStamp(0);
   }
 }
 

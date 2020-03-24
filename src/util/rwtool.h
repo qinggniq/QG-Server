@@ -48,7 +48,7 @@ qg_size_t QGReadN(qg_fd_t sfd, qg_string& buffer, qg_size_t size) {
   qg_size_t nread;
 
   if ((nread = QGReadN(sfd, cbuffer, size)) > 0) {
-    buffer = cbuffer;
+    buffer += qg_string(cbuffer);
     //TODO (qinggniq) here maybe produce many fragments of memory, so use stack?
   };
   delete[] cbuffer;
@@ -59,7 +59,6 @@ qg_size_t QGReadN(qg_fd_t sfd, qg_string& buffer, qg_size_t size) {
 qg_size_t QGWriteN(qg_fd_t sfd, const char* buffer, qg_size_t size) {
   qg_ssize_t nwrite;
   if ((nwrite = write(sfd, buffer, size)) < 0) {
-    //Log
     nwrite = -1;
   }
   return static_cast<qg_size_t>(nwrite);

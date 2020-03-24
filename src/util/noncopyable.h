@@ -4,20 +4,20 @@
 
 #ifndef SRC_NOCOPYABLE_H
 #define SRC_NOCOPYABLE_H
-namespace qg{
-
+namespace qg {
 
 /*
  * In C++11, this is the best programing practice to implement the non-copyable
  * class. And for declare the use class of copy, so std::move won't generate.
  */
 class noncopyable {
- public:
+public:
   noncopyable(const noncopyable &a) = delete;
-  noncopyable& operator=(const noncopyable &a) = delete;
- protected:
+  noncopyable &operator=(const noncopyable &a) = delete;
+
+protected:
   noncopyable() = default;
   ~noncopyable() = default;
 };
-};
-#endif //SRC_NOCOPYABLE_H
+};  // namespace qg
+#endif  // SRC_NOCOPYABLE_H

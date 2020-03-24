@@ -5,9 +5,9 @@
 #ifndef SRC_CORE_SOCKET_H_
 #define SRC_CORE_SOCKET_H_
 
-#include <string>
 #include "../util/noncopyable.h"
 #include "../util/type.h"
+#include <string>
 
 /*
  *  当使用非阻塞的Socket时，如果需要处理已经断开连接的客户端连接，请设置心跳，或者定时任务。
@@ -23,7 +23,7 @@ public:
 
   ~Socket();
 
-  explicit Socket(qg_int back_log);
+  Socket(qg_fd_t fd);
 
   qg_fd_t sfd() const { return fd_; }
 
@@ -39,7 +39,7 @@ public:
 
   void makeKeepAlive();
 
-  void bindAndListen(qg_int);
+  void bindAndListen(qg_int port, qg_int backlog);
 
   qg_fd_t accept();
 
@@ -52,7 +52,6 @@ private:
 
   std::string info_;
   qg_fd_t fd_;
-  const qg_int back_log_;
 };
 } // namespace qg
 

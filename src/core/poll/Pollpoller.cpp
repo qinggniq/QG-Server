@@ -4,9 +4,19 @@
 
 #include "Pollpoller.h"
 #include "../event_handler.h"
+#include <glog/logging.h>
+#include <iostream>
 #include <sys/poll.h>
 
 using namespace qg;
+Pollpoller::Pollpoller() : Poller() { mp = new handler_map_t; }
+Pollpoller::~Pollpoller() {
+  for (auto it = mp->begin(); it != mp->end(); it++) {
+    delete it->second;
+  }
+  delete mp;
+}
+
 void qg::Pollpoller::updateHandler(qg::Poller::handler h) {
   int index = h->Index();
   assert(index >= 0 && index < this->fds.size());
@@ -18,6 +28,7 @@ void qg::Pollpoller::updateHandler(qg::Poller::handler h) {
 void qg::Pollpoller::registerHandler(qg::Poller::handler h) {
   assert(h->Index() < 0);
   h->SetIndex(fds.size());
+
   struct pollfd pfd;
   pfd.fd = h->GetHandle();
   pfd.events = h->GetIEvents();
@@ -51,9 +62,12 @@ std::vector<qg::Poller::handler> qg::Pollpoller::Wait(int sz,
   ::poll(fds.data(), fds.size(), wait_time);
   for (auto &pfd : fds) {
     if (pfd.revents != 0) {
+      LOG(WARNING) << "event coming";
       handler_map_t::const_iterator handler = (*mp).find(pfd.fd);
       assert(handler != mp->end());
       handler->second->SetREvents(pfd.revents);
+      LOG(INFO) << "remove the revents";
+      pfd.revents = 0;
       res.emplace_back(handler->second);
       sz--;
     }
