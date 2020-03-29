@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -23,7 +24,8 @@ public:
 
 int main()
 {
-  shared_ptr<D> d(new D);
-  d->func();
+  vector<int> a;
+  a.push_back(1);
+  cout << a.capacity() << endl;
   return 0;
 }

@@ -6,6 +6,8 @@
 #define QG_CORE_SERVER_POLLER_H_
 #include "../../util/time_stamp.h"
 #include <vector>
+#include <map>
+
 namespace qg {
 class EventHandler;
 class Poller {
@@ -15,6 +17,10 @@ public:
   virtual void removeHandler(handler) = 0;
   virtual void updateHandler(handler) = 0;
   virtual std::vector<handler> Wait(int sz, TimeStamp time_stamp) = 0;
+
+protected:
+  typedef std::map<int, EventHandler*> event_handler_map_t_;
+  event_handler_map_t_ event_handler_map_;
 };
 }  // namespace qg
 #endif  // QG_SERVER_POLLER_H_

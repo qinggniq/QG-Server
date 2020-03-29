@@ -15,7 +15,6 @@ namespace qg{
     class Pollpoller : public Poller {
     public:
         typedef std::vector<pollfd> fd_list_t;
-        typedef std::unordered_map<qg_fd_t , handler> handler_map_t;
         Pollpoller();
         ~Pollpoller();
         void registerHandler(handler) override ;
@@ -23,7 +22,6 @@ namespace qg{
         void removeHandler(handler) override;
         std::vector<handler> Wait(int sz, TimeStamp time_stamp) override;
     private:
-        handler_map_t* mp;
         fd_list_t fds;
     };
 }//namespace qg

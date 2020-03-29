@@ -42,7 +42,7 @@ public:
   void run();
 
   void handleNewCon(std::unique_ptr<Socket>);
-
+  void handleConnectionClose(std::shared_ptr<TcpConnection>);
   void setMessageCallback(MessageCallBack cb) {
     message_call_back_ = std::move(cb);
   }
@@ -51,8 +51,11 @@ public:
     write_complete_call_back_ = std::move(cb);
   }
 
-  void setConnectionCallBack(ConnectionCallBack cb) {
-    connection_call_back_ = std::move(cb);
+  void setConnectionComeCallBack(ConnectionComeCallBack cb) {
+    connection_come_call_back_ = std::move(cb);
+  }
+  void setConnectionCloseCallBack(ConnectionCloseCallBack cb) {
+    connection_close_call_back_ = std::move(cb);
   }
 
 private:
@@ -61,7 +64,8 @@ private:
   mp_t connections_;
   MessageCallBack message_call_back_;
   WriteCompleteCallBack write_complete_call_back_;
-  ConnectionCallBack connection_call_back_;
+  ConnectionComeCallBack connection_come_call_back_;
+  ConnectionCloseCallBack connection_close_call_back_;
 };
 
 } // namespace qg

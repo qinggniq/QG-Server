@@ -23,7 +23,7 @@ public:
 
   ~Socket();
 
-  Socket(qg_fd_t fd);
+  explicit Socket(qg_fd_t fd);
 
   qg_fd_t sfd() const { return fd_; }
 

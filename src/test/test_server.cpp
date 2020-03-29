@@ -4,7 +4,6 @@
 #include <glog/logging.h>
 #include "../core/server.h"
 #include "../core/event_loop.h"
-#include "../util/type.h"
 #include "../util/config.h"
 #include "../core/tcp_connection.h"
 #include <iostream>
@@ -12,8 +11,9 @@ using namespace std;
 using namespace qg;
 
 int main(int argc, char **argv) {
+  FLAGS_log_dir = "/Users/qinggniq/Git/QG-Server/log";
+//  google::SetLogDestination(google::GLOG_INFO,"" );
   google::InitGoogleLogging(argv[0]);
-  FLAGS_logtostderr = 1;
   Config *config = new Config;
   cout  << " ? " << endl;
   config->keep_alive = true;
@@ -28,13 +28,16 @@ int main(int argc, char **argv) {
   Server server(config);
 
   LOG(INFO) << "before run";
-  server.setConnectionCallBack([](){cout << "connection success" << endl;});
+  server.setConnectionComeCallBack([](){cout << "connection success" << endl;});
   server.setMessageCallback([](shared_ptr<TcpConnection> conn, buf_pt read_buf) {
     cout << "recv : " << (*read_buf)  << endl;
     conn->write(read_buf);
   });
   server.setWriteCompleteCallBack([](shared_ptr<TcpConnection> conn, buf_pt buf) {
     cout << "write" << endl;
+  });
+  server.setConnectionCloseCallBack([](shared_ptr<TcpConnection> connd) {
+    cout << "closed" << endl;
   });
   server.run();
   LOG(FATAL) << "error exit\n";

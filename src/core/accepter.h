@@ -32,11 +32,15 @@ public:
 
   explicit Accepter(event_loop_pt el, config_pt config);
 
-  void run();
+  void init();
 
   void handleRead();
 
   void setNewConnectionCallBack(ConnectionCallBack);
+
+  void incConnection() {connection_number_++;}
+
+  void decConnection() {connection_number_--;}
 
 private:
   config_pt config_;
@@ -44,6 +48,8 @@ private:
   socket_pt socket_;
   event_handler_pt handler_;
   ConnectionCallBack connection_call_back_;
+  const int connection_high_water_;
+  int connection_number_;
 };
 
 } // namespace qg

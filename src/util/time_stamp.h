@@ -18,6 +18,7 @@ public:
   qg_string toString() const;
   qg_string toFormatedString() const;
   qg_int64_t toMilliseconds() const { return unix_time_stamp_ / 1000; }
+  qg_int64_t toSeconds() const {return unix_time_stamp_ / kMicroSecondsPerSecond;}
   qg_int64_t getUnixTimeStamp() const { return unix_time_stamp_; }
 
   static TimeStamp Now();

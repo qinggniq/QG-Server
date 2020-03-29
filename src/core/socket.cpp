@@ -76,11 +76,6 @@ void Socket::makeCork() {
   LOG(INFO) << "success to make fd " << fd_ << " cork";
 }
 
-/*
- * copyright:
- * author: Jeremy Friesner
- * https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking
- */
 void Socket::makeNonBlock() {
   qg_int flags = fcntl(fd_, F_GETFL, 0);
   if (flags == -1) {
@@ -251,7 +246,6 @@ qg_fd_t Socket::accept() {
     default:
       break;
     }
-
     return -1;
   }
   return new_fd;

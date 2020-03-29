@@ -5,11 +5,14 @@
 #include "event_handler.h"
 
 #ifdef __APPLE__
-#include "./poll/Pollpoller.h"
-#define POLL Pollpoller
+#include "./poll/KqueuePoller.h"
+#define POLL KqueuePoller
 #elif __linux__
 #include "./poll/Epollpoller.h"
 #defing POLL Epollpoller
+#else
+#include "./poll/Pollpoller.h"
+#define POLL Pollpoller
 #endif
 #include "../base/timer.h"
 #include "../base/timer_queue.h"
@@ -80,8 +83,8 @@ void EventLoop::loop() {
         next_time = next_time - now;
       }
     }
-    LOG(INFO) << " loop \n";
-    std::vector<EventHandler *> ess = poller_->Wait(defaultPollSize, next_time);
+    LOG(INFO) << "loop \n";
+    std::vector<EventHandler *> ess = poller_->Wait(-1, next_time);
     for (const auto &it : ess) {
       LOG(INFO) << it->toString();
       it->HandleEvent();

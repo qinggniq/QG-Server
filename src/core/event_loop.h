@@ -2,20 +2,10 @@
 // Created by wc on 1/23/19.
 //
 
-/*
- * I decide use Dispatcher Design Pattern to implement the multiple
- * connections.
- * Here I cite many open source implement of Dispatcher Design Pattern such as
- * https://github.com/song0071000/Reactor_Implemention,
- * https://github.com/justinzhu/reactor,
- * and the redis implemention.
- * */
-
 #ifndef QG_SERVER_EVENT_LOOP_H
 #define QG_SERVER_EVENT_LOOP_H
-
-#include "../util/type.h"
 #include "../util/time_stamp.h"
+#include "../util/type.h"
 #include <memory>
 #include <unordered_map>
 
@@ -48,8 +38,6 @@ public:
   void runAt(TimeStamp time, timer_handler_cb_t cb);
 
   void loop();
-
-  void stop();
 
   EventLoop(const EventLoop &) = delete;
 
