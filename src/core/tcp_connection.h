@@ -9,6 +9,7 @@
 #include "./socket.h"
 #include <any>
 #include <functional>
+#include <glog/logging.h>
 #include <string>
 #include <utility>
 
@@ -58,6 +59,10 @@ public:
   std::any context() const { return context_; }
   void setContext(std::any context) { context_ = std::move(context); }
   void write(buf_pt str);
+  void shutdown() {
+    LOG(ERROR) << "have not implement";
+    assert(false);
+  }
 
   event_handler_pt eventHandler() { return event_handler_; }
 

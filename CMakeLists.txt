@@ -8,6 +8,7 @@ include_directories(core)
 include_directories(core/http)
 include_directories(util)
 include_directories(base)
+include_directories(lib)
 
 
 find_package(glog 0.4.0 REQUIRED)
@@ -51,7 +52,7 @@ add_executable(main
         src/core/http/http_request.cpp
         src/core/http/http_request.h
         src/lib/http-parser/http_parser.h
-        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h src/core/http/http_response.cpp src/core/http/http_response.h)
+        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h src/core/http/http_response.cpp src/core/http/http_response.h src/core/http/http_server.cpp src/core/http/http_server.h)
 
 add_executable(Test
         src/core/event_loop.cpp
@@ -75,7 +76,7 @@ add_executable(Test
         src/core/socket.h
         src/base/timer_heap.cpp
         src/base/timer_heap.h
-        src/test/test_timer_heap.cc src/core/poll/KqueuePoller.cpp src/core/poll/KqueuePoller.h)
+        src/test/test_timer_heap.cc src/core/poll/KqueuePoller.cpp src/core/poll/KqueuePoller.h src/test/A.cpp)
 
 add_executable(test_timer_heap
         src/test/test_timer_heap.cc
@@ -162,7 +163,11 @@ add_executable(
         src/core/http/http_request.cpp
         src/core/http/http_request.h
         src/lib/http-parser/http_parser.h
-        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h)
+        src/lib/http-parser/http_parser.c
+        src/core/http/http_context.cpp
+        src/core/http/http_context.h
+        src/lib/http-parser/http_parser.c
+        src/lib/http-parser/http_parser.h)
 add_executable(
         test_weak_ptr
         src/test/test_weak_ptr.cpp
@@ -174,6 +179,18 @@ add_executable(
         src/util/time_stamp.cpp
         src/util/time_stamp.h
 )
+add_executable(test_virtual
+         src/test/test_virtual_deconstruct.cpp)
+
+add_executable(test_parser
+        src/core/http/test/test_parser.cpp
+        src/core/http/http_context.cpp
+        src/core/http/http_context.h
+        src/core/http/http_request.cpp
+        src/core/http/http_request.h
+        src/lib/http-parser/http_parser.h
+        src/lib/http-parser/http_parser.c)
+
 target_link_libraries(main glog::glog)
 target_link_libraries(test_timer_heap glog::glog)
 target_link_libraries(test_timer_in_reactor glog::glog)
@@ -181,6 +198,7 @@ target_link_libraries(test_acceptor glog::glog)
 target_link_libraries(test_server glog::glog)
 target_link_libraries(test_kqueue glog::glog)
 target_link_libraries(test_weak_ptr)
-
+target_link_libraries(test_virtual)
+target_link_libraries(test_parser glog::glog)
 set_target_properties(test_server PROPERTIES
         CMAKE_CXX_STANDARD 17)

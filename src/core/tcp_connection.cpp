@@ -42,7 +42,7 @@ void TcpConnection::handleConnection() {
   LOG(INFO) << "[Connection] " << socket_->Info();
   event_handler_->enableRead();
   if (connection_come_call_back_) {
-    connection_come_call_back_();
+    connection_come_call_back_(shared_from_this());
   }
 }
 

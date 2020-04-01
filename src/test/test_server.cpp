@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
   Server server(config);
 
   LOG(INFO) << "before run";
-  server.setConnectionComeCallBack([](){cout << "connection success" << endl;});
+  server.setConnectionComeCallBack([](std::shared_ptr<TcpConnection> _){cout << "connection success" << endl;});
   server.setMessageCallback([](shared_ptr<TcpConnection> conn, buf_pt read_buf) {
     cout << "recv : " << (*read_buf)  << endl;
     conn->write(read_buf);

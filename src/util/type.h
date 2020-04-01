@@ -41,7 +41,7 @@ typedef std::function<void(std::shared_ptr<TcpConnection>, buf_pt)>
     MessageCallBack;
 typedef std::function<void(std::shared_ptr<TcpConnection>, buf_pt)>
     WriteCompleteCallBack;
-typedef std::function<void()> ConnectionComeCallBack;
+typedef std::function<void(std::shared_ptr<TcpConnection>)> ConnectionComeCallBack;
 // FIXME(qinggniq): close的时候需不需要buffer是一个问题
 typedef std::function<void(std::shared_ptr<TcpConnection>)>
     ConnectionCloseCallBack;

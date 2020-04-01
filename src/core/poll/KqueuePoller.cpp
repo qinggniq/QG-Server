@@ -6,7 +6,6 @@
 #include "../event_handler.h"
 #include <glog/logging.h>
 #include <sys/event.h>
-#include <sys/types.h>
 
 namespace qg {
 KqueuePoller::KqueuePoller() {
@@ -16,7 +15,13 @@ KqueuePoller::KqueuePoller() {
     ::exit(1);
   }
 }
-KqueuePoller::~KqueuePoller() { ::close(kfd_); }
+KqueuePoller::~KqueuePoller() {
+  ::close(kfd_);
+  for (auto it = event_handler_map_.begin(); it != event_handler_map_.end();
+       it++) {
+    delete it->second;
+  }
+}
 
 void KqueuePoller::registerHandler(Poller::handler h) {
   assert(event_handler_map_.find(h->GetHandle()) == event_handler_map_.end());

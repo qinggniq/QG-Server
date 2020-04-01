@@ -12,7 +12,7 @@ namespace qg {
 class KqueuePoller : public Poller {
 public:
   KqueuePoller();
-  ~KqueuePoller();
+  ~KqueuePoller() override;
   void registerHandler(handler) override;
   void updateHandler(handler) override;
   void removeHandler(handler) override;
