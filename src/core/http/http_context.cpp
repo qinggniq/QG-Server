@@ -33,32 +33,59 @@ int isBodyFinal(const http_parser *parser) {
 }
 
 int defaultTriggerCallBack(http_parser *parser) {
-  LOG(INFO) << "message come callback";
   return 0;
 }
 int defaultMessageCallBack(http_parser *parser, const char *buf, size_t len) {
-  LOG(INFO) << "responseStatus callback";
   return 0;
 }
 
+inline void fillURLSubStr(HTTPRequest *request, struct http_parser_url *u,
+                          enum http_parser_url_fields field) {
+  std::string *target_ptr;
+  switch (field) {
+  case UF_QUERY:
+    target_ptr = &request->query_string;
+    break;
+  case UF_FRAGMENT:
+    target_ptr = &request->fragment;
+    break;
+  case UF_PATH:
+    target_ptr = &request->request_path;
+    break;
+  default:
+    LOG(ERROR) << "unpossible condition";
+    abort();
+  }
+  auto &url = request->request_url;
+  if (u->field_set & (1 << field)) {
+    target_ptr->append(url, u->field_data[field].off, u->field_data[field].len);
+  }
+}
 // 这个URL有问题
 int urlCallBack(http_parser *parser, const char *buf, size_t len) {
   HTTPRequest *http_request = getRequest(parser);
-  // 用string还是感觉有问题。
-//  std::cout << (typeid(http_request->request_url).name())  << " "<<http_request->request_url.size()  << std::endl;
-  assert(http_request->request_url.empty() && buf);
-//  std::cout << buf << " " << len << std::endl;
+
+  struct http_parser_url u;
   http_request->request_url.append(buf, len);
+  auto &url = http_request->request_url;
+  if (http_parser_parse_url(url.c_str(), url.size(), 0, &u)) {
+    LOG(ERROR) << "error when parsing url, url [ " << url << " ]";
+    abort();
+  }
+  http_request->method = static_cast<http_method>(parser->method);
+  for (auto field : {UF_QUERY, UF_FRAGMENT, UF_PATH}) {
+    fillURLSubStr(http_request, &u, field);
+  }
   return 0;
 }
 
 // 有可能它没有parse 完？
 int headerFieldCallBack(http_parser *parser, const char *buf, size_t len) {
-  std::cout << "header field : " << qg_string(buf, len) << std::endl;
   auto http_request = getRequest(parser);
   if (http_request->last_header_element != HTTPRequest::FIELD) {
     if (!http_request->last_filed_value.first.empty()) {
-      http_request->headers.emplace(http_request->last_filed_value.first, http_request->last_filed_value.second);
+      http_request->headers.emplace(http_request->last_filed_value.first,
+                                    http_request->last_filed_value.second);
     }
     http_request->last_filed_value = std::make_pair(qg_string(), qg_string());
   }
@@ -68,7 +95,6 @@ int headerFieldCallBack(http_parser *parser, const char *buf, size_t len) {
 }
 
 int headerValueCallBack(http_parser *parser, const char *buf, size_t len) {
-  std::cout << "header field : " << qg_string(buf, len) << std::endl;
   auto http_request = getRequest(parser);
   http_request->last_filed_value.second.append(buf, len);
   http_request->last_header_element = HTTPRequest::VALUE;
@@ -84,15 +110,14 @@ int bodyCallBack(http_parser *parser, const char *buf, size_t len) {
 
 int messageCompleteCallBack(http_parser *parser) {
   auto http_request = getRequest(parser);
-  std::cout << "=========message complete=========" << std::endl;
   if (!http_request->last_filed_value.second.empty()) {
     http_request->headers.emplace(http_request->last_filed_value);
   }
+  http_request->message_is_end = true;
   return 0;
 }
 int headerCompleteCallBack(http_parser *parser) {
   auto http_request = getRequest(parser);
-  std::cout << "=========header complete=========" << std::endl;
   if (!http_request->last_filed_value.second.empty()) {
     http_request->headers.emplace(http_request->last_filed_value);
   }

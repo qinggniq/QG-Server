@@ -15,6 +15,8 @@ namespace qg {
 /*
  * base on the initialize order
  */
+
+
 Server::Server(config_pt config) : event_loop_(new EventLoop()) {
   this->accepter_ = new Accepter(event_loop_, config);
   this->accepter_->setNewConnectionCallBack(

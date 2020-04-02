@@ -10,6 +10,7 @@
 
 using namespace qg;
 Pollpoller::Pollpoller() : Poller() {}
+
 Pollpoller::~Pollpoller() {
   for (auto it = event_handler_map_.begin(); it != event_handler_map_.end();
        it++) {
@@ -82,12 +83,10 @@ std::vector<qg::Poller::handler> qg::Pollpoller::Wait(int sz,
   for (auto &pfd : fds) {
     if (pfd.revents != 0) {
       LOG(WARNING) << "event coming";
-      event_handler_map_t_::const_iterator handler =
-          event_handler_map_.find(pfd.fd);
+      auto handler = event_handler_map_.find(pfd.fd);
       assert(handler != event_handler_map_.end());
       handler->second->SetREvents(pfd.revents);
       LOG(INFO) << "remove the revents";
-      //      pfd.revents = 0;
       res.emplace_back(handler->second);
       n--;
     }

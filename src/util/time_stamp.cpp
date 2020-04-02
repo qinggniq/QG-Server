@@ -31,4 +31,15 @@ TimeStamp TimeStamp::Now() {
   auto res = std::chrono::system_clock::to_time_t(time_point);
   return TimeStamp(res * TimeStamp::kMicroSecondsPerSecond);
 }
+
+qg_string TimeStamp::getTimeOfDay() {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  time_t nowtime = tv.tv_sec;
+  struct tm tm_time;
+  gmtime_r(&nowtime, &tm_time);
+  char buf[128];
+  size_t len = strftime(buf, 128, "%c %Z", &tm_time);
+  return qg_string(buf, buf + len);
+}
 } // namespace qg

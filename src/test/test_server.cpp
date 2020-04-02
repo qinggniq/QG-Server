@@ -29,11 +29,11 @@ int main(int argc, char **argv) {
 
   LOG(INFO) << "before run";
   server.setConnectionComeCallBack([](std::shared_ptr<TcpConnection> _){cout << "connection success" << endl;});
-  server.setMessageCallback([](shared_ptr<TcpConnection> conn, buf_pt read_buf) {
-    cout << "recv : " << (*read_buf)  << endl;
+  server.setMessageCallback([](shared_ptr<TcpConnection> conn, buf_t read_buf) {
+    cout << "recv : " << (read_buf)  << endl;
     conn->write(read_buf);
   });
-  server.setWriteCompleteCallBack([](shared_ptr<TcpConnection> conn, buf_pt buf) {
+  server.setWriteCompleteCallBack([](shared_ptr<TcpConnection> conn, buf_t buf) {
     cout << "write" << endl;
   });
   server.setConnectionCloseCallBack([](shared_ptr<TcpConnection> connd) {

@@ -14,22 +14,25 @@ struct Config;
 class HTTPServer {
 public:
   typedef std::function<void(HTTPRequest *, HTTPResponse *)> RequestCallBack;
+  typedef std::map<int, std::map<qg_string, RequestCallBack>> router_t;
   // 可能加入Server选项，定制的httpConfig
   explicit HTTPServer(Config *config);
+  enum Method { GET, PUT, DELETE, POST };
   void run() { server_->run(); }
-  void setRequestCallBack(RequestCallBack cb) {
-    request_call_back_ = std::move(cb);
+  void route(qg_string path, Method method, RequestCallBack cb) {
+    router_[method].emplace(path, std::move(cb));
   }
-
+private:
+  static int kMaxFileSize;
 private:
   void handleConnectionCome(std::shared_ptr<TcpConnection>);
-  void handleMessageCome(std::shared_ptr<TcpConnection>, buf_pt);
+  void handleMessageCome(std::shared_ptr<TcpConnection>, buf_t &);
   void handleConnectionClose(std::shared_ptr<TcpConnection>);
   void handleWriteComplete(std::shared_ptr<TcpConnection> conn,
-                           buf_pt read_buf);
+                           buf_t& read_buf );
   void defaultHandleRequest(HTTPRequest *, HTTPResponse *);
   Server *server_;
-  RequestCallBack request_call_back_;
+  router_t router_;
 };
 
 }; // namespace qg

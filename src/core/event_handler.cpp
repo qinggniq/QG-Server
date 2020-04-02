@@ -18,12 +18,12 @@ EventHandler::EventHandler(event_loop_pt el, qg_fd_t fd)
     : EventHandler(el, fd, EventMode::kEventNone) {}
 
 void EventHandler::HandleEvent() {
-  if (this->isReadable()) {
+  if (this->isReadable() && this->isReading()) {
     if (read_call_back_) {
       this->read_call_back_();
     }
   }
-  if (this->isWriteable()) {
+  if (this->isWriteable() && this->isWriting()) {
     if (write_call_back_) {
       this->write_call_back_();
     }

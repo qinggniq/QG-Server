@@ -23,6 +23,8 @@ public:
 
   static TimeStamp Now();
 
+  [[nodiscard]] static qg_string getTimeOfDay();
+
   static const qg_int kMicroSecondsPerSecond = 1000 * 1000;
 
 private:

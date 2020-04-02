@@ -39,6 +39,8 @@ public:
 
   void makeKeepAlive();
 
+  void shutdown();
+
   void bindAndListen(qg_int port, qg_int backlog);
 
   qg_fd_t accept();

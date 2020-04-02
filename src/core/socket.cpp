@@ -114,6 +114,13 @@ void Socket::close() {
   info_ += "closed\n";
 }
 
+void Socket::shutdown() {
+  int ret = ::shutdown(fd_, SHUT_WR);
+  if (ret < 0) {
+    LOG(ERROR) << "shut down write error " << fd_;
+  }
+}
+
 void Socket::bindAndListen(qg_int port, qg_int backlog) {
   LOG(INFO) << "bind and listen on port " << port;
   if (port < 0) {

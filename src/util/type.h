@@ -36,15 +36,18 @@ const qg_int kOk = 0;
 const qg_int kTrue = 1;
 const qg_int kFalse = 0;
 class TcpConnection;
-typedef std::string *buf_pt;
-typedef std::function<void(std::shared_ptr<TcpConnection>, buf_pt)>
+class HTTPRequest;
+class HTTPResponse;
+typedef std::string& buf_t;
+typedef std::function<void(std::shared_ptr<TcpConnection>, buf_t)>
     MessageCallBack;
-typedef std::function<void(std::shared_ptr<TcpConnection>, buf_pt)>
+typedef std::function<void(std::shared_ptr<TcpConnection>, buf_t)>
     WriteCompleteCallBack;
 typedef std::function<void(std::shared_ptr<TcpConnection>)> ConnectionComeCallBack;
 // FIXME(qinggniq): close的时候需不需要buffer是一个问题
 typedef std::function<void(std::shared_ptr<TcpConnection>)>
     ConnectionCloseCallBack;
+typedef std::function<void(HTTPRequest*, HTTPResponse*)> RequestCallBack;
 typedef std::function<void()> HandleWriteCallBack;
 typedef std::function<void()> timer_handler_cb_t;
 

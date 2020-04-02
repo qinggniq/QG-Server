@@ -6,7 +6,9 @@
 #define SRC_READ_WRITE_TOOL_H
 #include "type.h"
 #include <cstdlib>
+#include <fstream>
 #include <glog/logging.h>
+#include <utility>
 #include <zconf.h>
 
 namespace qg {
@@ -18,13 +20,13 @@ const qg_size_t kBufferSize = 4096;
  * IO, read and write system callback may not read write the needed number of
  * bytes.
  */
-qg_ssize_t QGReadN(qg_fd_t sfd, qg_char_t *buffer, qg_size_t size) {
+static qg_ssize_t read(qg_fd_t sfd, qg_char_t *buffer, qg_size_t size) {
   qg_ssize_t nread;
   qg_size_t nleft = size;
   qg_char_t *bptr = buffer;
   qg_size_t nsum = 0;
   while (nleft > 0) {
-    nread = read(sfd, bptr, nleft);
+    nread = ::read(sfd, bptr, nleft);
     if (nread > 0) {
       nsum += nread;
       bptr += nread;
@@ -42,11 +44,11 @@ qg_ssize_t QGReadN(qg_fd_t sfd, qg_char_t *buffer, qg_size_t size) {
   return nsum;
 }
 
-qg_size_t QGReadN(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
+static qg_size_t read(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
   // TODO (qinggniq) optimize the implemenation.
-  auto *cbuffer = new qg_char_t[size]();
+  auto cbuffer = new qg_char_t[size]();
   qg_size_t nread;
-  if ((nread = QGReadN(sfd, cbuffer, size)) > 0) {
+  if ((nread = ::read(sfd, cbuffer, size)) > 0) {
     buffer += qg_string(cbuffer);
     switch (errno) {
     case EAGAIN:
@@ -63,9 +65,9 @@ qg_size_t QGReadN(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
   return nread;
 }
 
-qg_ssize_t QGWriteN(qg_fd_t sfd, const char *buffer, qg_size_t size) {
+static qg_ssize_t write(qg_fd_t sfd, const char *buffer, qg_size_t size) {
   qg_ssize_t nwrite;
-  if ((nwrite = write(sfd, buffer, size)) < 0) {
+  if ((nwrite = ::write(sfd, buffer, size)) < 0) {
     nwrite = -1;
     switch (errno) {
     case EAGAIN:
@@ -81,8 +83,18 @@ qg_ssize_t QGWriteN(qg_fd_t sfd, const char *buffer, qg_size_t size) {
   return nwrite;
 }
 
-qg_size_t QGWriteN(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
-  return QGWriteN(sfd, buffer.c_str(), size);
+static qg_size_t write(qg_fd_t sfd, const qg_string &buffer, qg_size_t size) {
+  return write(sfd, buffer.c_str(), size);
+}
+
+static qg_string readFile(const qg_string &file_name) {
+  std::ifstream ifs(file_name.c_str(),
+                    std::ios::in | std::ios::binary | std::ios::ate);
+  std::ifstream::pos_type file_size = ifs.tellg();
+  ifs.seekg(0, std::ios::beg);
+  std::vector<char> bytes(file_size);
+  ifs.read(bytes.data(), file_size);
+  return std::move(qg_string(bytes.data(), file_size));
 }
 
 } // namespace qg

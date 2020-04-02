@@ -52,7 +52,7 @@ add_executable(main
         src/core/http/http_request.cpp
         src/core/http/http_request.h
         src/lib/http-parser/http_parser.h
-        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h src/core/http/http_response.cpp src/core/http/http_response.h src/core/http/http_server.cpp src/core/http/http_server.h)
+        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h src/core/http/http_response.cpp src/core/http/http_response.h src/core/http/http_server.cpp src/core/http/http_server.h src/core/http/error.cpp src/core/http/error.h src/core/http/router.cpp src/core/http/router.h)
 
 add_executable(Test
         src/core/event_loop.cpp
@@ -76,7 +76,7 @@ add_executable(Test
         src/core/socket.h
         src/base/timer_heap.cpp
         src/base/timer_heap.h
-        src/test/test_timer_heap.cc src/core/poll/KqueuePoller.cpp src/core/poll/KqueuePoller.h src/test/A.cpp)
+        src/test/test_timer_heap.cc src/core/poll/KqueuePoller.cpp src/core/poll/KqueuePoller.h )
 
 add_executable(test_timer_heap
         src/test/test_timer_heap.cc
@@ -167,7 +167,7 @@ add_executable(
         src/core/http/http_context.cpp
         src/core/http/http_context.h
         src/lib/http-parser/http_parser.c
-        src/lib/http-parser/http_parser.h)
+        src/lib/http-parser/http_parser.h src/core/http/router.cpp src/core/http/router.h)
 add_executable(
         test_weak_ptr
         src/test/test_weak_ptr.cpp
@@ -189,7 +189,63 @@ add_executable(test_parser
         src/core/http/http_request.cpp
         src/core/http/http_request.h
         src/lib/http-parser/http_parser.h
-        src/lib/http-parser/http_parser.c)
+        src/lib/http-parser/http_parser.c src/core/http/error.cpp src/core/http/error.h src/core/http/router.cpp src/core/http/router.h)
+
+add_executable(test_something
+        src/test/A.cpp)
+
+add_executable(
+        test_http_server
+        src/core/http/test/test_http_server.cpp
+        src/core/event_loop.cpp
+        src/core/event_loop.h
+        src/util/log.h
+        src/util/type.h
+        src/core/event_handler.cpp
+        src/core/event_handler.h
+        src/core/poll/Pollpoller.h
+        src/core/poll/Poller.h
+        src/core/poll/Pollpoller.cpp
+        src/util/rwtool.h
+        src/util/nettool.h
+        src/base/timer.cpp
+        src/base/timer.h
+        src/util/time_stamp.cpp
+        src/util/time_stamp.h
+        src/util/copyable.h
+        src/util/noncopyable.h
+        src/util/atomic.h
+        src/core/socket.cpp
+        src/core/socket.h
+        src/base/timer_heap.cpp
+        src/base/timer_heap.h
+        src/base/timer_queue.cpp
+        src/base/timer_queue.h
+        src/core/tcp_connection.cpp
+        src/core/tcp_connection.h
+        src/core/server.cpp
+        src/core/server.h
+        src/util/config.h
+        src/base/thread_pool.cpp
+        src/base/thread_pool.h
+        src/core/accepter.cpp
+        src/core/accepter.h
+        src/core/poll/KqueuePoller.cpp
+        src/core/poll/KqueuePoller.h
+        src/core/http/http_request.cpp
+        src/core/http/http_request.h
+        src/core/http/http_response.h
+        src/core/http/http_response.cpp
+        src/lib/http-parser/http_parser.h
+        src/lib/http-parser/http_parser.c
+        src/core/http/http_context.cpp
+        src/core/http/http_context.h
+        src/lib/http-parser/http_parser.c
+        src/lib/http-parser/http_parser.h
+        src/core/http/router.cpp
+        src/core/http/router.h
+        src/core/http/http_server.h
+        src/core/http/http_server.cpp)
 
 target_link_libraries(main glog::glog)
 target_link_libraries(test_timer_heap glog::glog)
@@ -200,5 +256,6 @@ target_link_libraries(test_kqueue glog::glog)
 target_link_libraries(test_weak_ptr)
 target_link_libraries(test_virtual)
 target_link_libraries(test_parser glog::glog)
+target_link_libraries(test_http_server glog::glog)
 set_target_properties(test_server PROPERTIES
         CMAKE_CXX_STANDARD 17)
