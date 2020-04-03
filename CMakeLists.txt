@@ -52,7 +52,7 @@ add_executable(main
         src/core/http/http_request.cpp
         src/core/http/http_request.h
         src/lib/http-parser/http_parser.h
-        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h src/core/http/http_response.cpp src/core/http/http_response.h src/core/http/http_server.cpp src/core/http/http_server.h src/core/http/error.cpp src/core/http/error.h src/core/http/router.cpp src/core/http/router.h)
+        src/lib/http-parser/http_parser.c src/core/http/http_context.cpp src/core/http/http_context.h src/core/http/http_response.cpp src/core/http/http_response.h src/core/http/http_server.cpp src/core/http/http_server.h src/core/http/error.cpp src/core/http/error.h src/core/http/router.cpp src/core/http/router.h src/core/loop_thread_pool.cpp src/core/loop_thread_pool.h)
 
 add_executable(Test
         src/core/event_loop.cpp
@@ -167,7 +167,7 @@ add_executable(
         src/core/http/http_context.cpp
         src/core/http/http_context.h
         src/lib/http-parser/http_parser.c
-        src/lib/http-parser/http_parser.h src/core/http/router.cpp src/core/http/router.h)
+        src/lib/http-parser/http_parser.h src/core/http/router.cpp src/core/http/router.h src/core/loop_thread.cpp src/core/loop_thread.h src/core/loop_thread_pool.cpp src/core/loop_thread_pool.h)
 add_executable(
         test_weak_ptr
         src/test/test_weak_ptr.cpp
@@ -245,7 +245,7 @@ add_executable(
         src/core/http/router.cpp
         src/core/http/router.h
         src/core/http/http_server.h
-        src/core/http/http_server.cpp)
+        src/core/http/http_server.cpp src/util/block_queue.h src/core/loop_thread.cpp src/core/loop_thread.h src/core/loop_thread_pool.cpp src/core/loop_thread_pool.h)
 
 target_link_libraries(main glog::glog)
 target_link_libraries(test_timer_heap glog::glog)

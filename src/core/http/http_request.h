@@ -6,12 +6,15 @@
 #define QGSERVER_SRC_CORE_HTTP_HTTP_REQUEST_H_
 #include "../../lib/http-parser/http_parser.h"
 #include "../../util/type.h"
+#include <glog/logging.h>
 #include <iostream>
 #include <map>
 namespace qg {
 class HTTPRequest {
 public:
-  HTTPRequest():body_is_final(false){}
+  HTTPRequest()
+      : body_is_final(false), message_is_end(false), should_keep_alive(false) {}
+  ~HTTPRequest() { LOG(INFO) << "~HTTPRequest"; }
   typedef std::map<qg_string, qg_string> header_t;
   qg_string name; // for debugging purposes
   qg_string raw;
@@ -28,18 +31,19 @@ public:
   std::pair<qg_string, qg_string> last_filed_value;
   int should_keep_alive;
 
-  int message_begin_cb_called;
-  int headers_complete_cb_called;
-  int message_complete_cb_called;
   int body_is_final;
   int message_is_end;
   void printRequest() {
-    std::cout << "url : \n" << request_url << "\n" \
-              << "path : \n" << request_path << "\n"\
-              << "query : \n" << query_string << "\n"\
-              << "fragment : \n" << fragment << "\n"\
+    std::cout << "url : \n"
+              << request_url << "\n"
+              << "path : \n"
+              << request_path << "\n"
+              << "query : \n"
+              << query_string << "\n"
+              << "fragment : \n"
+              << fragment << "\n"
               << "header : \n";
-    for (const auto& header : headers) {
+    for (const auto &header : headers) {
       std::cout << "[ " << header.first << ", " << header.second << " ]\n";
     }
     std::cout << "body : \n" << body << "\n";

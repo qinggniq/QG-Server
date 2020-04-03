@@ -22,35 +22,35 @@ void qg::Pollpoller::updateHandler(qg::Poller::handler h) {
   int index = h->Index();
   LOG(INFO) << "index " << index << " size " << fds.size();
   assert(index >= 0 && index < this->fds.size());
-  LOG(INFO) << ((event_handler_map_)[h->GetHandle()] == h);
-  assert((event_handler_map_)[h->GetHandle()] == h); // can't change the fd.
+  LOG(INFO) << ((event_handler_map_)[h->getHandle()] == h);
+  assert((event_handler_map_)[h->getHandle()] == h); // can't change the fd.
 
-  this->fds[index].events = h->GetIEvents();
+  this->fds[index].events = h->getIEvents();
   this->fds[index].revents = 0;
 }
 
 void qg::Pollpoller::registerHandler(qg::Poller::handler h) {
   assert(h->Index() < 0);
   h->SetIndex(fds.size());
-  event_handler_map_[h->GetHandle()] = h;
+  event_handler_map_[h->getHandle()] = h;
   struct pollfd pfd;
-  pfd.fd = h->GetHandle();
-  pfd.events = h->GetIEvents();
+  pfd.fd = h->getHandle();
+  pfd.events = h->getIEvents();
   pfd.revents = 0;
   fds.push_back(pfd);
-  event_handler_map_.emplace(h->GetHandle(), h);
+  event_handler_map_.emplace(h->getHandle(), h);
 }
 
 void qg::Pollpoller::removeHandler(qg::Poller::handler h) {
   int index = h->Index();
   assert(index >= 0 && index < this->fds.size());
-  assert(event_handler_map_[h->GetHandle()] == h);
+  assert(event_handler_map_[h->getHandle()] == h);
   assert(fds[index].revents == 0);
   LOG(INFO) << "set index from " << event_handler_map_[fds.back().fd]->Index()
             << " to " << index;
   // index 是Eventhandler的东西，在删除的时候我们不能移动位置。。
   event_handler_map_[fds.back().fd]->SetIndex(index);
-  event_handler_map_.erase(h->GetHandle());
+  event_handler_map_.erase(h->getHandle());
   std::swap(fds[index], fds.back());
   fds.pop_back();
 }
@@ -63,6 +63,9 @@ std::vector<qg::Poller::handler> qg::Pollpoller::Wait(int sz,
   qg_int wait_time = -1;
   if (time_stamp.getUnixTimeStamp() != 0) {
     wait_time = time_stamp.toMilliseconds();
+  }else{
+    LOG(INFO) << "wait 1s";
+    wait_time = 1000; //1s
   }
   if (sz < 0) {
     sz = fds.size();
@@ -85,7 +88,7 @@ std::vector<qg::Poller::handler> qg::Pollpoller::Wait(int sz,
       LOG(WARNING) << "event coming";
       auto handler = event_handler_map_.find(pfd.fd);
       assert(handler != event_handler_map_.end());
-      handler->second->SetREvents(pfd.revents);
+      handler->second->setREvents(pfd.revents);
       LOG(INFO) << "remove the revents";
       res.emplace_back(handler->second);
       n--;

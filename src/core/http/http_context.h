@@ -14,31 +14,25 @@
 namespace qg {
 struct HTTPRequest;
 struct HTTPResponse;
-class Server;
 class HTTPContext : public noncopyable {
 public:
-  typedef std::function<void(HTTPRequest *, HTTPResponse *)> RequestCallBack;
-  typedef std::function<void(HTTPResponse *)> ErrorCallBack;
+  typedef std::function<void(std::shared_ptr<HTTPRequest>, std::shared_ptr<HTTPResponse>)> RequestCallBack;
 
   HTTPContext();
   ~HTTPContext();
-  // 由于函数签名没有HTPPContext，所以需要通过conn.setContext(this)来注册HTTPContext
-  // 来控制HTTPContext的行为。
 
   void reset() {
-    auto request = new HTTPRequest();
+    auto request = std::make_shared<HTTPRequest>();
     std::swap(http_request_, request);
     http_parser_init(parser_, HTTP_REQUEST);
   }
 
   void bindParser(struct http_parser *parser) { parser->data = this; }
 
-  void execute(const char *buf, int len);
-  [[nodiscard]] struct http_parser *getParser() const {
-    return parser_;
-  }
+  int parse(const qg_string &data);
+  [[nodiscard]] struct http_parser *getParser() const { return parser_; }
 
-  [[nodiscard]] HTTPRequest *getRequest() const { return http_request_; }
+  [[nodiscard]] std::shared_ptr<HTTPRequest> getRequest() const { return http_request_; }
   [[nodiscard]] struct http_parser_settings *getSettings() const {
     return settings_;
   }
@@ -46,7 +40,7 @@ public:
 private:
   struct http_parser *parser_;
   struct http_parser_settings *settings_;
-  HTTPRequest *http_request_;
+  std::shared_ptr<HTTPRequest> http_request_;
 };
 } // namespace qg
 

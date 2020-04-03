@@ -7,6 +7,7 @@
 #include "./event_loop.h"
 #include "./socket.h"
 #include "./tcp_connection.h"
+#include "loop_thread_pool.h"
 #include <glog/logging.h>
 #include <memory>
 
@@ -15,9 +16,11 @@ namespace qg {
 /*
  * base on the initialize order
  */
+int Server::thread_num = 4;
 
-
-Server::Server(config_pt config) : event_loop_(new EventLoop()) {
+Server::Server(config_pt config)
+    : event_loop_(new EventLoop()),
+      loop_pool_(new LoopThreadPool(event_loop_, config->thread_num)) {
   this->accepter_ = new Accepter(event_loop_, config);
   this->accepter_->setNewConnectionCallBack(
       std::bind(&Server::handleNewCon, this, std::placeholders::_1));
@@ -26,7 +29,10 @@ Server::Server(config_pt config) : event_loop_(new EventLoop()) {
 
 Server::~Server() { delete event_loop_; }
 
-void Server::run() { this->event_loop_->loop(); }
+void Server::run() {
+  loop_pool_->start();
+  this->event_loop_->loop();
+}
 
 void Server::handleConnectionClose(std::shared_ptr<TcpConnection> conn) {
   LOG(INFO) << "close " << conn->fd();
@@ -40,8 +46,9 @@ void Server::handleNewCon(std::unique_ptr<Socket> socket) {
   LOG(INFO) << "new connection coming : " << socket->sfd();
   qg_fd_t fd = socket->sfd();
   socket->makeNonBlock();
+  EventLoop* io_loop = loop_pool_->getNextLoop();
   std::shared_ptr<TcpConnection> conn(
-      new TcpConnection(this->event_loop_, std::move(socket), accepter_));
+      new TcpConnection(io_loop, std::move(socket), accepter_));
   // 设置用户设置的一些回调
   // 连接回调、消息到达回调、消息发送回调
   connections_[fd] = conn;
@@ -50,6 +57,7 @@ void Server::handleNewCon(std::unique_ptr<Socket> socket) {
   conn->setConnectionComeCallBack(connection_come_call_back_);
   conn->setConnectionCloseCallBack(
       std::bind(&Server::handleConnectionClose, this, std::placeholders::_1));
-  conn->handleConnection();
+  // 这个任务应该放到Loop里面执行
+  io_loop->addFunctor(std::bind(&TcpConnection::handleConnection, conn));
 }
 } // namespace qg

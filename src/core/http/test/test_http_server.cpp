@@ -14,6 +14,7 @@ int main(int argc, char ** argv) {
   Config *config = new Config;
   cout  << " ? " << endl;
   config->keep_alive = true;
+  config->thread_num = 1;
   config->max_connections = 100;
   config->port = 1278;
   config->time_out = 0;

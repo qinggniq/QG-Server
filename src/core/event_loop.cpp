@@ -3,11 +3,10 @@
 //
 #include "event_loop.h"
 #include "event_handler.h"
-
-#ifdef __APPLE__
-#include "./poll/KqueuePoller.h"
-#define POLL KqueuePoller
-#elif __linux__
+//#ifdef __APPLE__
+//#include "./poll/KqueuePoller.h"
+//#define POLL KqueuePoller
+#ifdef __linux__
 #include "./poll/Epollpoller.h"
 #defing POLL Epollpoller
 #else
@@ -24,6 +23,7 @@ namespace qg {
 
 EventLoop::EventLoop()
     : poller_(new POLL()), stop_(false),
+      pending_functors_(new Queue<EventLoop::functor_t>()),
       defaultPollSize(10) // TODO: default size should be configable
 {
   LOG(INFO) << "event loop construct";
@@ -55,7 +55,7 @@ void EventLoop::runEvery(qg_time_t interval, timer_handler_cb_t cb) {
 
 void EventLoop::registerHandler(qg::EventLoop::event_handler_pt eh) {
   assert(eh != nullptr);
-  this->handler_map_.emplace(eh->GetHandle(), eh);
+  this->handler_map_.emplace(eh->getHandle(), eh);
   this->poller_->registerHandler(eh);
 }
 
@@ -66,10 +66,23 @@ void EventLoop::updateHandler(event_handler_pt eh) {
 
 void EventLoop::removeHandler(qg::EventLoop::event_handler_pt eh) {
   assert(eh != nullptr);
-  auto it = this->handler_map_.find(eh->GetHandle());
+  auto it = this->handler_map_.find(eh->getHandle());
   assert(it != handler_map_.end());
   handler_map_.erase(it);
   this->poller_->removeHandler(eh);
+}
+
+void EventLoop::addFunctor(EventLoop::functor_t functor) {
+  pending_functors_->push(functor);
+}
+
+void EventLoop::handlePendingFunctors() {
+  std::queue<functor_t> functors;
+  pending_functors_->pop_all(functors);
+  while (!functors.empty()) {
+    functors.front()();
+    functors.pop();
+  }
 }
 
 void EventLoop::loop() {
@@ -83,12 +96,14 @@ void EventLoop::loop() {
         next_time = next_time - now;
       }
     }
-    LOG(INFO) << "loop \n";
+    LOG(INFO) << "loop at " << this;
     std::vector<EventHandler *> ess = poller_->Wait(-1, next_time);
+    LOG(INFO) << "loop end with " << ess.size() << " events at " << this;
     for (const auto &it : ess) {
       LOG(INFO) << it->toString();
       it->HandleEvent();
     }
+    handlePendingFunctors();
     LOG(INFO) << "loop end";
   }
 }

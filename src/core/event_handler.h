@@ -60,36 +60,36 @@ public:
 
   virtual void HandleEvent();
 
-  handle_t GetHandle() const;
+  handle_t getHandle() const;
 
-  void SetHandle(handle_t handle);
+  void setHandler(handle_t handle);
 
-  void SetReadCallBack(Functor rcb);
+  void setReadCallBack(Functor rcb);
 
-  void SetWriteCallBack(Functor wcb);
+  void setWriteCallBack(Functor wcb);
 
-  void SetErrorCallBack(Functor ecb);
+  void setErrorCallBack(Functor ecb);
 
-  events_t &GetIEvents();
+  events_t &getIEvents();
 
-  events_t &GetREvents();
+  events_t &getREvents();
 
-  void SetIEvents(const events_t &iev);
+  void setIEvents(const events_t &iev);
 
-  void SetREvents(const events_t &rev);
+  void setREvents(const events_t &rev);
 
   void enableRead() {
-    SetIEvents(EventMode::kEventRead);
+    setIEvents(EventMode::kEventRead);
     update();
   }
 
   void enableWrite() {
-    SetIEvents(EventMode::kEventWrite);
+    setIEvents(EventMode::kEventWrite);
     update();
   }
 
   void enableError() {
-    SetIEvents(EventMode::kEventError);
+    setIEvents(EventMode::kEventError);
     update();
   }
 
@@ -98,7 +98,7 @@ public:
   bool isWriting() { return ievents_ & EventMode::kEventWrite; };
 
   void enableAll() {
-    SetIEvents(EventMode::kEventAll);
+    setIEvents(EventMode::kEventAll);
     update();
   }
 
@@ -146,33 +146,33 @@ private:
   Functor error_call_back_;
 };
 
-inline void EventHandler::SetHandle(const qg::handle_t handle) {
+inline void EventHandler::setHandler(handle_t handle) {
   this->handle_ = handle;
 }
 
-inline handle_t EventHandler::GetHandle() const { return this->handle_; }
+inline handle_t EventHandler::getHandle() const { return this->handle_; }
 
-inline events_t &EventHandler::GetIEvents() { return this->ievents_; }
+inline events_t &EventHandler::getIEvents() { return this->ievents_; }
 
-inline events_t &EventHandler::GetREvents() { return this->revents_; }
+inline events_t &EventHandler::getREvents() { return this->revents_; }
 
-inline void EventHandler::SetIEvents(const qg::events_t &iev) {
+inline void EventHandler::setIEvents(const qg::events_t &iev) {
   this->ievents_ |= (iev & kEventMask);
 }
 
-inline void EventHandler::SetREvents(const qg::events_t &rev) {
+inline void EventHandler::setREvents(const qg::events_t &rev) {
   this->revents_ |= (rev & kEventMask);
 }
 
-inline void EventHandler::SetReadCallBack(Functor rcb) {
+inline void EventHandler::setReadCallBack(Functor rcb) {
   this->read_call_back_ = std::move(rcb);
 }
 
-inline void EventHandler::SetWriteCallBack(Functor wcb) {
+inline void EventHandler::setWriteCallBack(Functor wcb) {
   this->write_call_back_ = std::move(wcb);
 }
 
-inline void EventHandler::SetErrorCallBack(Functor ecb) {
+inline void EventHandler::setErrorCallBack(Functor ecb) {
   this->error_call_back_ = std::move(ecb);
 }
 

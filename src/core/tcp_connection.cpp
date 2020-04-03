@@ -24,14 +24,12 @@ TcpConnection::TcpConnection(event_loop_pt el, std::unique_ptr<Socket> socket,
     : event_loop_(el), socket_(std::move(socket)),
       event_handler_(new EventHandler(el, socket_->sfd())), accpeter_(accepter),
       disconnected_(false), sendfile_fd_(-1) {
-#ifdef __APPLE__
-
-#endif
   accpeter_->incConnection();
-  event_handler_->SetReadCallBack(std::bind(&TcpConnection::handleRead, this));
-  event_handler_->SetWriteCallBack(
+  event_handler_->setReadCallBack(std::bind(&TcpConnection::handleRead, this));
+  event_handler_->setWriteCallBack(
       std::bind(&TcpConnection::handleWrite, this));
   event_loop_->registerHandler(event_handler_);
+  LOG(INFO) << "connection come at " << event_loop_ ;
 }
 // 析构的时候要仔细考虑
 TcpConnection::~TcpConnection() {

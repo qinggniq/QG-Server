@@ -24,6 +24,8 @@ class Accepter;
 
 class TcpConnection;
 
+class LoopThreadPool;
+
 // server
 // 是唯一暴露给用户的东西，所以注册"写回调、读回调、连接回调"需要通过Server来注册
 class Server : public qg::noncopyable {
@@ -59,7 +61,9 @@ public:
   }
 
 private:
+  static int thread_num;
   event_loop_pt event_loop_;
+  std::unique_ptr<LoopThreadPool> loop_pool_;
   accepter_pt accepter_;
   mp_t connections_;
   MessageCallBack message_call_back_;

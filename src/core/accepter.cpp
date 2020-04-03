@@ -40,7 +40,7 @@ void Accepter::init() {
   }
   socket_->makePortReuseable();
   socket_->makeAddrReuseable();
-  handler_->SetReadCallBack(std::bind(&Accepter::handleRead, this));
+  handler_->setReadCallBack(std::bind(&Accepter::handleRead, this));
   event_loop_->registerHandler(handler_);
   handler_->enableRead();
   // TODO(qinggniq): Accpeter 如何处理error

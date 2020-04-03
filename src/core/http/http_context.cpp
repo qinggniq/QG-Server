@@ -14,7 +14,7 @@ namespace net {
 typedef int (*http_data_cb)(http_parser *, const char *buf, size_t len);
 typedef int (*http_cb)(http_parser *);
 
-inline HTTPRequest *getRequest(const http_parser *parser) {
+inline std::shared_ptr<HTTPRequest> getRequest(const http_parser *parser) {
   return static_cast<HTTPContext *>(parser->data)->getRequest();
 }
 
@@ -32,14 +32,13 @@ int isBodyFinal(const http_parser *parser) {
   return 0;
 }
 
-int defaultTriggerCallBack(http_parser *parser) {
-  return 0;
-}
+int defaultTriggerCallBack(http_parser *parser) { return 0; }
 int defaultMessageCallBack(http_parser *parser, const char *buf, size_t len) {
   return 0;
 }
 
-inline void fillURLSubStr(HTTPRequest *request, struct http_parser_url *u,
+inline void fillURLSubStr(std::shared_ptr<HTTPRequest> request,
+                          struct http_parser_url *u,
                           enum http_parser_url_fields field) {
   std::string *target_ptr;
   switch (field) {
@@ -63,7 +62,7 @@ inline void fillURLSubStr(HTTPRequest *request, struct http_parser_url *u,
 }
 // 这个URL有问题
 int urlCallBack(http_parser *parser, const char *buf, size_t len) {
-  HTTPRequest *http_request = getRequest(parser);
+  auto http_request = getRequest(parser);
 
   struct http_parser_url u;
   http_request->request_url.append(buf, len);
@@ -141,19 +140,20 @@ HTTPContext::HTTPContext() {
   http_parser_init(parser_, HTTP_REQUEST);
   bindParser(parser_);
   settings_ = &net::defaultParserSettig;
-  http_request_ = new HTTPRequest();
+  http_request_ = std::make_shared<HTTPRequest>();
 }
 
-HTTPContext::~HTTPContext() { delete http_request_; }
+HTTPContext::~HTTPContext() { LOG(INFO) << "~HTTPContext"; }
 
 // used for test
-void HTTPContext::execute(const char *buf, int len) {
-  int n = http_parser_execute(parser_, settings_, buf, len);
-  if (n != len) {
-    assert(0 && "有问题");
+int HTTPContext::parse(const qg_string &data) {
+  int len = data.size();
+  int n = http_parser_execute(parser_, settings_, data.c_str(), len);
+  if (n != len || HTTP_PARSER_ERRNO(parser_) != HPE_OK) {
+    LOG(ERROR) << "Client send a bad request "
+               << http_errno_name(HTTP_PARSER_ERRNO(parser_));
+    return -1;
   }
-  http_request_->printRequest();
-  delete (http_request_);
-  reset();
+  return n;
 }
 } // namespace qg

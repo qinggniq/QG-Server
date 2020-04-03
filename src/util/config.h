@@ -19,6 +19,7 @@ struct Config{
   qg_int port;
   qg_int time_out;
   qg_int max_connections;
+  qg_int thread_num;
   qg_bool keep_alive;
 };
 
