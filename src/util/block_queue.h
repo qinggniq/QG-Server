@@ -10,9 +10,12 @@
 #include <queue>
 #include <glog/logging.h>
 namespace qg {
-template <typename T> class Queue : public noncopyable {
+template <typename T> class Queue  {
 public:
-  Queue() :mutex_() {}
+  Queue() = default;
+  ~Queue() {
+    LOG(INFO) << "queue end" ;
+  }
   void push(const T &t){
     std::unique_lock<std::mutex> ulock(mutex_);
     queue_.push(t);
@@ -28,7 +31,6 @@ public:
     return res;
   }
  void pop_all(std::queue<T>& res) {
-    LOG(INFO) << "lock before";
     std::unique_lock<std::mutex> ulock(mutex_);
     LOG(INFO) << "lock after";
     if (queue_.empty()) return;

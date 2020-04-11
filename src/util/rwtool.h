@@ -47,12 +47,14 @@ static qg_ssize_t read(qg_fd_t sfd, qg_char_t *buffer, qg_size_t size) {
 static qg_size_t read(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
   // TODO (qinggniq) optimize the implemenation.
   auto cbuffer = new qg_char_t[size]();
-  qg_size_t nread, cnt = 0;
+  qg_ssize_t nread, cnt = 0;
   while (true) {
     nread = ::read(sfd, cbuffer, size);
     if (nread > 0) {
       cnt += nread;
+      LOG(INFO) << "read n " << nread << " bytes";
       buffer += qg_string(cbuffer, nread);
+      LOG(INFO) << "read end";
       if (nread != size) {
         break;
       }
@@ -62,7 +64,7 @@ static qg_size_t read(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
       switch (errno) {
       case EAGAIN:
         LOG(INFO) << "::read() again";
-        break;
+        goto normal_end;
       case ECONNRESET:
         LOG(INFO) << "::read() peer closed";
         goto error;
@@ -71,7 +73,8 @@ static qg_size_t read(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
         goto error;
       }
     }
-  };
+  }
+normal_end:
   delete[] cbuffer;
   return nread;
 error:

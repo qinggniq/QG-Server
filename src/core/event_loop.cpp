@@ -14,12 +14,14 @@ namespace qg {
 
 EventLoop::EventLoop()
     : poller_(new POLL()), stop_(false),
-      pending_functors_(new Queue<EventLoop::functor_t>()),
       defaultPollSize(10) // TODO: default size should be configable
 {
   LOG(INFO) << "event loop construct";
   timer_queue_ = std::make_unique<TimerQueue>();
+  pending_functors_ = std::make_unique<Queue<EventLoop::functor_t>>();
   waker_ = std::make_unique<Waker<POLL>>(this);
+  LOG(INFO) << "event loop construct end";
+  LOG(INFO) << "test end";
 }
 
 void EventLoop::wake_up() {
@@ -74,6 +76,10 @@ void EventLoop::removeHandler(qg::EventLoop::event_handler_pt eh) {
 }
 
 void EventLoop::addFunctor(EventLoop::functor_t functor) {
+  LOG(INFO) << "addFunctor";
+  LOG(INFO) << "queue " << pending_functors_;
+  LOG(INFO) << "timer " << timer_queue_;
+  LOG(INFO) << "waker " << waker_;
   pending_functors_->push(functor);
   waker_->wake_up();
 }
