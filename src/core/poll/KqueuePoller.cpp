@@ -17,10 +17,6 @@ KqueuePoller::KqueuePoller() {
 }
 KqueuePoller::~KqueuePoller() {
   ::close(kfd_);
-  for (auto it = event_handler_map_.begin(); it != event_handler_map_.end();
-       it++) {
-    delete it->second;
-  }
 }
 
 void KqueuePoller::registerHandler(Poller::handler h) {

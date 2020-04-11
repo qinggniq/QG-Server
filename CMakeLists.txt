@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.13)
 project(QGServer)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_PREFIX_PATH "/usr/local/Cellar/glog/0.4.0")
 
 include_directories(core)
 include_directories(core/http)
@@ -247,6 +246,15 @@ add_executable(
         src/core/http/http_server.h
         src/core/http/http_server.cpp src/util/block_queue.h src/core/loop_thread.cpp src/core/loop_thread.h src/core/loop_thread_pool.cpp src/core/loop_thread_pool.h)
 
+add_executable(
+        test_wake_up
+        src/test/test_wake_up.cpp
+)
+
+add_executable(
+        test_pipe
+        src/test/test_pipe.cpp
+)
 target_link_libraries(main glog::glog)
 target_link_libraries(test_timer_heap glog::glog)
 target_link_libraries(test_timer_in_reactor glog::glog)
@@ -257,5 +265,6 @@ target_link_libraries(test_weak_ptr)
 target_link_libraries(test_virtual)
 target_link_libraries(test_parser glog::glog)
 target_link_libraries(test_http_server glog::glog)
+target_link_libraries(test_pipe glog::glog)
 set_target_properties(test_server PROPERTIES
         CMAKE_CXX_STANDARD 17)

@@ -103,7 +103,7 @@ void HTTPServer::handleRequest(std::shared_ptr<HTTPRequest> &request,
   default:
     LOG(ERROR) << "un support method " << http_method_str(request->method);
     // 返回一个bad request
-    response->setStatus(501);
+    response->setStatus(405);
     return;
   }
   // 可能不是path。

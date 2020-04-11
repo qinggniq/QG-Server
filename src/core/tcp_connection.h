@@ -42,7 +42,10 @@ public:
 
   void handleClose();
 
+  void closeConnection();
+
   qg_fd_t fd() const { return socket_->sfd(); }
+  EventLoop* getLoop() const {return event_loop_;}
 
   void setMessageCallBack(MessageCallBack cb) {
     this->message_call_back_ = std::move(cb);
@@ -59,6 +62,7 @@ public:
   std::any context() const { return context_; }
   void setContext(std::any context) { context_ = std::move(context); }
   void write(const buf_t& str);
+  void writeInLoop(const buf_t& str);
   void sendFile(const qg_string &file_name);
   void sendFile(qg_fd_t fd) {
     // TODO(qinggniq) : 在Linux下面用sendfile实现。

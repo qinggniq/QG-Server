@@ -3,16 +3,7 @@
 //
 #include "event_loop.h"
 #include "event_handler.h"
-//#ifdef __APPLE__
-//#include "./poll/KqueuePoller.h"
-//#define POLL KqueuePoller
-#ifdef __linux__
-#include "./poll/Epollpoller.h"
-#defing POLL Epollpoller
-#else
-#include "./poll/Pollpoller.h"
-#define POLL Pollpoller
-#endif
+
 #include "../base/timer.h"
 #include "../base/timer_queue.h"
 #include <cassert>
@@ -28,9 +19,15 @@ EventLoop::EventLoop()
 {
   LOG(INFO) << "event loop construct";
   timer_queue_ = std::make_unique<TimerQueue>();
+  waker_ = std::make_unique<Waker<POLL>>(this);
+}
+
+void EventLoop::wake_up() {
+  waker_->wake_up();
 }
 
 EventLoop::~EventLoop() {
+  LOG(INFO) << "~EventLoop";
   for (handler_map_t::const_iterator it = handler_map_.begin();
        it != handler_map_.end(); ++it) {
     poller_->removeHandler(it->second);
@@ -60,11 +57,15 @@ void EventLoop::registerHandler(qg::EventLoop::event_handler_pt eh) {
 }
 
 void EventLoop::updateHandler(event_handler_pt eh) {
+  LOG(INFO) << "upadte fd " << eh->getHandle() << " at loop " << this;
   assert(eh != nullptr);
+  auto it = this->handler_map_.find(eh->getHandle());
+  assert(it != handler_map_.end());
   this->poller_->updateHandler(eh);
 }
 
 void EventLoop::removeHandler(qg::EventLoop::event_handler_pt eh) {
+  LOG(INFO) << "remove fd " << eh->getHandle() << " at loop " << this;
   assert(eh != nullptr);
   auto it = this->handler_map_.find(eh->getHandle());
   assert(it != handler_map_.end());
@@ -74,15 +75,18 @@ void EventLoop::removeHandler(qg::EventLoop::event_handler_pt eh) {
 
 void EventLoop::addFunctor(EventLoop::functor_t functor) {
   pending_functors_->push(functor);
+  waker_->wake_up();
 }
 
 void EventLoop::handlePendingFunctors() {
   std::queue<functor_t> functors;
   pending_functors_->pop_all(functors);
+  LOG(INFO) << "before handle functions " << this;
   while (!functors.empty()) {
     functors.front()();
     functors.pop();
   }
+  LOG(INFO) << "handle over " << this;
 }
 
 void EventLoop::loop() {

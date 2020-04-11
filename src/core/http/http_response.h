@@ -18,6 +18,8 @@ public:
       status_ = "404 Not Found";
     } else if (code == 400) {
       status_ = "400 Bad Request";
+    } else if (code == 405) {
+      status_ = "405 Method is not allowed";
     } else if (code == 413) {
       status_ = "413 Payload Too Large";
     } else if (code == 505) {

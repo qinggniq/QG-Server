@@ -16,7 +16,7 @@ namespace qg{
     public:
         typedef std::vector<pollfd> fd_list_t;
         Pollpoller();
-         ~Pollpoller() override;
+         ~Pollpoller() override = default  ;
         void registerHandler(handler) override ;
         void updateHandler(handler) override ;
         void removeHandler(handler) override;

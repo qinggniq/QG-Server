@@ -13,7 +13,7 @@
 #include <sys/fcntl.h>
 #include <sys/socket.h>
 #include <zconf.h>
-
+#include <glog/logging.h>
 #include "type.h"
 
 /*
@@ -30,7 +30,7 @@
 namespace qg {
 
 
-qg_fd_t QGAccept(qg_fd_t sfd, struct sockaddr *sockaddr, socklen_t *slen) {
+static qg_fd_t QGAccept(qg_fd_t sfd, struct sockaddr *sockaddr, socklen_t *slen) {
   qg_fd_t cfd;
   if ((cfd = accept(sfd, sockaddr, slen)) != -1) {
     // Maybe we need save the information of the new client.
@@ -98,19 +98,30 @@ static qg_fd_t QGInetPassiveSocket(const qg_char_t *service, qg_int type,
   return (rp == nullptr) ? -1 : sfd;
 }
 
-qg_fd_t QGNetListen(qg_size_t port, socklen_t *addlen, qg_int backlog) {
+static qg_fd_t QGNetListen(qg_size_t port, socklen_t *addlen, qg_int backlog) {
   port = ((port < 1024 || port > 65535)) ? 6666 : port;
   qg_string sport = std::to_string(port);
   return QGInetPassiveSocket(sport.c_str(), SOCK_STREAM, addlen, true, backlog);
 }
 
-qg_int QGSetTcpCork(qg_fd_t sfd) {
+static qg_int QGSetTcpCork(qg_fd_t sfd) {
   qg_int optval = 1;
   if (setsockopt(sfd, SOL_SOCKET, QGIO_NOPUSH, &optval, sizeof(optval)) == -1) {
     close(sfd);
     return -1;
   }
   return 0;
+}
+
+static void makeFdNoneBlock(qg_fd_t fd) {
+  qg_int flags = fcntl(fd, F_GETFL, 0);
+  if (flags == -1) {
+    LOG(ERROR) << "error when get flags";
+  }
+  flags = flags | O_NONBLOCK;
+  if (fcntl(fd, F_SETFL, flags) != 0) {
+    LOG(ERROR) << "error when set O_NONBLOCK flags";
+  }
 }
 
 } // namespace qg

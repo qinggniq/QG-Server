@@ -11,22 +11,16 @@
 using namespace qg;
 Pollpoller::Pollpoller() : Poller() {}
 
-Pollpoller::~Pollpoller() {
-  for (auto it = event_handler_map_.begin(); it != event_handler_map_.end();
-       it++) {
-    delete it->second;
-  }
-}
-
 void qg::Pollpoller::updateHandler(qg::Poller::handler h) {
   int index = h->Index();
-  LOG(INFO) << "index " << index << " size " << fds.size();
-  assert(index >= 0 && index < this->fds.size());
-  LOG(INFO) << ((event_handler_map_)[h->getHandle()] == h);
-  assert((event_handler_map_)[h->getHandle()] == h); // can't change the fd.
 
-  this->fds[index].events = h->getIEvents();
-  this->fds[index].revents = 0;
+  if (index < 0) {
+    registerHandler(h);
+  }else{
+    this->fds[index].events = h->getIEvents();
+    this->fds[index].revents = 0;
+  }
+
 }
 
 void qg::Pollpoller::registerHandler(qg::Poller::handler h) {
@@ -64,8 +58,8 @@ std::vector<qg::Poller::handler> qg::Pollpoller::Wait(int sz,
   if (time_stamp.getUnixTimeStamp() != 0) {
     wait_time = time_stamp.toMilliseconds();
   }else{
-    LOG(INFO) << "wait 1s";
-    wait_time = 1000; //1s
+    LOG(INFO) << "wait forerver";
+    // wait_time = 1000; //1s
   }
   if (sz < 0) {
     sz = fds.size();

@@ -47,40 +47,61 @@ static qg_ssize_t read(qg_fd_t sfd, qg_char_t *buffer, qg_size_t size) {
 static qg_size_t read(qg_fd_t sfd, qg_string &buffer, qg_size_t size) {
   // TODO (qinggniq) optimize the implemenation.
   auto cbuffer = new qg_char_t[size]();
-  qg_size_t nread;
-  if ((nread = ::read(sfd, cbuffer, size)) > 0) {
-    buffer += qg_string(cbuffer);
-    switch (errno) {
-    case EAGAIN:
-      LOG(INFO) << "::read() again";
-      break;
-    case ECONNRESET:
-      LOG(INFO) << "::read() peer closed";
-      break;
-    default:
-      LOG(INFO) << "::read() error";
+  qg_size_t nread, cnt = 0;
+  while (true) {
+    nread = ::read(sfd, cbuffer, size);
+    if (nread > 0) {
+      cnt += nread;
+      buffer += qg_string(cbuffer, nread);
+      if (nread != size) {
+        break;
+      }
+    } else if (nread == 0) {
+      return cnt;
+    } else {
+      switch (errno) {
+      case EAGAIN:
+        LOG(INFO) << "::read() again";
+        break;
+      case ECONNRESET:
+        LOG(INFO) << "::read() peer closed";
+        goto error;
+      default:
+        LOG(INFO) << "::read() encounte error";
+        goto error;
+      }
     }
   };
   delete[] cbuffer;
   return nread;
+error:
+  delete[] cbuffer;
+  return -1;
 }
 
 static qg_ssize_t write(qg_fd_t sfd, const char *buffer, qg_size_t size) {
-  qg_ssize_t nwrite;
-  if ((nwrite = ::write(sfd, buffer, size)) < 0) {
-    nwrite = -1;
-    switch (errno) {
-    case EAGAIN:
-      LOG(INFO) << "::write() again";
-      break;
-    case ECONNRESET:
-      LOG(INFO) << "::write() peer closed";
-      break;
-    default:
-      LOG(INFO) << "::write() error";
+  ssize_t nwrite, cnt = 0;
+  size_t total = size;
+  const char *p = buffer;
+
+  while (1) {
+    nwrite = ::write(sfd, p, total);
+    if (nwrite < 0) {
+      // 当send收到信号时,可以继续写,但这里返回-1.
+      if (errno == EINTR)
+        return -1;
+      // 当socket是非阻塞时,如返回此错误,表示写缓冲队列已满,
+      // 在这里做延时后再重试.
+      if (errno == EAGAIN) {
+        break;
+      }
+      return -1;
     }
+    cnt += nwrite;
+    if ((size_t)cnt == total)
+      return size;
   }
-  return nwrite;
+  return cnt;
 }
 
 static qg_size_t write(qg_fd_t sfd, const qg_string &buffer, qg_size_t size) {

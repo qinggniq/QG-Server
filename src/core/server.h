@@ -45,6 +45,7 @@ public:
 
   void handleNewCon(std::unique_ptr<Socket>);
   void handleConnectionClose(std::shared_ptr<TcpConnection>);
+  void closeAtBaseLoop(std::shared_ptr<TcpConnection>);
   void setMessageCallback(MessageCallBack cb) {
     message_call_back_ = std::move(cb);
   }

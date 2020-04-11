@@ -13,6 +13,7 @@ class EventHandler;
 class Poller {
 public:
   typedef EventHandler *handler;
+  Poller() = default;
   virtual ~Poller() {}
   virtual void registerHandler(handler) = 0;
   virtual void removeHandler(handler) = 0;

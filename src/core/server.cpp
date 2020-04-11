@@ -37,16 +37,22 @@ void Server::run() {
 void Server::handleConnectionClose(std::shared_ptr<TcpConnection> conn) {
   LOG(INFO) << "close " << conn->fd();
   connections_.erase(conn->fd());
-  if (connection_close_call_back_) {
-    connection_close_call_back_(conn);
-  }
+  auto io_loop = conn->getLoop();
+  io_loop->addFunctor(std::bind(&TcpConnection::closeConnection, conn));
+}
+
+void Server::closeAtBaseLoop(std::shared_ptr<TcpConnection> conn) {
+  event_loop_->addFunctor(
+      std::bind(&Server::handleConnectionClose, this, conn));
 }
 
 void Server::handleNewCon(std::unique_ptr<Socket> socket) {
   LOG(INFO) << "new connection coming : " << socket->sfd();
   qg_fd_t fd = socket->sfd();
   socket->makeNonBlock();
-  EventLoop* io_loop = loop_pool_->getNextLoop();
+
+  EventLoop *io_loop = loop_pool_->getNextLoop();
+
   std::shared_ptr<TcpConnection> conn(
       new TcpConnection(io_loop, std::move(socket), accepter_));
   // 设置用户设置的一些回调
@@ -56,7 +62,7 @@ void Server::handleNewCon(std::unique_ptr<Socket> socket) {
   conn->setWriteCompleteCallBack(write_complete_call_back_);
   conn->setConnectionComeCallBack(connection_come_call_back_);
   conn->setConnectionCloseCallBack(
-      std::bind(&Server::handleConnectionClose, this, std::placeholders::_1));
+      std::bind(&Server::closeAtBaseLoop, this, std::placeholders::_1));
   // 这个任务应该放到Loop里面执行
   io_loop->addFunctor(std::bind(&TcpConnection::handleConnection, conn));
 }

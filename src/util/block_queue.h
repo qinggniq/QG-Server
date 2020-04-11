@@ -31,6 +31,7 @@ public:
     LOG(INFO) << "lock before";
     std::unique_lock<std::mutex> ulock(mutex_);
     LOG(INFO) << "lock after";
+    if (queue_.empty()) return;
     std::swap(res, queue_);
   }
 
